@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   adresses_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:33:33 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 16:30:40 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 21:05:27 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void* ft_malloc(int len, t_garbage_node** genisis_block)
+void	*ft_malloc(int len, t_garbage_node **genisis_block)
 {
-    void* new_m = malloc(len);
+	void	*new_block;
 
-    lst_addback(genisis_block, new_lst(new_m));
-    return (new_m);
+	new_block = malloc(len);
+	lst_addback(genisis_block, new_lst(new_block));
+	return (new_block);
 }
 
-void ft_free(t_garbage_node* genisis_block)
+void	ft_free(t_garbage_node	*genisis_block)
 {
-    t_garbage_node *tmp;
+	t_garbage_node	*tmp;
 
-    while (genisis_block)
-    {
-        free(genisis_block->addr);
+	while (genisis_block)
+	{
+		tmp = genisis_block;
+		free(genisis_block->addr);
 		genisis_block->addr = NULL;
-        tmp = genisis_block;
-        genisis_block = genisis_block->next;
-        free(tmp);
-		tmp = NULL;
-    }
+		genisis_block = genisis_block->next;
+		free(tmp);
+	}
 }
