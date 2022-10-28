@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adresses_control.c                                 :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:33:33 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 16:30:40 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/10/28 16:16:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void* ft_malloc(int len, t_garbage_node** genisis_block)
+void lexer(char *str)
 {
-    void* new_m = malloc(len);
-
-    lst_addback(genisis_block, new_lst(new_m));
-    return (new_m);
-}
-
-void ft_free(t_garbage_node* genisis_block)
-{
-    t_garbage_node *tmp;
-
-    while (genisis_block)
-    {
-        free(genisis_block->addr);
-		genisis_block->addr = NULL;
-        tmp = genisis_block;
-        genisis_block = genisis_block->next;
-        free(tmp);
-		tmp = NULL;
-    }
+	char **split;
+	//t_parse parse;
+	int i = 0;
+	
+	split = ft_split(str, ' ');
+	while (split[i])
+	{
+		
+	}
 }

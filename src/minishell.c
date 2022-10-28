@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 14:02:27 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:44:52 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ t_garbage *garbage = NULL;
 
 int main(int ac, char **av)
 {
-	(void)ac;
 	(void)av;
-	char *str;
 	
+	if (ac > 1)
+		return(printf("minishell binary does not take any argument.\n"), 0);
+	char *str;
 	int i = 0;
 
 	while(1)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
+		lexer(str);
 		if (str[i] == 'x')
 		{
 			break;

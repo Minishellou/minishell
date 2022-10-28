@@ -2,6 +2,7 @@
 	"conventionalCommits.scopes": [
 		"includes",
 		"src",
-		"root"
+		"root",
+		"libft"
 	]
 }
