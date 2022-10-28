@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/28 21:05:49 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/28 21:17:09 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ typedef struct s_global
 /*		LEXER AND TOKENS		*/
 enum e_token
 {
-	PIPE,
-	LESS,
-	GREAT,
-	LESSER,
-	GREATER,	
+	PIPE = '|',
+	LESS = '<',
+	GREAT = '>',
+	LESSER = '<' * 2,
+	GREATER = '>' * 2
 };
 
 typedef struct s_lexer_node
