@@ -6,13 +6,13 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 15:44:52 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:51:00 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_garbage *garbage = NULL;
+//t_garbage *garbage = NULL;
 
 int main(int ac, char **av)
 {
