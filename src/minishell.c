@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adresses_control.c                                 :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:33:33 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 14:00:14 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/10/28 14:02:27 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void* ft_malloc(int len, t_garbage** genisis_block)
+t_garbage *garbage = NULL;
+
+int main(int ac, char **av)
 {
-    void* new_m = malloc(len);
+	(void)ac;
+	(void)av;
+	char *str;
+	
+	int i = 0;
 
-    lst_addback(genisis_block, new_lst(new_m));
-    return (new_m);
-}
-
-void ft_free(t_garbage* genisis_block)
-{
-    t_garbage *tmp;
-
-    while (genisis_block)
-    {
-        free(genisis_block->addr);
-		genisis_block->addr = NULL;
-        tmp = genisis_block;
-        genisis_block = genisis_block->next;
-        free(tmp);
-		tmp = NULL;
-    }
+	while(1)
+	{
+		str = readline("minishell~ ");
+		add_history(str);
+		if (str[i] == 'x')
+		{
+			break;
+		}
+		printf("%s", str);
+		printf("\n");
+	}
+	return (0);
 }

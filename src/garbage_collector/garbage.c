@@ -6,11 +6,11 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 12:39:24 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 12:52:18 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 t_garbage* new_lst(void *addr)
 {

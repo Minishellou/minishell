@@ -1,6 +1,7 @@
 {
 	"conventionalCommits.scopes": [
 		"includes",
-		"src"
+		"src",
+		"root"
 	]
 }
