@@ -6,22 +6,21 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 16:00:54 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:16:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int is_white_space(char c)
-{
-	if (c == '\t' || c == 'v' || c == '\n' || c == '\r')
-		return (1);
-	return (0);
-}
-
 void lexer(char *str)
 {
-	int i;
-	int j;
+	char **split;
+	//t_parse parse;
+	int i = 0;
 	
+	split = ft_split(str, ' ');
+	while (split[i])
+	{
+		
+	}
 }
