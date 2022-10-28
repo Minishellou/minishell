@@ -6,13 +6,13 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:33:33 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 14:00:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:30:40 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void* ft_malloc(int len, t_garbage** genisis_block)
+void* ft_malloc(int len, t_garbage_node** genisis_block)
 {
     void* new_m = malloc(len);
 
@@ -20,9 +20,9 @@ void* ft_malloc(int len, t_garbage** genisis_block)
     return (new_m);
 }
 
-void ft_free(t_garbage* genisis_block)
+void ft_free(t_garbage_node* genisis_block)
 {
-    t_garbage *tmp;
+    t_garbage_node *tmp;
 
     while (genisis_block)
     {
