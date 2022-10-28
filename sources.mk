@@ -13,3 +13,9 @@ SOURCES		+=                                     		\
 		src/garbage_collector/garbage.c               	\
 
 
+## SRC/LEXER ##
+
+SOURCES		+=                                     		\
+		src/lexer/lexer.c                             	\
+
+

@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 13:48:50 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:30:08 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,26 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+enum token
+{
+	PIPE,
+	LESS,
+	GREAT,
+	LESSER,
+	GREATER,	
+};
+
+typedef struct S_parse
+{
+	char* keyword;
+	char* type;
+	struct S_parse *next;
+} t_parse;
+
 typedef struct S_garbage
 {
-
     void        *addr;
     struct S_garbage   *next;
-
 } t_garbage;
 
 //t_garbage *garbage = NULL;
