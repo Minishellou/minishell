@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 15:30:08 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/28 16:01:49 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
