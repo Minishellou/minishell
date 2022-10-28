@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/28 16:40:15 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/28 16:54:24 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 		int						standard_input;
 		int						standard_output;
 		char					*gobal_environment;
-		t_garbage				*garbage_collector_chain;
+		t_garbage_node			*garbage_collector_chain;
 		struct s_redirection	redirection_table[2];
 		struct s_lexer_node		*lexer_output_chain;
 		struct s_exec_node		*execution_chain;
