@@ -4,5 +4,6 @@
 		"src",
 		"root",
 		"libft"
-	]
+	],
+	"C_Cpp.errorSquiggles": "Disabled"
 }

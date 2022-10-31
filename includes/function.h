@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 21:02:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/31 10:29:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block);
 void			*ft_malloc(int len, t_garbage_node **genisis_block);
 //	Throw garbage
 void			ft_free(t_garbage_node *genisis_block);
+// Lexer
+void lexer(char *str, t_global **global);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:27:42 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 16:48:21 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:30:24 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/function.h"
 
 t_lexer_node	*new_lxr_lst(char *word, t_garbage_node **genisis_block)
 {

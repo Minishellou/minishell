@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 21:07:55 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/31 11:03:29 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
 	return (genisis_block);
 }
 
-void	lst_addback(t_garbage_node **alst, t_garbage_node *new_node)
+void	lst_addback(t_global **global, t_garbage_node *new_node)
 {
 	if (!new_node)
 		return ;
-	else if (*alst)
-		ft_lstlast(*alst)->next = new_node;
+	else if ((*global)->garbage_collector)
+		ft_lstlast((*global)->garbage_collector)->next = new_node;
 	else
-		*alst = new_node;
+		(*global)->garbage_collector = new_node;
 }

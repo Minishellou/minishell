@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   adresses_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:33:33 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/28 21:05:27 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/31 11:00:08 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_malloc(int len, t_garbage_node **genisis_block)
+void	*ft_malloc(int len, t_global **global)
 {
 	void	*new_block;
 
 	new_block = malloc(len);
-	lst_addback(genisis_block, new_lst(new_block));
+	lst_addback(global, new_lst(new_block));
 	return (new_block);
 }
 
-void	ft_free(t_garbage_node	*genisis_block)
+void	ft_free(t_global **global)
 {
 	t_garbage_node	*tmp;
 
-	while (genisis_block)
+	while ((*global)->garbage_collector)
 	{
-		tmp = genisis_block;
-		free(genisis_block->addr);
-		genisis_block->addr = NULL;
-		genisis_block = genisis_block->next;
+		free((*global)->garbage_collector->addr);
+		(*global)->garbage_collector->addr = NULL;
+		tmp = (*global)->garbage_collector;
+		(*global)->garbage_collector = (*global)->garbage_collector->next;
 		free(tmp);
 	}
 }
