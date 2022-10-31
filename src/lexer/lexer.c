@@ -6,27 +6,13 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 11:30:55 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 12:00:44 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /*
 #include "../includes/function.h"
 
-int is_special_token(char *str)
-{
-	enum e_special_token token;
-	int i;
-
-	i = 0;
-	if (ft_strlen(str) <= 2)
-	{
-		while(ft_strlen(str) <)
-		{
-		}
-	}
-}
 
 void lexer(char *str, t_global **global)
 {
@@ -41,5 +27,4 @@ void lexer(char *str, t_global **global)
 		if (ft_strlen(split[i]))
 	}
 }
-
 */
