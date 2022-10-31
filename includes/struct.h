@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/31 11:58:59 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 12:30:01 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_global
 {
 	int						standard_input;
 	int						standard_output;
-	char					*gobal_environment;
+	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
 	struct s_redirection	*redirection_table;
 	struct s_lexer_node		*lexer_output_chain;
@@ -60,6 +60,14 @@ typedef struct s_exec_node
 	char				*command_args;
 	struct s_exec_node	*next;
 }				t_exec_node;
+
+/*		ENVIRONMENT CHAIN		*/
+typedef struct s_env_node
+{
+	char				*name;
+	char				*value;
+	struct s_env_node	*next;
+}				t_env_node;
 
 /*		GARBAGE COLLECTOR		*/
 typedef struct s_garbage_node
