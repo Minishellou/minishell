@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:48 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 11:44:06 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 int main(int ac, char **av)
 {
 	(void)av;
-	t_global *global;
 
+	
 	global = malloc(sizeof(t_global));
-	global->garbage_ctr = NULL;
+	global.garbage_ctr = NULL;
 	if (ac > 1)
 		return(printf("minishell binary does not take any argument.\n"), 0);
 	char *str;

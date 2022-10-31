@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 10:44:37 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 11:30:55 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int is_special_token(char *str)
 	i = 0;
 	if (ft_strlen(str) <= 2)
 	{
-		while(ft_strlen(str))
+		while(ft_strlen(str) <)
+		{
+		}
 	}
 }
 

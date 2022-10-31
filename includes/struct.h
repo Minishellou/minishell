@@ -6,13 +6,18 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:48 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 11:58:59 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define PIPE '|';
+# define LESS '<';
+# define GREAT '>';
+# define LESSER '<' * 2;
+# define GREATER  '>' * 2;
 	/*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -26,15 +31,6 @@ typedef struct s_global
 }				t_global;
 
 /*		LEXER AND TOKENS		*/
-enum e_special_token
-{
-	PIPE = '|',
-	LESS = '<',
-	GREAT = '>',
-	LESSER = '<' * 2,
-	GREATER = '>' * 2
-};
-
 typedef struct s_lexer_node
 {
 	char				*token;
@@ -45,9 +41,9 @@ typedef struct s_lexer_node
 /*		REDIRECTION CHAIN		*/
 enum	e_redirection_type
 {
-	INPUT,
-	OUPUT,
-	APPEND
+	INPUT = 1,
+	OUPUT = 2,
+	APPEND = 3
 };
 
 typedef struct s_redirection
