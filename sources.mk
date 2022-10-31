@@ -6,11 +6,11 @@ SOURCES		+=                                     		\
 		src/minishell.c                               	\
 
 
-## SRC/GARBAGE_COLLECTOR ##
+## SRC/garbage_ctr ##
 
 SOURCES		+=                                     		\
-		src/garbage_collector/adresses_control.c      	\
-		src/garbage_collector/garbage.c               	\
+		src/garbage_ctr/adresses_control.c      	\
+		src/garbage_ctr/garbage.c               	\
 
 
 ## SRC/LEXER ##

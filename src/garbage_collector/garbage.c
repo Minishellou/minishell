@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 11:03:29 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/10/31 11:06:48 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	lst_addback(t_global **global, t_garbage_node *new_node)
 {
 	if (!new_node)
 		return ;
-	else if ((*global)->garbage_collector)
-		ft_lstlast((*global)->garbage_collector)->next = new_node;
+	else if ((*global)->garbage_ctr)
+		ft_lstlast((*global)->garbage_ctr)->next = new_node;
 	else
-		(*global)->garbage_collector = new_node;
+		(*global)->garbage_ctr = new_node;
 }
