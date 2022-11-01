@@ -6,12 +6,13 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 14:55:34 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 12:33:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 
+#include "../../includes/minishell.h"
+/*
 static
 t_env_node	new_env_node(char *env_var)
 {
@@ -37,14 +38,15 @@ t_env_node	*make_env_chain(t_env_node *current_node, char *current_element, \
 	if (return_first)
 		return (current_node);
 }
+*/
 
-void	init_global(char **envp)
+void	init_global(void)
 {
-	size_t	size_of_redir_table;
+	//size_t	size_of_redir_table;
 
 	global.standard_input = dup(0);
 	global.standard_output = dup(1);
-	global.env = make_env_to_chain(global.env, *envp, 1);
+//	global.env = make_env_to_chain(global.env, *envp, 1);
 	global.garbage_ctr = NULL;
 	global.redirection_table = NULL;
 	global.lexer_output_chain = NULL;

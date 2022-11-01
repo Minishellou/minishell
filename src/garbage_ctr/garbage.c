@@ -6,11 +6,11 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 11:04:16 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 12:54:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static
 t_garbage_node	*new_grb_node(void *addr)
@@ -41,9 +41,9 @@ void	lst_addback(t_garbage_node *new_node)
 	if (!new_node)
 		return ;
 	else if (global.garbage_ctr)
-		ft_lstlast((*global)->garbage_ctr)->next = new_node;
+		ft_lstlast((global).garbage_ctr)->next = new_node;
 	else
-		(global.garbage_ctr = new_node;
+		(global.garbage_ctr) = new_node;
 }
 
 void	*ft_malloc(int len)
