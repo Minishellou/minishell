@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:34:05 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:46:37 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	make_chain_of_words(char *command)
 {
 	char	**words;
 	t_node	*output_chain;
-
+	
 	words = ft_split(command, ' ');
 	if (!words)
 		return (1);

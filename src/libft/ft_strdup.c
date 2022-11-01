@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 15:21:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2021/12/06 12:11:19 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 20:00:22 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 #include "libft.h"
 
 char	*ft_strdup(const char *s)
@@ -19,7 +21,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	str = (char *) s;
-	dup = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	dup = (char *)ft_malloc(sizeof(char) * ft_strlen(str) + 1);
 	if (dup == NULL)
 		return (NULL);
 	while (str[i] != '\0')

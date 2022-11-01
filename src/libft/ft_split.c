@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/01/11 18:47:10 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 19:58:39 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 #include "libft.h"
 
 static int	ft_ischarset(char c, char sep)
@@ -48,7 +50,7 @@ static char	*ft_dup(char const *str, char sep)
 	i = 0;
 	while (str[len] && !ft_ischarset(str[len], sep))
 		len++;
-	cpy = (char *)malloc(sizeof(char) * (len + 1));
+	cpy = (char *)ft_malloc(sizeof(char) * (len + 1));
 	if (!cpy)
 		return (NULL);
 	while (str[i] && !ft_ischarset(str[i], sep))
@@ -68,7 +70,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	split = (char **)malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
+	split = (char **)ft_malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
 	if (!split)
 		return (NULL);
 	while (s[i] && ft_ischarset(s[i], c))
