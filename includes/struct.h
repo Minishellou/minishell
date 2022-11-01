@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/31 12:30:01 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/10/31 14:49:20 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_lexer_node
 /*		REDIRECTION CHAIN		*/
 enum	e_redirection_type
 {
-	INPUT = 1,
-	OUPUT = 2,
-	APPEND = 3
+	INPUT,
+	OUPUT,
+	APPEND
 };
 
 typedef struct s_redirection

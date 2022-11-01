@@ -6,13 +6,14 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:48 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 11:02:23 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-t_garbage_node	*new_node(void *addr)
+static
+t_garbage_node	*new_grb_node(void *addr)
 {
 	t_garbage_node	*new_node;
 
@@ -24,6 +25,7 @@ t_garbage_node	*new_node(void *addr)
 	return (new_node);
 }
 
+static
 t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
 {
 	while (genisis_block->next)
@@ -33,12 +35,29 @@ t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
 	return (genisis_block);
 }
 
-void	lst_addback(t_global **global, t_garbage_node *new_node)
+static
+void	lst_addback(t_garbage_node *new_node)
 {
 	if (!new_node)
 		return ;
-	else if ((*global)->garbage_ctr)
+	else if (global.garbage_ctr)
 		ft_lstlast((*global)->garbage_ctr)->next = new_node;
 	else
-		(*global)->garbage_ctr = new_node;
+		(global.garbage_ctr = new_node;
 }
+
+void	*ft_malloc(int len)
+{
+	void	*new_block;
+
+	new_block = malloc(len);
+	lst_addback(new_grb_node(new_block));
+	return (new_block);
+}
+
+void	ft_free(void)
+{
+	t_garbage_node	*tmp;
+
+	while (global.garbage_c
+t_garbage_node	*ft_lst
