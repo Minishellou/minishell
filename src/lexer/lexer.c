@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_global.c                                      :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:34:02 by mcorso           ###   ########.fr       */
+/*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/11/01 17:34:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_global(char **envp)
+static int	make_chain_of_words(char *command)
 {
-	g_glo.standard_input = dup(0);
-	g_glo.standard_output = dup(1);
-	g_glo.env = (t_env_node *)make_chain_from_array(envp, create_env_node);
-	g_glo.garbage_ctr = NULL;
-	g_glo.redirection_table = NULL;
-	g_glo.lexer_output_chain = NULL;
-	g_glo.execution_chain = NULL;
+	char	**words;
+	t_node	*output_chain;
+
+	words = ft_split(command, ' ');
+	if (!words)
+		return (1);
+	output_chain = make_chain_from_array(words, create_lexer_node);
+	g_glo.lexer_output_chain = (t_lexer_node *)output_chain;
+	return (0);
+}
+
+int	lexer(char *command)
+{
+	if (make_chain_of_words(command) != 0)
+		return (1);
+	//	expand_envar();
+	//	tokenize();
+	return (0);
 }

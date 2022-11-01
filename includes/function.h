@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 12:34:08 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:37:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 
 # include "./struct.h"
 
+/*		GLOBAL STRUCTURE		*/
+void			init_global(char **envp);
+
+/*		NODE & UTILS			*/
+//	Create Node
+t_node			*create_env_node(char *var);
+t_node			*create_lexer_node(char *word);
+//	Utils
+t_node			*make_chain_from_array(char **array, \
+										t_node_creator create_node);
+
+/*		LEXER & UTILS			*/
+//	Lexer
+int				lexer(char *command);
 
 /*		GARBAGE COLLECTOR		*/
-//	lexer
-t_lexer_node	*new_lxr_lst(char *word);
-t_lexer_node* ft_lxr_lstlast(t_lexer_node *lexer_node);
-void    lst_lxr_addback(t_lexer_node *alst, t_lexer_node *new);
- void make_chain_from_array(char **str, t_lexer_node *lex);
- t_lexer_node lexer(char *str);
 //	Collect garbage
 void			*ft_malloc(int len);
-void	init_global(void);
 //	Throw garbage
 void			ft_free(void);
 

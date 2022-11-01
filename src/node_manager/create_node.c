@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_global.c                                      :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:34:02 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
+/*   Updated: 2022/11/01 17:34:50 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_global(char **envp)
+t_node	*create_lexer_node(char *word)
 {
-	g_glo.standard_input = dup(0);
-	g_glo.standard_output = dup(1);
-	g_glo.env = (t_env_node *)make_chain_from_array(envp, create_env_node);
-	g_glo.garbage_ctr = NULL;
-	g_glo.redirection_table = NULL;
-	g_glo.lexer_output_chain = NULL;
-	g_glo.execution_chain = NULL;
+	t_lexer_node	*new_node;
+
+	new_node = ft_malloc(sizeof(*new_node));
+	new_node->word = word;
+	new_node->next = NULL;
+	return ((t_node *)new_node);
+}
+
+t_node	*create_env_node(char *var)
+{
+	t_env_node	*new_node;
+
+	new_node = ft_malloc(sizeof(*new_node));
+	new_node->var = var;
+	new_node->next = NULL;
+	return ((t_node *)new_node);
 }

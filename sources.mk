@@ -57,10 +57,14 @@ SOURCES		+=                      		\
 		src/garbage_ctr/garbage.c      	\
 
 
+## SRC/NODE_MANAGER ##
+SOURCES		+=								\
+		src/node_manager/chain_utils.c	\
+		src/node_manager/create_node.c	\
+
 ## SRC/LEXER ##
 
 SOURCES		+=                      		\
 		src/lexer/lexer.c              	\
-		src/lexer/lst_lexer.c          	\
 
 

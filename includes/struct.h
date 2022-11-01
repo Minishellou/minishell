@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/10/31 14:49:20 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:22:50 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define GREAT '>';
 # define LESSER '<' * 2;
 # define GREATER  '>' * 2;
+
 	/*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -30,13 +31,28 @@ typedef struct s_global
 	struct s_exec_node		*execution_chain;
 }				t_global;
 
+/*		ENVIRONMENT CHAIN		*/
+typedef struct s_env_node
+{
+	struct s_env_node	*next;
+	char				*var;
+}				t_env_node;
+
 /*		LEXER AND TOKENS		*/
 typedef struct s_lexer_node
 {
-	char				*token;
-	char				*word;
 	struct s_lexer_node	*next;
+	char				*word;
+	char				*token;
 }				t_lexer_node;
+
+/*		EXECUTION CHAIN			*/
+typedef struct s_exec_node
+{
+	char				*command_path;
+	char				*command_args;
+	struct s_exec_node	*next;
+}				t_exec_node;
 
 /*		REDIRECTION CHAIN		*/
 enum	e_redirection_type
@@ -52,22 +68,19 @@ typedef struct s_redirection
 	enum e_redirection_type	type;
 }				t_redirection;
 
-
-/*		EXECUTION CHAIN			*/
-typedef struct s_exec_node
+/*		NODE INTERFACE			*/
+typedef struct s_node
 {
-	char				*command_path;
-	char				*command_args;
-	struct s_exec_node	*next;
-}				t_exec_node;
+	struct s_node	*next;
+	char			*word;
+	char			*var;
+}				t_node;
 
-/*		ENVIRONMENT CHAIN		*/
-typedef struct s_env_node
-{
-	char				*name;
-	char				*value;
-	struct s_env_node	*next;
-}				t_env_node;
+typedef t_node	*t_node_creator(char *);
+//	The function should allocate new_node to the right node type
+//						set a member of new_node to its argument
+//						set new_node->next to NULL
+//						return the new_node casted as (t_node *)
 
 /*		GARBAGE COLLECTOR		*/
 typedef struct s_garbage_node

@@ -3,7 +3,7 @@
 # genmake v1.1.6
 
 #Compiler and Linker
-CC					:= clang
+CC					:= gcc
 CXX					:= c++
 ifeq ($(shell uname -s),Darwin)
 	CC				:= gcc

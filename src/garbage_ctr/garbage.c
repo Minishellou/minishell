@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 12:54:33 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:39:20 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	lst_addback(t_garbage_node *new_node)
 {
 	if (!new_node)
 		return ;
-	else if (global.garbage_ctr)
-		ft_lstlast((global).garbage_ctr)->next = new_node;
+	else if (g_glo.garbage_ctr)
+		ft_lstlast(g_glo.garbage_ctr)->next = new_node;
 	else
-		(global.garbage_ctr) = new_node;
+		(g_glo.garbage_ctr) = new_node;
 }
 
 void	*ft_malloc(int len)
@@ -59,12 +59,12 @@ void	ft_free(void)
 {
 	t_garbage_node	*tmp;
 
-	while (global.garbage_ctr)
+	while (g_glo.garbage_ctr)
 	{
-		free(global.garbage_ctr->addr);
-		global.garbage_ctr->addr = NULL;
-		tmp = global.garbage_ctr;
-		global.garbage_ctr = global.garbage_ctr->next;
+		free(g_glo.garbage_ctr->addr);
+		g_glo.garbage_ctr->addr = NULL;
+		tmp = g_glo.garbage_ctr;
+		g_glo.garbage_ctr = g_glo.garbage_ctr->next;
 		free(tmp);
 	} 
 }

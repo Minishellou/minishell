@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_global.c                                      :+:      :+:    :+:   */
+/*   chain_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:34:02 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
+/*   Updated: 2022/11/01 17:36:45 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_global(char **envp)
+t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 {
-	g_glo.standard_input = dup(0);
-	g_glo.standard_output = dup(1);
-	g_glo.env = (t_env_node *)make_chain_from_array(envp, create_env_node);
-	g_glo.garbage_ctr = NULL;
-	g_glo.redirection_table = NULL;
-	g_glo.lexer_output_chain = NULL;
-	g_glo.execution_chain = NULL;
+	int		i;
+	t_node	**new_node;
+	t_node	*first_node;
+
+	i = 0;
+	first_node = create_node(array[i++]);
+	if (first_node == NULL)
+		return (NULL);
+	new_node = &first_node->next;
+	while (array[i] != NULL)
+	{
+		*new_node = create_node(array[i++]);
+		if (*new_node == NULL)
+			return (NULL);
+		new_node = &(*new_node)->next;
+	}
+	return (first_node);
 }

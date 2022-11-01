@@ -3,38 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 13:15:47 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 17:38:56 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_global global;
+t_global	g_glo;
 
-int main(int ac, char **av, char **envp)
+static
+void	print_word_list(t_lexer_node *node)
 {
-	(void)av;
-	(void)envp;
-	init_global();
-	if (ac > 1)
-		return(printf("minishell binary does not take any argument.\n"), 0);
-	char *str;
-	int i = 0;
+	if (node == NULL)
+		return ;
+	printf("%s ->\n", node->word);
+	print_word_list(node->next);
+}
 
-	while(1)
+static
+void	print_env_list(t_env_node *node)
+{
+	if (node == NULL)
+		return ;
+	printf("%s ->\n", node->var);
+	print_env_list(node->next);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	char	*str;
+
+	(void)av;
+	init_global(envp);
+	if (ac > 1)
+		return (printf("minishell binary does not take any argument.\n"), 0);
+	print_env_list(g_glo.env);
+	while (1)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
 		lexer(str);
-		if (str[i] == 'x')
-		{
-			break;
-		}
-		printf("%s", str);
-		printf("\n");
+		print_word_list(g_glo.lexer_output_chain);
 	}
 	ft_free();
 	return (0);
