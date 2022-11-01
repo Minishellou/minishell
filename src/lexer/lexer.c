@@ -6,25 +6,36 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 12:00:44 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:28:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-#include "../includes/function.h"
+#include "../../includes/minishell.h"
 
+ void make_chain_from_array(char **str, t_lexer_node *lex)
+{
+	int i;
 
-void lexer(char *str, t_global **global)
+	i = 1;
+	lex = new_lxr_lst(str[i]);
+	i++;
+	while (str[i])
+		lst_lxr_addback(lex, new_lxr_lst(str[++i]));
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}
+
+t_lexer_node lexer(char *str)
 {
 	char **split;
 	t_lexer_node *lex;
-	int i = 0;
-	
-	node = ft_malloc(sizeof(node), &global)	
+
+	lex = NULL;	
 	split = ft_split(str, ' ');
-	while (split[i])
-	{
-		if (ft_strlen(split[i]))
-	}
+	make_chain_from_array(split, lex);
+	return (*lex);
 }
 */

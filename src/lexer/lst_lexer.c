@@ -6,15 +6,16 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:27:42 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/10/31 12:25:23 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:28:54 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+/*
+#include "../../includes/minishell.h"
 
-t_lexer_node	*new_lxr_lst(char *word, t_garbage_node **genisis_block)
+t_lexer_node	*new_lxr_lst(char *word)
 {
-	t_lexer_node* lexer_node = ft_malloc(sizeof(t_lexer_node), genisis_block);
+	t_lexer_node* lexer_node = ft_malloc(sizeof(t_lexer_node));
 	
     if (!lexer_node)
         return NULL;
@@ -32,12 +33,13 @@ t_lexer_node* ft_lxr_lstlast(t_lexer_node *lexer_node)
     return (lexer_node);
 }
 
-void    lst_lxr_addback(t_lexer_node **alst, t_lexer_node *new)
+void    lst_lxr_addback(t_lexer_node *alst, t_lexer_node *new)
 {
     if (!new)
         return ;
-    else if (*alst)
-        ft_lstlast(*alst)->next = new;
+    else if (alst)
+        ft_lxr_lstlast(alst)->next = new;
     else
-        *alst = new;
+        alst = new;
 }
+*/
