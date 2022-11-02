@@ -14,6 +14,6 @@ is traditionally composed of two parts :
  - **The Lexer**, which first will separate the string into **words**, just before it convert them into **tokens** :
 	- [The First Pass](https://github.com/Minishellou/minishell/issues/7);
 	- [The Envar Expansion](https://github.com/Minishellou/minishell/issues/8);
-	- The Second Pass;
+	- [The Second Pass](https://github.com/Minishellou/minishell/issues/9);
 
  - **The Composer** will... compose an **Execution Chain** and a **Redirection Chain** for the **Executor** to use
