@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:16:30 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/03 14:39:49 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(int ac, char **av, char **envp)
 	char	*str;
 
 	(void)av;
-	init_global(envp);
+	if (init_global(envp) == ERROR)
+		return (ERROR);
 	if (ac > 1)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	print_env_list(g_glo.env);
@@ -49,5 +50,5 @@ int	main(int ac, char **av, char **envp)
 		print_word_list(g_glo.lexer_output_chain);
 	}
 	ft_free();
-	return (0);
+	return (SUCCESS);
 }

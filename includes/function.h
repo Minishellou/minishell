@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:15:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/03 14:37:47 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./struct.h"
 
 /*		GLOBAL STRUCTURE		*/
-void			init_global(char **envp);
+int				init_global(char **envp);
 
 /*		NODE & UTILS			*/
 //	Env Node
