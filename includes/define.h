@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:14:24 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/03 14:14:28 by mcorso            #+#    #+#             */
+/*   Updated: 2022/11/03 14:15:50 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef DEFINE_H
+# define DEFINE_H
 
-# include <stdio.h>
-# include "../src/libft/libft.h"
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include "./function.h"
-# include "./struct.h"
-# include "./define.h"
-
-extern t_global	g_glo;
+/*		ERROR MANAGEMENT		*/
+# define SUCCESS 0
+# define ERROR 1
 
 #endif
