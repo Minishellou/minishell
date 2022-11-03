@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:37:08 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/03 14:15:52 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 void			init_global(char **envp);
 
 /*		NODE & UTILS			*/
-//	Create Node
+//	Env Node
 t_node			*create_env_node(char *var);
+int				fill_env_node(char *var, t_env_node *node);
+//	Create Node
 t_node			*create_lexer_node(char *word);
 //	Utils
 t_node			*make_chain_from_array(char **array, \

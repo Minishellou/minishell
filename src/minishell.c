@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 11:31:15 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:16:30 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_env_list(t_env_node *node)
 {
 	if (node == NULL)
 		return ;
-	printf("%s ->\n", node->var);
+	printf("%s = %s \n", node->name, node->value);
 	print_env_list(node->next);
 }
 

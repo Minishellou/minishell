@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_node.c                                      :+:      :+:    :+:   */
+/*   env_node_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/03 14:11:10 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/03 14:10:31 by mcorso            #+#    #+#             */
+/*   Updated: 2022/11/03 14:15:31 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_node	*create_lexer_node(char *word)
+int	fill_env_node(char *var, t_env_node *node)
 {
-	t_lexer_node	*new_node;
+	int		i;
+	char	*var_cpy;
 
-	new_node = ft_malloc(sizeof(*new_node));
-	new_node->word = word;
-	new_node->next = NULL;
-	return ((t_node *)new_node);
-}
-
-t_node	*create_env_node(char *var)
-{
-	t_env_node	*new_node;
-
-	new_node = ft_malloc(sizeof(*new_node));
-	fill_env_node(var, new_node);
-	new_node->next = NULL;
-	return ((t_node *)new_node);
+	i = 0;
+	var_cpy = ft_strdup(var);
+	if (!var_cpy)
+		return (ERROR);
+	while (var[i] != '=')
+		i++;
+	var[i] = '\0';
+	node->name = var;
+	node->value = &var[i + 1];
+	return (SUCCESS);
 }

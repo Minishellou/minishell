@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/01 17:22:50 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/03 14:17:49 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_global
 typedef struct s_env_node
 {
 	struct s_env_node	*next;
-	char				*var;
+	char				*name;
+	char				*value;
 }				t_env_node;
 
 /*		LEXER AND TOKENS		*/
@@ -49,10 +50,16 @@ typedef struct s_lexer_node
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
 {
-	char				*command_path;
-	char				*command_args;
 	struct s_exec_node	*next;
+	char				*command_path;
+	struct s_arg_node	*command_args;
 }				t_exec_node;
+
+typedef struct s_arg_node
+{
+	struct s_arg_node	*next;
+	char				*word;
+}				t_arg_node;
 
 /*		REDIRECTION CHAIN		*/
 enum	e_redirection_type
