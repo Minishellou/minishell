@@ -58,6 +58,7 @@ SOURCES		+=                      		\
 
 
 ## SRC/NODE_MANAGER ##
+
 SOURCES		+=								\
 		src/node_manager/chain_utils.c	\
 		src/node_manager/create_node.c	\
@@ -68,4 +69,7 @@ SOURCES		+=								\
 SOURCES		+=                      		\
 		src/lexer/lexer.c              	\
 
+## SRC/EXECUTOR ##
 
+SOURCES		+=								\
+		src/executor/io_env_manager
