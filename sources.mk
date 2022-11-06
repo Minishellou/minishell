@@ -72,4 +72,5 @@ SOURCES		+=                      		\
 ## SRC/EXECUTOR ##
 
 SOURCES		+=								\
-		src/executor/io_env_manager
+		src/executor/io_env_manager		\
+		src/executor/testers/io_env_tester	\

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/06 11:07:16 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:50:49 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int				lexer(char *command);
 int					find_last_output_redir(t_redirection *redirection);
 int					find_last_input_redir(t_redirection *redirection);
 t_io_environment	io_environment_manager(t_redirection *redirection_chain);
-
+//	Tests
+void				null_output_redir_test(void);
 
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage
