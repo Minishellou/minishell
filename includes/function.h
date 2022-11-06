@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:37:47 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:07:16 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ t_node			*make_chain_from_array(char **array, \
 /*		LEXER & UTILS			*/
 //	Lexer
 int				lexer(char *command);
+
+/*		IO ENV & UTILS			*/
+int					find_last_output_redir(t_redirection *redirection);
+int					find_last_input_redir(t_redirection *redirection);
+t_io_environment	io_environment_manager(t_redirection *redirection_chain);
+
 
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage

@@ -6,14 +6,11 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/06 10:45:47 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 11:07:23 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	find_last_input_redir(t_redirection *redirection);
-static int	find_last_output_redir(t_redirection *redirection);
 
 t_io_environment	io_environment_manager(t_redirection *redirection_chain)
 {
@@ -32,7 +29,6 @@ t_io_environment	io_environment_manager(t_redirection *redirection_chain)
 	return (current_io_env);
 }
 
-static
 int	find_last_input_redir(t_redirection *redirection)
 {
 	static int	fd = NOT_SET;
@@ -49,7 +45,6 @@ int	find_last_input_redir(t_redirection *redirection)
 	return (find_last_input_redir(redirection->next));
 }
 
-static
 int	find_last_output_redir(t_redirection *redirection)
 {
 	static int	fd = NOT_SET;
