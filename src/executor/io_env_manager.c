@@ -6,13 +6,13 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/06 11:07:23 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:26:48 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_io_environment	io_environment_manager(t_redirection *redirection_chain)
+t_io_environment	io_environment_manager(void)
 {
 	int					input_fd;
 	int					output_fd;
@@ -31,6 +31,7 @@ t_io_environment	io_environment_manager(t_redirection *redirection_chain)
 
 int	find_last_input_redir(t_redirection *redirection)
 {
+	int			ret;
 	static int	fd = NOT_SET;
 
 	if (redirection == NULL)
@@ -39,14 +40,16 @@ int	find_last_input_redir(t_redirection *redirection)
 		return (find_last_input_redir(redirection->next));
 	if (fd != NOT_SET)
 		close(fd);
-	fd = open(redirection->file_path, O_READ);
+	fd = open(redirection->file_path, O_RDONLY);
 	if (fd < 0)
 		return (ERROR);
-	return (find_last_input_redir(redirection->next));
+	ret = find_last_input_redir(redirection->next);
+	return (ret);
 }
 
 int	find_last_output_redir(t_redirection *redirection)
-{
+{	
+	int			ret;
 	static int	fd = NOT_SET;
 
 	if (redirection == NULL)
@@ -58,5 +61,6 @@ int	find_last_output_redir(t_redirection *redirection)
 	fd = open(redirection->file_path, O_WRONLY | O_CREAT, S_IWUSR);
 	if (fd < 0)
 		return (ERROR);
-	return (find_last_output_redir(redirection->next));
+	ret = find_last_output_redir(redirection->next);
+	return (ret);
 }

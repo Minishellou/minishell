@@ -6,19 +6,22 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:14:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 12:26:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include "../src/libft/libft.h"
-# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+
 # include "./function.h"
 # include "./struct.h"
 # include "./define.h"
