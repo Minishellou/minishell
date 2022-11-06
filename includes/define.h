@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:14:28 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/04 10:35:33 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 10:43:03 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 /*		ERROR MANAGEMENT		*/
 # define SUCCESS 0
 # define ERROR -1
+# define NOT_SET -2		// fd
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/03 14:17:49 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/06 10:44:15 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define LESSER '<' * 2;
 # define GREATER  '>' * 2;
 
-	/*		GLOBAL STRUCT			*/
+/*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
 	int						standard_input;
@@ -74,6 +74,13 @@ typedef struct s_redirection
 	char					*file_path;
 	enum e_redirection_type	type;
 }				t_redirection;
+
+/*		IO ENVIRONMENT			*/
+typedef struct s_io_environment
+{
+	int	input_fd;
+	int	output_fd;
+}				t_io_environment;
 
 /*		NODE INTERFACE			*/
 typedef struct s_node
