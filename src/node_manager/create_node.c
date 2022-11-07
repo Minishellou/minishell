@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/06 12:08:18 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/07 10:14:34 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ t_node	*create_env_node(char *var)
 		return (NULL);
 	if (fill_env_node(var, new_node) == ERROR)
 		return (NULL);
+	new_node->next = NULL;
+	return ((t_node *)new_node);
+}
+
+t_node	*create_redirection(char *file_path)
+{
+	t_redirection	*new_node;
+
+	new_node = ft_malloc(sizeof(*new_node));
+	if (!new_node)
+		return (NULL);
+	new_node->file_path = file_path;
 	new_node->next = NULL;
 	return ((t_node *)new_node);
 }
