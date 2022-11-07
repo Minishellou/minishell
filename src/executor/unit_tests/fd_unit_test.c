@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:03:13 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/06 16:29:45 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/07 09:53:11 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ void	finder_returns_not_set(int (*finder)(t_redirection *))
 
 	result = finder(g_glo.redirection_table);
 	TEST_RESULT(result == NOT_SET);
+}
+
+void	finder_returns_fd(int (*finder)(t_redirection *))
+{
+	int	result;
+
+	result = finder(g_glo.redirection_table);
+	TEST_RESULT(result > -1);	
 }
 
 void	fd_is_open_write(int fd)

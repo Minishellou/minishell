@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:03:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/06 16:36:50 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:31:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@
 # define STDOUT g_glo.standard_output
 
 #include "minishell.h"
+#include "struct.h"
 
 //	IO ENV
 void	fd_is_open_read(int fd);
 void	fd_is_open_write(int fd);
 void	fds_are_duplicates(int fd_one, int fd_two);
+void	finder_returns_fd(int (*finder)(t_redirection *));
 void	finder_returns_not_set(int (*finder)(t_redirection *));
+//	INPUT FD
+void	null_input_redir_test(int input_fd);
+//	OUTPUT FD 
+void	null_output_redir_test(int output_fd);
+void	single_output_redir_test(int output_fd, int right_fd);
 
 #endif
