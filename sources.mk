@@ -73,7 +73,3 @@ SOURCES		+=                      		\
 
 SOURCES		+=								\
 		src/executor/io_env_manager.c		\
-		src/executor/unit_tests/fd_unit_test.c	\
-		src/executor/unit_tests/io_env_tester.c	\
-		src/executor/unit_tests/input_fd_unit_test.c	\
-		src/executor/unit_tests/output_fd_unit_test.c	\
