@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 09:23:15 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:52:49 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <errno.h>
 
 # include "./function.h"
 # include "./struct.h"
