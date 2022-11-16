@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 10:50:34 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:14:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_last_input_redir(t_redirection *redirection)
 	if (fd != NOT_SET)
 		close(fd);
 	if (redirection->type == INPUT)
-		fd = open(redirection->argument, O_RDONLY);
+		fd = open_file_to_read(redirection->argument);
 	if (redirection->type == HEREDOC)
 		fd = heredoc_process(redirection->argument);
 	if (fd < 0)
@@ -57,11 +57,14 @@ int	find_last_output_redir(t_redirection *redirection)
 
 	if (redirection == NULL)
 		return (fd);
-	if (redirection->type == INPUT)
+	if (redirection->type < OUTPUT)
 		return (find_last_output_redir(redirection->next));
 	if (fd != NOT_SET)
 		close(fd);
-	fd = open(redirection->file_path, O_WRONLY | O_CREAT, S_IWUSR);
+	if (redirection->type == OUTPUT)
+		fd = open_file_to_trunc(redirection->argument);
+	if (redirection->type == APPEND)
+		fd = open_file_to_append(redirection->argument);
 	if (fd < 0)
 		return (ERROR);
 	ret = find_last_output_redir(redirection->next);
