@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 11:09:30 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:16:55 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		restore_escaped_char(char **string);
 int			open_tmp_file(void);
 int			open_file_to_read(char *file_path);
 int			open_file_to_trunc(char *file_path);
+int			open_file_to_append(char *file_path);
 void		write_to_file(int file_fd, char *string_to_write);
 
 /*		IO ENV & UTILS			*/

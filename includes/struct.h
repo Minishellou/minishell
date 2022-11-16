@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 10:49:44 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:17:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ enum	e_redirection_type
 {
 	INPUT,
 	HEREDOC,
-	OUPUT,
+	OUTPUT,
 	APPEND
 };
 
