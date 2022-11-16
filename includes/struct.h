@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 08:59:10 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 10:46:02 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_arg_node
 enum	e_redirection_type
 {
 	INPUT,
+	HEREDOC,
 	OUPUT,
 	APPEND
 };
