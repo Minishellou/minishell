@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 11:14:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:47:41 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	find_last_input_redir(t_redirection *redirection)
 		fd = open_file_to_read(redirection->argument);
 	if (redirection->type == HEREDOC)
 		fd = heredoc_process(redirection->argument);
-	if (fd < 0)
+	if (fd == ERROR)
 		return (ERROR);
 	ret = find_last_input_redir(redirection->next);
 	return (ret);

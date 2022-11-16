@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:57 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 11:13:13 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:53:22 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	open_file_to_read(char *file_path)
 	int	ret_fd;
 
 	ret_fd = open(file_path, O_RDONLY);
+	if (ret_fd < 0)
+		printf("minishell: %s: %s\n", strerror(errno), file_path);
 	return (ret_fd);
 }
 
@@ -35,6 +37,8 @@ int	open_file_to_trunc(char *file_path)
 	int	ret_fd;
 
 	ret_fd = open(file_path, TRUNC_FILE_FLAGS, CREAT_FILE_ACCESS);
+	if (ret_fd < 0)
+		printf("minishell: %s: %s\n", strerror(errno), file_path);
 	return (ret_fd);
 }
 
@@ -43,6 +47,8 @@ int	open_file_to_append(char *file_path)
 	int	ret_fd;
 
 	ret_fd = open(file_path, APPND_FILE_FLAGS, CREAT_FILE_ACCESS);
+	if (ret_fd < 0)
+		printf("minishell: %s: %s\n", strerror(errno), file_path);
 	return (ret_fd);
 }
 
