@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 10:47:13 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 10:49:44 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef int	t_redirection_type;
 typedef struct s_redirection
 {
 	struct s_redirection	*next;
-	char					*file_path;
+	char					*argument;
 	t_redirection_type		type;
 }				t_redirection;
 
