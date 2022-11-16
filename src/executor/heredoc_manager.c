@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 09:46:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:26:36 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	heredoc_process(char *limit_string)
 	if (manage_limit_string(&limit_string, &quote_context) != SUCCESS)
 		return (ERROR);
 	limit_string_len = ft_strlen(limit_string);
-	write(1, limit_string, limit_string_len);
-	write(1, "\n", 1);
 	tmp_file = open_tmp_file();
 	if (tmp_file < 0)
 		return (ERROR);
