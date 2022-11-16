@@ -6,14 +6,11 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 14:33:07 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/16 16:41:57 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-
-
 
 int white_space_to_neg(char **str)
 {

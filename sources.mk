@@ -65,6 +65,8 @@ SOURCES		+=								\
 ## SRC/LEXER ##
 
 SOURCES		+=                      		\
-		src/lexer/lexer.c              	\
+		src/lexer/lexer.c              		\
+		src/lexer/char_convert.c 			\
+		src/lexer/check_char.c 				\
 
 
