@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 11:23:35 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 13:56:59 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ int			open_file_to_append(char *file_path);
 void		write_to_file(int file_fd, char *string_to_write);
 
 /*		IO ENV & UTILS			*/
-//	Manager
 t_io_env	io_environment_manager(void);
-//	Finders
-int			find_last_output_redir(t_redirection *redirection);
-int			find_last_input_redir(t_redirection *redirection);
 
 /*		HEREDOC & UTILS			*/
 //	Heredoc process
