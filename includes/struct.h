@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/07 11:20:16 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 08:59:10 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,21 @@ typedef struct s_redirection
 	int						type;
 }				t_redirection;
 
+/*		QUOTE CONTEXT			*/
+enum e_quote_context
+{
+	QUOTED,
+	UNQUOTED
+};
+
+typedef int	t_quote_context;
+
 /*		IO ENVIRONMENT			*/
 typedef struct s_io_environment
 {
 	int	input_fd;
 	int	output_fd;
-}				t_io_environment;
+}				t_io_env;
 
 /*		NODE INTERFACE			*/
 typedef struct s_node
