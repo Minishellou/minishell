@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 09:02:49 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 09:45:39 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	restore_escaped_char(char **string)
 
 	i = 0;
 	while ((*string)[i] != '\0')
+	{
 		if ((*string)[i] < 0)
 			(*string)[i] *= -1;
+		i++;
+	}
 }

@@ -8,6 +8,7 @@
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {
 		"struct.h": "c",
-		"unit_tests.h": "c"
+		"unit_tests.h": "c",
+		"minishell.h": "c"
 	}
 }

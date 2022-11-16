@@ -79,7 +79,8 @@ SOURCES		+=								\
 
 ## SRC/UTILS ##
 
-SOURCES		+=
-		src/utils/file_utils.c		\
+SOURCES		+=								\
+		src/utils/file_utils.c				\
 		src/utils/escape_char_utils.c		\
-		src/utils/quote_utils.c		\
+		src/utils/string_conversion_utils.c		\
+		src/utils/quote_utils.c	

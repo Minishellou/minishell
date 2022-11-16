@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 09:02:11 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 09:20:13 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_node		*make_chain_from_array(char **array, \
 //	Lexer
 int			lexer(char *command);
 
+/*		STRING CONVERT & UTILS	*/
+char	*concat_array_to_string(char **splited_string);
+
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
 int			unquote_string(char **string);
@@ -41,6 +44,10 @@ int			is_quoted(char *string, int nb_of_quote);
 int			delete_escaped_char(char **string);
 void		mask_escaped_char(char **string);
 void		restore_escaped_char(char **string);
+
+/*		FILE & UTILS			*/
+int			open_tmp_file(void);
+void		write_to_file(int file_fd, char *string_to_write);
 
 /*		IO ENV & UTILS			*/
 //	Manager

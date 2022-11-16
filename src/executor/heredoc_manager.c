@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 09:03:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/16 09:46:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@ int	heredoc_process(char *limit_string)
 {
 	int				tmp_file;
 	char			*current_string;
+	size_t			limit_string_len;
 	t_quote_context	quote_context;
 
 	if (manage_limit_string(&limit_string, &quote_context) != SUCCESS)
 		return (ERROR);
+	limit_string_len = ft_strlen(limit_string);
+	write(1, limit_string, limit_string_len);
+	write(1, "\n", 1);
 	tmp_file = open_tmp_file();
+	if (tmp_file < 0)
+		return (ERROR);
 	while (1)
 	{
 		current_string = readline("heredoc> ");
-		if (ft_strcmp(current_string, limit_string) == 0)
+		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
 			break ;
 //		if (quote_context == UNQUOTED)
 //			process_heredoc_string(current_string);
