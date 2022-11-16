@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   check_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/15 15:46:42 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/11/15 16:26:31 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/11/15 16:28:29 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	make_chain_of_words(char *command)
+int    is_white_space(char c)
 {
-	char	**words;
-	t_node	*output_chain;
-	
-	words = ft_split(command, ' ');
-	if (!words)
+    if (c == ' ' || c == '\t'|| c == '\r')
+        return (1);
+    return (0);
+}
+
+int ft_isquote(char c)
+{
+	if (c == '"' || c == '\'')
 		return (1);
-	output_chain = make_chain_from_array(words, create_lexer_node);
-	g_glo.lexer_output_chain = (t_lexer_node *)output_chain;
 	return (0);
 }
-
-int	lexer(char *command)
-{
-	char **words;
-
-	if ()
-	//	expand_envar();
-	//	tokenize();
-	return (0);
-}
-
-**/

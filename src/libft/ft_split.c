@@ -6,41 +6,40 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 19:58:39 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/14 10:18:57 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include "libft.h"
 
-static int	ft_ischarset(char c, char sep)
+static int	ft_ischarset(char c)
 {
-	if (c == sep)
-		return (1);
-	return (0);
+    if (c == ' ' || c == '\t'|| c == '\r')
+        return (1);
+    return (0);
 }
 
-static int	ft_countwords(char const *str, char sep)
+static int	ft_countwords(char const *str)
 {
 	int	wc;
 	int	i;
 
 	i = 0;
 	wc = 0;
-	while (str[i] && ft_ischarset(str[i], sep))
+	while (str[i] && ft_ischarset(str[i]))
 		i++;
 	while (str[i])
 	{
 		wc++;
-		while (str[i] && !ft_ischarset(str[i], sep))
+		while (str[i] && !ft_ischarset(str[i]))
 			i++;
-		while (str[i] && ft_ischarset(str[i], sep))
+		while (str[i] && ft_ischarset(str[i]))
 			i++;
 	}
 	return (wc);
 }
 
-static char	*ft_dup(char const *str, char sep)
+static char	*ft_dup(char const *str)
 {
 	int		len;
 	int		i;
@@ -48,12 +47,12 @@ static char	*ft_dup(char const *str, char sep)
 
 	len = 0;
 	i = 0;
-	while (str[len] && !ft_ischarset(str[len], sep))
+	while (str[len] && !ft_ischarset(str[len]))
 		len++;
-	cpy = (char *)ft_malloc(sizeof(char) * (len + 1));
+	cpy = (char *)malloc(sizeof(char) * (len + 1));
 	if (!cpy)
 		return (NULL);
-	while (str[i] && !ft_ischarset(str[i], sep))
+	while (str[i] && !ft_ischarset(str[i]))
 	{
 		cpy[i] = str[i];
 		i++;
@@ -62,7 +61,7 @@ static char	*ft_dup(char const *str, char sep)
 	return (cpy);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s)
 {
 	char	**split;
 	int		i;
@@ -70,17 +69,17 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	split = (char **)ft_malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
+	split = (char **)malloc(sizeof(char *) * (ft_countwords(s) + 1));
 	if (!split)
 		return (NULL);
-	while (s[i] && ft_ischarset(s[i], c))
+	while (s[i] && ft_ischarset(s[i]))
 		i++;
 	while (s[i])
 	{
-		split[j] = ft_dup(&s[i], c);
-		while (s[i] && !ft_ischarset(s[i], c))
+		split[j] = ft_dup(&s[i]);
+		while (s[i] && !ft_ischarset(s[i]))
 			i++;
-		while (s[i] && ft_ischarset(s[i], c))
+		while (s[i] && ft_ischarset(s[i]))
 			i++;
 		j++;
 	}
