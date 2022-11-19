@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 13:56:59 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/19 12:07:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 /*		GLOBAL STRUCTURE		*/
 int			init_global(char **envp);
 
-/*		NODE & UTILS			*/
-//	Env Node
-int			fill_env_node(char *var, t_env_node *node);
+/*		T_NODE & UTILS			*/
 //	Create Node
 t_node		*create_env_node(char *var);
 t_node		*create_lexer_node(char *word);
 t_node		*create_redirection(char *argument);
 //	Utils
+void		include_subchain_at(t_node **this_node, t_node *subchain);
+t_node		last_node(t_node *current_node);
 t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
 
