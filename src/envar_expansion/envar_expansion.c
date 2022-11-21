@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/21 09:48:59 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:55:43 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_env_node	*get_envar(char *envar_name)
 	t_env_node	*env_node;
 
 	env_node = g_glo.env;
-	while (env_node && ft_strncmp(env_node->name, envar_name, ft_strlen(envar_name)) != 0)
+	while (env_node && ft_strncmp(env_node->name, envar_name, ft_strlen(env_node->name)) != 0)
 		env_node = env_node->next;
 	return (env_node);
 }
