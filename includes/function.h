@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 09:48:29 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:28:10 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			lexer(char *command);
 
 /*		STRING CONVERT & UTILS	*/
 char		*concat_array_to_string(char **splited_string);
+char		*concat_chain_to_string(t_lexer_node *first_node);
 
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
@@ -48,6 +49,7 @@ void		restore_escaped_char(char **string);
 /*		ENVAR & NODE UTILS		*/
 //	Envar expansion
 t_env_node	*get_envar(char *envar_name);
+int			expand_and_add_to_string(char **current_string, t_env_node *envar);
 int			expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar);
 //	env_node
 int			fill_env_node(char *var, t_env_node *node);
