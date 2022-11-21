@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/01 17:37:08 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:15:05 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include "./struct.h"
 
+/* INIT */
+void	token_state_init(t_token_state *state);
 /*		GLOBAL STRUCTURE		*/
 void			init_global(char **envp);
-
 /*		NODE & UTILS			*/
 //	Create Node
 t_node			*create_env_node(char *var);
@@ -29,11 +30,20 @@ t_node			*make_chain_from_array(char **array, \
 /*		LEXER & UTILS			*/
 //	Lexer
 int				lexer(char *command);
-
+/* PARSING */
+int parse_token(char *input);
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage
 void			*ft_malloc(int len);
 //	Throw garbage
 void			ft_free(void);
+//  check every char 
+int				is_white_space(char c);
+int				is_special_token(char c);
+
+// state management 
+int token_state(t_token_state state);
+void switch_state(bool *old, bool *new);
+int token_state_management(int *i, char **input, t_token_state *state);
 
 #endif

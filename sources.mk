@@ -63,10 +63,10 @@ SOURCES		+=								\
 		src/node_manager/create_node.c	\
 
 ## SRC/LEXER ##
-
 SOURCES		+=                      		\
-		src/lexer/lexer.c              		\
-		src/lexer/char_convert.c 			\
 		src/lexer/check_char.c 				\
 
-
+## SRC/PARSING
+SOURCES 	+=								\
+		src/parsing/token_parse.c 			\
+		src/parsing/state_utils.c           \

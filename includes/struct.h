@@ -6,19 +6,18 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 17:15:41 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:20:03 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define PIPE '|'; x
-# define LESS '<'; 
-# define GREAT '>';
-# define LESSER '<' * 2; x
-# define GREATER  '>' * 2; x
+# define PIPE '|'
+# define LESS '<' 
+# define GREAT '>'
 
+# include <stdbool.h>
 	/*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -76,12 +75,13 @@ typedef struct s_node
 	char			*var;
 }				t_node;
 
-//HANDLING TOKEN STATE FOR PARSING
+/* HANDLING TOKEN STATE FOR PARSING */
 typedef struct s_token_state{
-	bool less = false; 
-	bool great = false;
-	bool lesser = false;
-	bool greater = false;
+	bool less;
+	bool great;
+	bool lesser;
+	bool greater;
+	bool pipe;
 }		t_token_state;
 
 typedef t_node	*t_node_creator(char *);

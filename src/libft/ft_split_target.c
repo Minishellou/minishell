@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:29:25 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 15:35:31 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:05:10 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_dup_target(char const *str, char target)
 
 	len = 0;
 	i = 0;
-	while (str[len] && !ft_target(str[len], target))
+	while (str[len] && !ft_istarget(str[len], target))
 		len++;
 	cpy = (char *)malloc(sizeof(char) * (len + 1));
 	if (!cpy)
@@ -76,7 +76,7 @@ char	**ft_split_target(char const *s, char target)
 		i++;
 	while (s[i])
 	{
-		split[j] = ft_dup_target(&s[i]);
+		split[j] = ft_dup_target(&s[i], target);
 		while (s[i] && !ft_istarget(s[i], target))
 			i++;
 		while (s[i] && ft_istarget(s[i], target))
