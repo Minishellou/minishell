@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/21 09:55:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 10:05:04 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar)
 	t_lexer_node	*subchain;
 
 	if (!envar)
-		return (ERROR);
+	{
+		(*envar_node)->word	= NULL;
+		return (SUCCESS);
+	}
 	splited_envar = ft_split(envar->value, ' ');
 	if (!splited_envar)
 		return (ERROR);
