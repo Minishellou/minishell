@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/19 12:07:05 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:48:29 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_node		*create_lexer_node(char *word);
 t_node		*create_redirection(char *argument);
 //	Utils
 void		include_subchain_at(t_node **this_node, t_node *subchain);
-t_node		last_node(t_node *current_node);
+t_node		*last_node(t_node *current_node);
 t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
 
@@ -34,7 +34,7 @@ t_node		*make_chain_from_array(char **array, \
 int			lexer(char *command);
 
 /*		STRING CONVERT & UTILS	*/
-char	*concat_array_to_string(char **splited_string);
+char		*concat_array_to_string(char **splited_string);
 
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
@@ -44,6 +44,13 @@ int			is_quoted(char *string, int nb_of_quote);
 int			delete_escaped_char(char **string);
 void		mask_escaped_char(char **string);
 void		restore_escaped_char(char **string);
+
+/*		ENVAR & NODE UTILS		*/
+//	Envar expansion
+t_env_node	*get_envar(char *envar_name);
+int			expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar);
+//	env_node
+int			fill_env_node(char *var, t_env_node *node);
 
 /*		FILE & UTILS			*/
 int			open_tmp_file(void);

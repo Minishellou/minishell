@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/19 12:06:41 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 09:42:44 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	include_subchain_at(t_node **this_node, t_node *subchain)
 	last_subchain_node->next = next_to_this_node;
 }
 
-t_node	last_node(t_node *current_node)
+t_node	*last_node(t_node *current_node)
 {
 	if (current_node->next == NULL)
 		return (current_node);
