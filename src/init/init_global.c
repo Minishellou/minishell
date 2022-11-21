@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init_global.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:37:38 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:40:09 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void token_state_init(t_token_state *state)
+{
+	state->less = false;
+	state->great = false;
+	state->lesser = false;
+	state->greater = false;
+}
 
 int	init_global(char **envp)
 {

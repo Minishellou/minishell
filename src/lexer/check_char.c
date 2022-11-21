@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_utils.c                                      :+:      :+:    :+:   */
+/*   check_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 14:08:11 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/11/15 16:26:31 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/11/21 11:05:56 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-t_node	*make_chain_from_array(char **array, t_node_creator create_node)
+ 
+int   is_white_space(char c)
 {
-	int		i;
-	t_node	**new_node;
-	t_node	*first_node;
+    if (c == ' ' || c == '\t'|| c == '\r')
+        return (1);
+    return (0);
+}
 
-	i = 0;
-	first_node = create_node(array[i++]);
-	if (first_node == NULL)
-		return (NULL);
-	new_node = &first_node->next;
-	while (array[i] != NULL)
-	{
-		*new_node = create_node(array[i++]);
-		if (*new_node == NULL)
-			return (NULL);
-		new_node = &(*new_node)->next;
-	}
-	return (first_node);
+int is_special_token(char c)
+{
+	if (c == PIPE)
+	    return (1);
+    if (c == LESS)
+        return (1);
+    if (c == GREAT)
+        return (1);
+    return (0);
 }

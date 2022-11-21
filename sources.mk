@@ -43,7 +43,7 @@ SOURCES		+=                      		\
 		src/libft/ft_striteri.c        	\
 		src/libft/ft_strdup.c          	\
 		src/libft/ft_strlcpy.c         	\
-
+		src/libft/ft_split_target.c 	\
 
 ## SRC/INIT ##
 
@@ -64,8 +64,10 @@ SOURCES		+=								\
 		src/node_manager/env_node_manager.c	\
 
 ## SRC/LEXER ##
-
 SOURCES		+=                      		\
-		src/lexer/lexer.c              	\
+		src/lexer/check_char.c 				\
 
-
+## SRC/PARSING
+SOURCES 	+=								\
+		src/parsing/token_parse.c 			\
+		src/parsing/state_utils.c           \
