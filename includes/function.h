@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:15:05 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:35:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 
 /* INIT */
 void	token_state_init(t_token_state *state);
+
 /*		GLOBAL STRUCTURE		*/
-void			init_global(char **envp);
+int				init_global(char **envp);
+
 /*		NODE & UTILS			*/
-//	Create Node
+//	Env Node
 t_node			*create_env_node(char *var);
+int				fill_env_node(char *var, t_env_node *node);
+//	Create Node
 t_node			*create_lexer_node(char *word);
 //	Utils
 t_node			*make_chain_from_array(char **array, \

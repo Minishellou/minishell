@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:05:32 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:39:37 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,23 @@ void	print_word_list(t_lexer_node *node)
 	print_word_list(node->next);
 }
 
-// static
-// void	print_env_list(t_env_node *node)
-// {
-	// if (node == NULL)
-		// return ;
-	// printf("%s ->\n", node->var);
-	// print_env_list(node->next);
-// }
-// 
+static
+void	print_env_list(t_env_node *node)
+{
+	if (node == NULL)
+		return ;
+	printf("%s = %s \n", node->name, node->value);
+	print_env_list(node->next);
+}
+
 
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
 
 	(void)av;
-	init_global(envp);
+	if (init_global(envp) == ERROR)
+		return (ERROR);
 	if (ac > 1)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	//print_env_list(g_glo.env);
