@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 09:18:45 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 12:31:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:40:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,9 @@ char	*concat_chain_to_string(t_lexer_node *first_node)
 	current_node = first_node->next;
 	while (current_node != NULL)
 	{
-		if (current_node->word == NULL)
-		{
-			current_node = current_node->next;
-			continue ;
-		}
 		concatened_string = ft_strjoin(concatened_string, " ");
-		concatened_string = ft_strjoin(concatened_string, current_node->word);
+	if (current_node->word != NULL)
+			concatened_string = ft_strjoin(concatened_string, current_node->word);
 		current_node = current_node->next;
 	}
 	return (concatened_string);
