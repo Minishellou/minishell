@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 13:55:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/22 10:49:34 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	find_last_output_redir(t_redirection *redirection);
 
 t_io_env	io_environment_manager(void)
 {
-	int					input_fd;
-	int					output_fd;
+	int			input_fd;
+	int			output_fd;
 	t_io_env	current_io_env;
 
 	input_fd = find_last_input_redir(g_glo.redirection_table);
