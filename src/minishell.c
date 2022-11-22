@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/03 14:39:49 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:39:37 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	main(int ac, char **av, char **envp)
 		return (ERROR);
 	if (ac > 1)
 		return (printf("minishell binary does not take any argument.\n"), 0);
-	print_env_list(g_glo.env);
+	//print_env_list(g_glo.env);
 	while (1)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
-		lexer(str);
-		print_word_list(g_glo.lexer_output_chain);
+		if(!parse_token(str))
+			printf(" ");
 	}
 	ft_free();
-	return (SUCCESS);
+	return (0);
 }

@@ -6,18 +6,16 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 14:44:55 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/22 14:46:52 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define PIPE '|';
-# define LESS '<';
-# define GREAT '>';
-# define LESSER '<' * 2;
-# define GREATER  '>' * 2;
+# define PIPE '|'
+# define LESS '<' 
+# define GREAT '>'
 
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
@@ -95,6 +93,15 @@ typedef struct s_node
 	char			*word;
 	char			*var;
 }				t_node;
+
+/* HANDLING TOKEN STATE FOR PARSING */
+typedef struct s_token_state{
+	bool less;
+	bool great;
+	bool lesser;
+	bool greater;
+	bool pipe;
+}		t_token_state;
 
 typedef t_node	*t_node_creator(char *);
 //	The function should allocate new_node to the right node type
