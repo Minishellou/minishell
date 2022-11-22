@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 12:02:42 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/19 12:02:54 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/22 12:16:29 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 int	fill_env_node(char *var, t_env_node *node)
 {
 	int		i;
-	char	*var_cpy;
 
 	i = 0;
-	var_cpy = ft_strdup(var);
-	if (!var_cpy)
-		return (ERROR);
 	while (var[i] != '=')
 		i++;
 	var[i] = '\0';
