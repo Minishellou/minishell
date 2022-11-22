@@ -9,6 +9,7 @@
 	"files.associations": {
 		"struct.h": "c",
 		"unit_tests.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"typeinfo": "c"
 	}
 }
