@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/22 13:45:17 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:43:13 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	main(int ac, char **av, char **envp)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
-		if((parse_token(str)) != SUCCESS)
+		if((lexer(str)) != SUCCESS)
 			printf(" ");
+		ft_free();
 	}
-	ft_free();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:35:42 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:30:24 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void			ft_free(void);
 //  check every char 
 int				is_white_space(char c);
 int				is_special_token(char c);
-
+// chac convert
+int neon(char **str);
+int	quote_neon(char **str);
 // state management 
 int token_state(t_token_state state);
 void switch_state(bool *old, bool *new);
