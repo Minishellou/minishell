@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:13:54 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:23:51 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/22 13:39:40 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int token_state(t_token_state state)
 	if (state.pipe == true)
 		checker++;
 	if ( checker != 1 && checker != 0)
-		return (0);
-	return (1);
+		return (ERROR);
+	return (SUCCESS);
 }
 
 void switch_state(bool *old, bool *new)
@@ -45,7 +45,7 @@ int token_state_management(int *i, char **input, t_token_state *state)
 		if (state->great == true)
 			switch_state(&state->great, &state->greater);
 		else if (state->greater == true)
-			return (0);
+			return (ERROR);
 		else 
 			state->great = true;
 	}
@@ -54,15 +54,15 @@ int token_state_management(int *i, char **input, t_token_state *state)
 		if (state->less == true)
 			switch_state(&state->less, &state->lesser);
 		else if (state->lesser == true)
-			return (0);
+			return (ERROR);
 		else 
 			state->less = true;
 	}
 	if ((*input)[(*i)] == PIPE)
 	{
 		if (state->pipe == true)
-			return (0);
+			return (ERROR);
 		state->pipe = true; 	
 	}
-	return (1);
+	return (SUCCESS);
 }

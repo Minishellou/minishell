@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:39:37 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/22 13:45:17 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_global	g_glo;
 
+/*
 void	print_word_list(t_lexer_node *node)
 {
 	if (node == NULL)
@@ -30,7 +31,7 @@ void	print_env_list(t_env_node *node)
 	printf("%s = %s \n", node->name, node->value);
 	print_env_list(node->next);
 }
-
+*/
 
 int	main(int ac, char **av, char **envp)
 {
@@ -46,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
-		if(!parse_token(str))
+		if((parse_token(str)) != SUCCESS)
 			printf(" ");
 	}
 	ft_free();
