@@ -1,0 +1,375 @@
+commit 0198fdf74c7623bef918fc033987df0d46a13291
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 24 13:39:44 2022 +0100
+
+    update
+
+commit a19666caa291adb466165b9f7a5356741b04be4b
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 24 13:32:53 2022 +0100
+
+    test for vostphere
+
+commit 373af00da1bad1148d3e91186404b26b4c9e0e0d
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 24 13:22:23 2022 +0100
+
+    Test sync two repository
+
+commit b879d341f3bdd38c9029828167ffab3adb760acd
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 24 13:19:22 2022 +0100
+
+    Test github and vogsphere push
+
+commit 1c334094e92bac7175440b7d6d2a8b62b49e003e
+Merge: 15cb053 3c323ab
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Tue Nov 22 14:47:25 2022 +0100
+
+    Merge branch 'main' of github.com:Minishellou/minishell
+
+commit 15cb053738605718c8979b2fa7a67f9c6c7dab58
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Tue Nov 22 14:46:02 2022 +0100
+
+    feat(root): :art: Define branched stuff in main struct.h to share accross branches
+
+commit 3c323abe06e6d1f5261d2ac2866289372e0f1353
+Merge: 39b4af2 c4f6c54
+Author: Nucleon <70663867+kellerM42@users.noreply.github.com>
+Date:   Mon Nov 21 15:48:28 2022 +0100
+
+    Merge pull request #15 from Minishellou/catchParsingError
+    
+    Catch parsing error
+
+commit c4f6c546de0be935433b587ee88cb768a6c6159d
+Merge: 9217d00 39b4af2
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Nov 21 15:41:22 2022 +0100
+
+    feat(root): :twisted_rightwards_arrows: Pull from main to make pull request
+
+commit 9217d006a121f890a6513b4f009e1d6771acefac
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Nov 21 15:29:53 2022 +0100
+
+    feat(src): :poop: catch parsing error has been created successfully,  state_utils has been added to parsing directory. need refactorisation
+
+commit dd49fe5eb8d6f644259e1ec52fe299ae79d8b8c2
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Wed Nov 16 17:21:01 2022 +0100
+
+    feat(src): :sparkles: add parsing directory with token_parse,  pipe failure done, token _done with new struct token_state
+
+commit 013ee7f1d46ab106f7c09761c9cf5feed90f720d
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Wed Nov 16 15:38:31 2022 +0100
+
+    feat(libft): :sparkles: create split_target to split according to the target char
+
+commit 4416115899f2b7499e13a59135d7598a094b0d7d
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Wed Nov 16 13:10:05 2022 +0100
+
+    feat(src): create quote handling lexer part
+
+commit 39b4af25ca6553a9b3775d5dd43c920daa0c79bf
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Sun Nov 6 12:09:12 2022 +0100
+
+    fix(src): :rotating_light: Missing commas has been added
+
+commit 1fb0691d9a13b5dcc274c94f6ec64d5d95d1cb69
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Fri Nov 4 10:35:38 2022 +0100
+
+    .
+
+commit 79a5fa0e84801754793faf735dfbb91a2f102ca4
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Thu Nov 3 14:40:52 2022 +0100
+
+    feat(includes): :lock: Managing error everywhere
+
+commit 2b00c184a61d998053654192f0d1a7c21c9fc6f3
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Thu Nov 3 14:24:19 2022 +0100
+
+    Removing minishell exec from repo
+
+commit b42eac0597dedde0f134cac5acdd31c17c8d4d4e
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Thu Nov 3 14:23:56 2022 +0100
+
+    build(includes): :art: Adding basic define for error handling
+    
+    0 = SUCCESS, 1 = ERROR
+
+commit 962d71845ca38ad73a5a6aa675a10726c014ac44
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Thu Nov 3 14:22:54 2022 +0100
+
+    feat(src): :sparkles: Autosplitting name and value of envar on env_node creation
+
+commit faa359606da2c81fafad8fc118f186393bf814d6
+Merge: 74fab45 ea2b3f3
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 3 11:37:05 2022 +0100
+
+    Merge branch 'main' of github.com:Minishellou/minishell into main
+
+commit 74fab45f13491ba52b17b04a9bf935c938a919dc
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Thu Nov 3 11:31:57 2022 +0100
+
+    fix(src): :ambulance: fixing garbage collector
+
+commit ea2b3f3c433aac1d15e9eab225bc5da4329718b0
+Author: ArenorRaxx <77867649+ArenorRaxx@users.noreply.github.com>
+Date:   Wed Nov 2 20:10:30 2022 +0100
+
+    Update README.md
+
+commit e97d5f146b936a77e2104ee632d01c8493e76fc2
+Author: ArenorRaxx <77867649+ArenorRaxx@users.noreply.github.com>
+Date:   Wed Nov 2 20:08:37 2022 +0100
+
+    Create README.md
+
+commit 9d749fc168c4a9ea2a671643afc59cb77e132ab7
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 21:37:12 2022 +0100
+
+    feat(libft): modify ft_split and ft_strdup for addind ft_malloc within
+
+commit 916935464a391121be06841d293323b8b386495f
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Tue Nov 1 19:27:02 2022 +0100
+
+    feat(root): :lipstick: Recovering 4 hours of work
+    
+    So. We added a new nodal system for our chained list, we implemented this new system in the lexer, and we completed the first part of the Lexer
+    
+    Everything :D
+
+commit 661d9015800384672be4a3db4572c2cc6f1c5d62
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 18:43:00 2022 +0100
+
+    delete useless file
+
+commit d87153f18cebc6f2dfaa9ae7b5368a38d5a06234
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 18:29:38 2022 +0100
+
+    style(src): commenting lexer part
+
+commit 126600600e8cba9fab9db454d20620eab99e572f
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 13:31:10 2022 +0100
+
+    feat(root): libft, Makefile, includes have been changed
+
+commit 86083e939f8300f07a64926bcb938e0cd052bcd3
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 11:04:37 2022 +0100
+
+    fix(src): ft_free has been fixed
+
+commit 10b0bdae8c29a5a8f474350f2c25889f1d1aeba9
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Tue Nov 1 11:03:51 2022 +0100
+
+    refactor(src): :construction: put all garbage functions in the same files and change garbage function into statics
+
+commit 240eef60cdb57af493b86cd1d53abfc66237542d
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Mon Oct 31 12:59:39 2022 +0100
+
+    feat(src): :sparkles: Init global function added
+    
+    We're getting the **envp array and turning it into chained list, after we created the corresponding structure. We duplicate stdin 0 et stdout 1 as "standard_input" and "standard_output" members. Everything else gets inited the regular way.
+
+commit ec5c8f1e36dedf124062dd8906240e175e4cc86f
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Oct 31 12:07:36 2022 +0100
+
+    feat(root): Working on the parsing, we added a global variable, so we should refactor the garbage file and init the global variable
+
+commit 23942916e0517765d001e039d3600d2cb2a22454
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Oct 31 12:00:07 2022 +0100
+
+    refactor(includes): turn token enum into macro
+
+commit 9e9770a69aab428120947255462ba3d350620d79
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Oct 31 11:08:16 2022 +0100
+
+    style: update garbage_collector name for garbage_ctr to avoid *line too long*
+
+commit 3924fea10b68d92579da81e80bfad0232986816f
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Mon Oct 31 11:05:33 2022 +0100
+
+    refactor(src): in garbage_collector folder, using garbage collector through global struct
+
+commit 18e86208f611fb93331e7e2a41259d7b383f8848
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Fri Oct 28 22:44:49 2022 +0200
+
+    Je me suis trompé Gaby, on n'aura pas une table de 2 redirections seulement, d;esolé
+
+commit 67b53f547a300eb07095e4c2c0f7bed3b4af8922
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Fri Oct 28 21:25:46 2022 +0200
+
+    style(includes): We separate the string into tokens. Then we translate them in words.
+
+commit c26b9272f5c107d689450d960a32719bcc290999
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Fri Oct 28 21:18:45 2022 +0200
+
+    feat(includes): :art: Genius. I. Am. A. Genius.
+    
+    There we give each value of enum e_token the value of the corresponding char. Then, the Lexer only have to compare the char to any value to know if it is any of theze tokens
+
+commit ee2f3ea591a866fa53f9d9770c603efbbb3a8533
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Fri Oct 28 21:09:45 2022 +0200
+
+    refactor(Multiple Workspaces): :art: Dividing header file, refactoring garbage collector code and struct syntax, norming
+
+commit 9faf46c15334798a3e5b3fb860931f8dc9ff7405
+Author: Mateo Corso <mcorso@student.42.fr>
+Date:   Fri Oct 28 20:53:49 2022 +0200
+
+    fix(includes): :art: Restructuring struct.h
+
+commit 07d7422efceb833639ee82af6dcda4521938035d
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 17:02:22 2022 +0200
+
+    feat(libft): libft is back
+
+commit d9ca366cc10488487aaccced56341fa9e4ba52e6
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 17:01:37 2022 +0200
+
+    refactor(libft): libft has been removed from the project
+
+commit ade58cdaebbdff2aba5d20487a6a5b2ec9e0976b
+Merge: 24e90a5 108b030
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:59:24 2022 +0200
+
+    Merge branch 'main' of github.com:Minishellou/minishell into main
+
+commit 24e90a5acadf8283ea20f57895b408e4009030cb
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:59:11 2022 +0200
+
+    feat(libft): libft has been re added to the root project
+
+commit 108b030c3ff6be1de4ebf4a722f7cb99e2dd4218
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Fri Oct 28 16:58:25 2022 +0200
+
+    fix(includes): :building_construction: Renaming garbage_collector_chain to the good name
+
+commit 5df7f1253d49062e03b801fb56fb9bc9a10d91c1
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:57:48 2022 +0200
+
+    chore(libft): libft has been removed from the root project
+
+commit 1e9f1ade678f79907a97c2a71e41a228983eb981
+Merge: 6cf563c 123b499
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Fri Oct 28 16:53:09 2022 +0200
+
+    Merge branch 'main' of github.com:Minishellou/minishell into main
+
+commit 123b4992c4977386e4d1af140d7746d86d4e921c
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:42:32 2022 +0200
+
+    feat(src): Linked list has been created inside the lexer directory
+
+commit 6cf563c7c1edf47b4b8739ad1960a3af979c0f94
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Fri Oct 28 16:41:45 2022 +0200
+
+    refactor(includes): :building_construction: Adding gb_col chain to global struct
+    
+    Including minishell.h and securing struct.h
+
+commit 5ba27f4c41937074c355252f46e2ac2ae07a6ecd
+Author: ArenorRaxx <mateocorso@gmail.com>
+Date:   Fri Oct 28 16:33:05 2022 +0200
+
+    refactor(includes): :building_construction: Defining a set of struct for intra-communication in the shell
+    
+    Here we define a global struct, which will be used much later in the project, and basic nodes for chained lists of lexer and execution
+
+commit 3ce0718b0aac8243c77721ab60b8ba42f9381c12
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:26:15 2022 +0200
+
+    style(includes): Header file has been norminated
+
+commit 2550dda3dd1996ce90cc7f8b8dc2341383e50277
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:02:23 2022 +0200
+
+    fix(includes): libft has been included to the header file
+
+commit 3964e01c8e7027d934f99292a77cfde6ab8eca7c
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 16:00:29 2022 +0200
+
+    feat(libft): libft has been added to the project
+
+commit 49f2b579ac92ca4bfea38f114f43a2a465210572
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 14:04:29 2022 +0200
+
+    feat(root): Makefile has been created sucessfully
+
+commit de9904795b7f8ae9708c836f3a2a39084163025b
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 12:40:30 2022 +0200
+
+    feat(src): Making up the garbage collector in garbage folder
+
+commit f51424e74f20ecf9a4979f8e2e2abf15cbb5f695
+Author: gabriel <gaabrielkeller19@gmail.com>
+Date:   Fri Oct 28 12:27:20 2022 +0200
+
+    feat(includes): creating the minishell's header file
+
+commit 04a8c19d55a1fba3f4a4c45d9b6181868eb78c99
+Author: Gabriel guyga KITOKO <gkitoko@e3r3p3.clusters.42paris.fr>
+Date:   Thu Oct 27 17:48:00 2022 +0200
+
+    rm little_shell
+
+commit a6a6024f9d84fd40cd958acc17dec698cb654d4d
+Author: Gabriel guyga KITOKO <gkitoko@e3r3p3.clusters.42paris.fr>
+Date:   Thu Oct 27 16:28:46 2022 +0200
+
+    name changing
+
+commit 3f157da73916979ef6ce5b40582ea0d930df77b1
+Author: Gabriel guyga KITOKO <gkitoko@e3r3p3.clusters.42paris.fr>
+Date:   Thu Oct 27 16:28:07 2022 +0200
+
+    first push
+
+commit 6316f5be5835d35000a651f5c9c6c429e7973055
+Author: Nucleon <70663867+kellerM42@users.noreply.github.com>
+Date:   Fri Oct 21 11:30:16 2022 +0200
+
+    Initial commit
