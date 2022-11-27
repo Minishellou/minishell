@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/24 16:43:13 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/25 13:26:14 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int ac, char **av, char **envp)
 		add_history(str);
 		if((lexer(str)) != SUCCESS)
 			printf(" ");
-		ft_free();
 	}
 	return (0);
 }

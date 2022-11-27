@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/24 16:31:13 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/27 14:14:48 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_lexer_node
 {
 	struct s_lexer_node	*next;
 	char				*word;
-	char				*token;
+	int 				token;
 }				t_lexer_node;
 
 /*		EXECUTION CHAIN			*/

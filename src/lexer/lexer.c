@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/24 16:57:51 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/27 14:42:30 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,37 @@ static void quote_rehestablish(char *str)
 	}
 }
 
-/*
-static int	make_chain_of_words(char *input)
+int	command_expression(t_lexer_node **cmd, char *last_node)
 {
-	char			**words;
-	int				i;
-	t_lexer_node	*output_chain;
-
+	char			**split;
+	t_lexer_node 	*command_expression;
 	
-	if(!quote_space_to_neg(&input))
-		return (EXIT_FAILURE);
-	words = ft_split_target(input, '|');
-	if (!words)
-		return (0);
-	i = 0;
-	output_chain = (t_lexer_node *)make_chain_from_array(words, create_lexer_node);
-		expand_envar();
-		tokenize();
+	split = ft_split((*cmd)->word);
+	if (!split)
+		return (ERROR);
+	command_expression = (t_lexer_node*)make_chain_from_array(split, create_lexer_node);
+	if (!command_expression)
+		return (ERROR);
+	while (command_expression->next)
+		command_expression = command_expression->next;
+	if (last_node != NULL)
+	{
+		command_expression = (t_lexer_node *)create_lexer_node(last_node);
+		if (!command_expression)
+			return (ERROR);
+		command_expression = command_expression->next;
+	}
+	// waiting for subchain_at
+	return(SUCCESS);
 }
-*/
-int	lexer(char *input)
+ 
+int	process_spipe(char *input)
 {
 	char	**words;
 	int		i;
-	//t_node	*output_chain;
+	t_lexer_node *command_spipe;
 	
+	i = 0;
 	if(quote_neon(&input) != SUCCESS)
 		return (ERROR);
 	if(parse_token(input) != SUCCESS)
@@ -59,15 +65,13 @@ int	lexer(char *input)
 	words = ft_split_target(input, '|');
 	while (words[i])
 	{
-		if (words[i][0] == '\0' && ft_strlen(words[i]) <= 2)
+		if (words[i][0] == ' ' && ft_strlen(words[i]) <= 2)
 			return (ERROR);
 		quote_neon(&words[i++]);
 	}
 	i = 0;
 	while (words[i])
-	{
-		quote_rehestablish(words[i]);
-		printf("%s\n", words[i++]);
-	}
+		quote_rehestablish(words[i++]);
+	command_spipe = (t_lexer_node *)make_chain_from_array(words, create_lexer_node);
 	return (SUCCESS);
 }
