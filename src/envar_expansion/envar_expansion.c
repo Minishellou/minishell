@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 12:22:05 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/27 09:41:02 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,17 @@ t_env_node	*get_envar(char *envar_name)
 	return (current_node);
 }
 
-static t_lexer_node	**find_envar_node(t_lexer_node **first_node)
+static t_lexer_node	*find_envar_node(t_lexer_node *first_node)
 {
 	t_lexer_node	*current_node;
-	t_lexer_node	**ret_node;
+	t_lexer_node	*ret_node;
 
-	current_node = *first_node;
-	if (*(*first_node)->word == '$')
-		return (first_node);
-	while (*current_node->next->word != '$')
+	current_node = first_node;
+	while (!has_envar(current_node->word))
 		current_node = current_node->next;
-	ret_node = &current_node->next;
-	return (ret_node);
+	return (current_node);
 }
 
-int	expand_and_add_to_string(char **current_string, t_env_node *envar)
-{
-	char			**splited_string;
-	t_lexer_node	*first_node;
-	t_lexer_node	**envar_node;
-
-	splited_string = ft_split(*current_string, ' ');
-	first_node = (t_lexer_node *)make_chain_from_array(splited_string, create_lexer_node);
-	envar_node = find_envar_node(&first_node);
-	if (expand_and_add_to_chain(envar_node, envar) != SUCCESS)
-		return (ERROR);
-	*current_string = concat_chain_to_string(first_node);
-	if (!*current_string)
-		return (ERROR);
-	return (SUCCESS); 
-}
 
 int	expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar)
 {
