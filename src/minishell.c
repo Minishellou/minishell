@@ -6,15 +6,14 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/25 13:26:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:11:55 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_global	g_glo;
+extern t_global	g_glo;
 
-/*
 void	print_word_list(t_lexer_node *node)
 {
 	if (node == NULL)
@@ -23,6 +22,7 @@ void	print_word_list(t_lexer_node *node)
 	print_word_list(node->next);
 }
 
+/*
 static
 void	print_env_list(t_env_node *node)
 {
@@ -42,7 +42,6 @@ int	main(int ac, char **av, char **envp)
 		return (ERROR);
 	if (ac > 1)
 		return (printf("minishell binary does not take any argument.\n"), 0);
-	//print_env_list(g_glo.env);
 	while (1)
 	{
 		str = readline("minishell~ ");

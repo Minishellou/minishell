@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/27 14:42:30 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:11:02 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	command_expression(t_lexer_node **cmd, char *last_node)
 			return (ERROR);
 		command_expression = command_expression->next;
 	}
-	// waiting for subchain_at
+	include_subchain_at((t_node **)cmd, (t_node *)command_expression);
 	return(SUCCESS);
 }
  
@@ -55,6 +55,7 @@ int	process_spipe(char *input)
 {
 	char	**words;
 	int		i;
+	t_lexer_node *tmp;
 	t_lexer_node *command_spipe;
 	
 	i = 0;
@@ -73,5 +74,20 @@ int	process_spipe(char *input)
 	while (words[i])
 		quote_rehestablish(words[i++]);
 	command_spipe = (t_lexer_node *)make_chain_from_array(words, create_lexer_node);
+	tmp = command_spipe;
+	while (tmp->next)
+	{
+		if(command_expression(&tmp, "PIPE") != SUCCESS)
+			return (ERROR);
+		tmp = tmp->next;
+	}
+	print_word_list(command_spipe);
 	return (SUCCESS);
+}
+
+int lexer(char *input)
+{
+	if (process_spipe(input) != SUCCESS)
+		return (ERROR);
+	return (SUCCESS);	
 }
