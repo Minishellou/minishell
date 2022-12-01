@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:08:27 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:02:12 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_node			*make_chain_from_array(char **array, \
 /*		LEXER & UTILS			*/
 //	Lexer
 int				lexer(char *command);
+t_lexer_node	*command_expression(t_lexer_node *cmd, char *last_token);
 /* PARSING */
 int parse_token(char *input);
 /*		GARBAGE COLLECTOR		*/
@@ -44,11 +45,13 @@ void			ft_free(void);
 //  check every char 
 int				is_white_space(char c);
 int				is_special_token(char c);
-// chac convert
+// manipulation
 int neon(char **str);
+int array_to_rehestablish(char ***str);
+int	quote_neon(char **str);
+
 void	include_subchain_at(t_node **this_node, t_node *subchain);
 t_node	*last_node(t_node *current_node);
-int	quote_neon(char **str);
 // state management 
 int token_state(t_token_state state);
 // print words list

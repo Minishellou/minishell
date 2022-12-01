@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/28 12:38:31 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:41:04 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	include_subchain_at(t_node **this_node, t_node *subchain)
 {
 	t_node	*next_to_this_node;
 	t_node	*last_subchain_node;
-	
+
 	next_to_this_node = (*this_node)->next;
 	*this_node = subchain;
 	last_subchain_node = last_node(subchain);

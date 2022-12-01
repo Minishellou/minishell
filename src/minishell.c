@@ -6,13 +6,13 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:11:55 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:16:28 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern t_global	g_glo;
+t_global	g_glo;
 
 void	print_word_list(t_lexer_node *node)
 {

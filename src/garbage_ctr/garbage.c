@@ -6,13 +6,11 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:13:13 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:16:36 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern global g_glo;
 
 static
 t_garbage_node	*new_grb_node(void *addr)

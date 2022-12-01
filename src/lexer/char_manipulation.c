@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_convert.c                                     :+:      :+:    :+:   */
+/*   char_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 11:33:28 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/01 18:57:28 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int neon(char **str)
 	if ((*str)[i] != start)
 		return (ERROR);
 	return (i);
+}
+
+int array_to_rehestablish(char ***str)
+{
+	int i;
+	
+	i = 0;
+	while ((*str)[i])
+	{
+		if ((*str)[i][0] == ' ' && ft_strlen((*str)[i]) <= 2)
+			return (ERROR);
+		quote_neon(&(*str)[i++]);
+	}
+	return (SUCCESS);
 }
 
 int	quote_neon(char **str)
