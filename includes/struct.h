@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 11:17:05 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/03 10:02:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ typedef struct s_exec_node
 {
 	struct s_exec_node	*next;
 	char				*command_path;
-	struct s_arg_node	*command_args;
+	t_lexer_node		*arg_chain;
+	t_redirection		*redir_chain;
+	t_io_env			io_env;
 }				t_exec_node;
 
 typedef struct s_arg_node
