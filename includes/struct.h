@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/27 14:14:48 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/03 10:08:35 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_global
 	int						standard_output;
 	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
-	struct s_redirection	*redirection_table;
 	struct s_lexer_node		*lexer_output_chain;
 	struct s_exec_node		*execution_chain;
 }				t_global;
@@ -50,7 +49,10 @@ typedef struct s_lexer_node
 typedef struct s_exec_node
 {
 	struct s_exec_node	*next;
+	char				*command_path;
 	t_lexer_node		*argv;
+	t_redirection		*redir_chain;
+	t_io_env			io_env;
 }				t_exec_node;
 
 /*		REDIRECTION CHAIN		*/
