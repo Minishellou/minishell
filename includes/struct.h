@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/03 10:02:08 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/11/27 14:14:48 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define PIPE '|';
-# define LESS '<';
-# define GREAT '>';
-# define LESSER '<' * 2;
-# define GREATER  '>' * 2;
+# define PIPE '|'
+# define LESS '<' 
+# define GREAT '>'
 
+#include <stdbool.h>
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -44,24 +43,15 @@ typedef struct s_lexer_node
 {
 	struct s_lexer_node	*next;
 	char				*word;
-	char				*token;
+	int 				token;
 }				t_lexer_node;
 
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
 {
 	struct s_exec_node	*next;
-	char				*command_path;
-	t_lexer_node		*arg_chain;
-	t_redirection		*redir_chain;
-	t_io_env			io_env;
+	t_lexer_node		*argv;
 }				t_exec_node;
-
-typedef struct s_arg_node
-{
-	struct s_arg_node	*next;
-	char				*word;
-}				t_arg_node;
 
 /*		REDIRECTION CHAIN		*/
 enum	e_redirection_type
@@ -104,6 +94,15 @@ typedef struct s_node
 	char			*word;
 	char			*var;
 }				t_node;
+
+/* HANDLING TOKEN STATE FOR PARSING */
+typedef struct s_token_state{
+	bool less;
+	bool great;
+	bool lesser;
+	bool greater;
+	bool pipe;
+}		t_token_state;
 
 typedef t_node	*t_node_creator(char *);
 //	The function should allocate new_node to the right node type
