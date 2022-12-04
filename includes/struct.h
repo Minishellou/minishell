@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/04 12:04:54 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/04 12:07:14 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,6 @@ enum e_quote_context
 };
 
 typedef int	t_quote_context;
-
-/*		IO ENVIRONMENT			*/
-typedef struct s_io_environment
-{
-	int	input;
-	int	output;
-}				t_io_env;
 
 /*		NODE INTERFACE			*/
 typedef struct s_node
