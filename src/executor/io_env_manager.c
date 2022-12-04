@@ -5,71 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 13:55:51 by mcorso           ###   ########.fr       */
+/*   Created: 2022/12/04 11:57:25 by mcorso            #+#    #+#             */
+/*   Updated: 2022/12/04 11:57:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	find_last_input_redir(t_redirection *redirection);
-static int	find_last_output_redir(t_redirection *redirection);
+static void	open_input_redir(char *file_path, t_io_env *to_fill);
+static void	open_output_redir(char *file_path, t_io_env *to_fill);
+static void	open_append_redir(char *file_path, t_io_env *to_fill);
 
-t_io_env	io_environment_manager(void)
+int	io_environment_manager(t_exec_node *current_command)
 {
-	int					input_fd;
-	int					output_fd;
-	t_io_env	current_io_env;
+	t_io_env		current_io_env;
+	t_redirection	*current_redirection_node;
 
-	input_fd = find_last_input_redir(g_glo.redirection_table);
-	output_fd = find_last_output_redir(g_glo.redirection_table);
-	if (input_fd == NOT_SET)
-		input_fd = dup(g_glo.standard_input);
-	if (output_fd == NOT_SET)
-		output_fd = dup(g_glo.standard_output);
-	current_io_env.input_fd = input_fd;
-	current_io_env.output_fd = output_fd;
-	return (current_io_env);
+	current_io_env.input = dup(0);
+	current_io_env.output = dup(1);
+	current_redirection_node = current_command->redir_chain;
+	while (current_redirection_node != NULL)
+	{
+		if (current_redirection_node->type == INPUT)
+			open_input_redir(current_redirection_node->argument, &current_io_env);
+		if (current_redirection_node->type == OUTPUT)
+			open_output_redir(current_redirection_node->argument, &current_io_env);
+		if (current_redirection_node->type == APPEND)
+			open_append_redir(current_redirection_node->argument, &current_io_env);
+		if (current_io_env.input == ERROR || current_io_env.output == ERROR)
+			return (ERROR);
+		current_redirection_node = current_redirection_node->next;
+	}
+	current_command->io_env.input = current_io_env.input;
+	current_command->io_env.output = current_io_env.output;
+	return (SUCCESS);
 }
 
-static int	find_last_input_redir(t_redirection *redirection)
+static void	open_input_redir(char *file_path, t_io_env *to_fill)
 {
-	int			ret;
-	static int	fd = NOT_SET;
-
-	if (redirection == NULL)
-		return (fd);
-	if (redirection->type > HEREDOC)
-		return (find_last_input_redir(redirection->next));
-	if (fd != NOT_SET)
-		close(fd);
-	if (redirection->type == INPUT)
-		fd = open_file_to_read(redirection->argument);
-	if (redirection->type == HEREDOC)
-		fd = heredoc_process(redirection->argument);
-	if (fd == ERROR)
-		return (ERROR);
-	ret = find_last_input_redir(redirection->next);
-	return (ret);
+	close(to_fill->input);
+	to_fill->input = open_file_to_read(file_path);
 }
 
-static int	find_last_output_redir(t_redirection *redirection)
-{	
-	int			ret;
-	static int	fd = NOT_SET;
+static void	open_output_redir(char *file_path, t_io_env	*to_fill)
+{
+	close(to_fill->output);
+	to_fill->output = open_file_to_trunc(file_path);
+}
 
-	if (redirection == NULL)
-		return (fd);
-	if (redirection->type < OUTPUT)
-		return (find_last_output_redir(redirection->next));
-	if (fd != NOT_SET)
-		close(fd);
-	if (redirection->type == OUTPUT)
-		fd = open_file_to_trunc(redirection->argument);
-	if (redirection->type == APPEND)
-		fd = open_file_to_append(redirection->argument);
-	if (fd < 0)
-		return (ERROR);
-	ret = find_last_output_redir(redirection->next);
-	return (ret);
+static void	open_append_redir(char *file_path, t_io_env	*to_fill)
+{
+	close(to_fill->output);
+	to_fill->output = open_file_to_append(file_path);
 }
