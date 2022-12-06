@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 09:20:13 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 10:05:54 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ char	*concat_array_to_string(char **splited_string);
 //	Quotes
 int			unquote_string(char **string);
 int			is_quoted(char *string, int nb_of_quote);
-//	Escape char
-int			delete_escaped_char(char **string);
-void		mask_escaped_char(char **string);
-void		restore_escaped_char(char **string);
 
 /*		FILE & UTILS			*/
 int			open_tmp_file(void);
@@ -60,7 +56,7 @@ int			find_last_input_redir(t_redirection *redirection);
 //	Heredoc process
 int			heredoc_process(char *limit_string);
 //	Limit string
-int			manage_limit_string(char **limit_string, int *quote_context);
+int			process_limit_string(char **limit_string, int *quote_context);
 
 
 /*		GARBAGE COLLECTOR		*/

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_utils.c                                      :+:      :+:    :+:   */
+/*   quote_context_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:42:39 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/16 09:40:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 10:03:24 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	is_quoted(char *string, int nb_of_quote)
 		else
 			return (ERROR);
 	}
-	if (*string == '\\')
-		return (is_quoted(string + 2, nb_of_quote));
 	if (*string != '"' && *string != '\'')
 		return (is_quoted(string + 1, nb_of_quote));
 	if (nb_of_quote == 0)
