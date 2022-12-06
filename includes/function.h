@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/06 14:39:46 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:53:46 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int			open_file_to_append(char *file_path);
 void		write_to_file(int file_fd, char *string_to_write);
 
 /*		IO ENV & UTILS			*/
+//	IO Env manager
 int			io_environment_manager(t_exec_node *current_command);
-
-/*		HEREDOC & UTILS			*/
-//	Heredoc process
-int			heredoc_process(char *limit_string);
+//	Heredoc manager 
+int			manage_heredoc(t_redirection *heredoc_node);
 //	Limit string
 int			process_limit_string(char **limit_string, int *quote_context);
 
