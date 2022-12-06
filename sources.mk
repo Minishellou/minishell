@@ -73,14 +73,17 @@ SOURCES		+=                      		\
 
 SOURCES		+=								\
 		src/executor/io_env_manager.c		\
-		src/executor/heredoc_manager.c		\
-		src/executor/limit_string_manager.c		\
+
+## SRC/HEREDOC ##
+
+SOURCES		+=
+		src/heredoc/heredoc_manager.c		\
+		src/heredoc/limit_string_manager.c		\
+		src/heredoc/quote_context_manager.c
 
 
 ## SRC/UTILS ##
 
 SOURCES		+=								\
 		src/utils/file_utils.c				\
-		src/utils/escape_char_utils.c		\
-		src/utils/string_conversion_utils.c		\
-		src/utils/quote_utils.c	
+		src/utils/string_conversion_utils.c	
