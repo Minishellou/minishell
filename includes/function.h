@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/06 14:37:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:39:46 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			unquote_string(char **string);
 int			is_quoted(char *string, int nb_of_quote);
 
 /*		FILE & UTILS			*/
-int			open_tmp_file(void);
 int			open_file_to_read(char *file_path);
 int			open_file_to_trunc(char *file_path);
 int			open_file_to_append(char *file_path);

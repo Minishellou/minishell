@@ -72,7 +72,8 @@ SOURCES		+=                      		\
 ## SRC/EXECUTOR ##
 
 SOURCES		+=								\
-		src/executor/io_env_manager.c		\
+		src/executor/file_manager.c			\
+		src/executor/io_env_manager.c		
 
 ## SRC/HEREDOC ##
 
@@ -85,5 +86,4 @@ SOURCES		+=
 ## SRC/UTILS ##
 
 SOURCES		+=								\
-		src/utils/file_utils.c				\
 		src/utils/string_conversion_utils.c	

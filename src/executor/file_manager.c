@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_utils.c                                       :+:      :+:    :+:   */
+/*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:57 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/04 12:01:41 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 14:39:34 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ int	open_file_to_read(char *file_path)
 	if (ret_fd < 0)
 		return (ERROR);
 	return (ret_fd);
-}
-
-int	open_tmp_file(void)
-{
-	int	tmp_file;
-
-	tmp_file = open("./tmp_file", TMP_FILE_FLAGS, TMP_FILE_ACCESS);
-	if (tmp_file > 0)
-		unlink("./tmp_file");
-	return (tmp_file);
 }
 
 int	open_file_to_trunc(char *file_path)
