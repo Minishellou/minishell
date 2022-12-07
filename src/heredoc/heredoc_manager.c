@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/06 14:55:29 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:14:58 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	manage_heredoc(t_redirection *heredoc_node)
 	tmpfile_fd = open_file_to_trunc(tmpfile);
 	if (tmpfile_fd == ERROR)
 		return (ERROR);
-	heredoc_process(heredoc_node->argument, tmpfile_fd);
+	if (heredoc_process(heredoc_node->argument, tmpfile_fd) != SUCCESS)
+		return (ERROR);
 	heredoc_node->type = INPUT;
 	heredoc_node->argument = tmpfile;
 	return (SUCCESS);
