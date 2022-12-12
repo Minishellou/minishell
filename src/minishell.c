@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:16:28 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/10 13:43:40 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	main(int ac, char **av, char **envp)
 		str = readline("minishell~ ");
 		add_history(str);
 		if((lexer(str)) != SUCCESS)
-			printf(" ");
+			printf("error\n");
+		//print_word_list(g_glo.lexer_output_chain);
+		ft_free();
+		g_glo.lexer_output_chain = NULL;
 	}
 	return (0);
 }

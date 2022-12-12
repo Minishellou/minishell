@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/27 14:14:48 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/10 13:06:40 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define PIPE '|'
 # define LESS '<' 
 # define GREAT '>'
+# define LESSER '<' * 2
+# define GREATER '>' * 2
 
 #include <stdbool.h>
 /*		GLOBAL STRUCT			*/

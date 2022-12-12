@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:16:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/10 13:05:37 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	*ft_malloc(int len)
 	void	*new_block;
 
 	new_block = malloc(len);
+	if (!new_block)
+		return (NULL);
 	lst_addback(new_grb_node(new_block));
 	return (new_block);
 }
@@ -59,6 +61,7 @@ void	ft_free(void)
 {
 	t_garbage_node	*tmp;
 
+	tmp = NULL;
 	while (g_glo.garbage_ctr)
 	{
 		free(g_glo.garbage_ctr->addr);
@@ -66,5 +69,5 @@ void	ft_free(void)
 		tmp = g_glo.garbage_ctr;
 		g_glo.garbage_ctr = g_glo.garbage_ctr->next;
 		free(tmp);
-	} 
+	}
 }

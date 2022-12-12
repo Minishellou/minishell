@@ -71,6 +71,8 @@ SOURCES		+=                      		\
 SOURCES 	+=								\
 		src/parsing/token_parse.c 			\
 		src/parsing/state_utils.c           \
+		src/lexer/pipe_handler.c 			\
+		src/lexer/redir_handler.c 			\
 		src/lexer/char_manipulation.c 		\
 		src/lexer/check_char.c 				\
 		src/lexer/lexer.c 					\
