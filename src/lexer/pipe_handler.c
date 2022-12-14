@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:46:38 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/12 12:00:45 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/12 18:14:43 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	fill_lexer_output(t_lexer_node *command_list)
 		{
 			last_parsed_node = (t_lexer_node *)last_node((t_node *)parsed_command);
 			last_parsed_node->next = (t_lexer_node *)create_lexer_node("|");
-			last_parsed_node->next->token = PIPE;
 		}
 		add_command_to_lexer_output(parsed_command);
-		//printf("word = %s\n", command_list->word);
 		command_list = command_list->next;
 	}
 }

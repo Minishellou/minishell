@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/12 12:09:28 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/12 18:14:05 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,13 @@ t_lexer_node *create_redir(char *str)
 
 	redir = NULL;
 	if (which_redir(str) == LESSER)
-	{
 		redir = (t_lexer_node *)create_lexer_node("<<");
-		redir->token = LESSER;
-	}
 	else if(which_redir(str) == GREATER)
-	{
 		redir = (t_lexer_node *)create_lexer_node(">>");
-		redir->token = GREATER;
-	}
 	if (which_redir(str) == LESS)
-	{
 		redir = (t_lexer_node *)create_lexer_node("<");
-		redir->token = LESS;
-	}
 	if (which_redir(str) == GREAT)
-	{
 		redir = (t_lexer_node *)create_lexer_node(">");
-		redir->token = GREAT;
-	}
 	return (redir);
 }
 

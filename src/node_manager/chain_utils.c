@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/10 13:46:34 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:19:31 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 	t_node	*first_node;
 
 	i = 0;
-	first_node = create_node(array[i++]);
+	first_node = NULL;
+	if (array[1])
+		first_node = create_node(array[i++]);
 	if (first_node == NULL)
 		return (NULL);
 	new_node = &first_node->next;

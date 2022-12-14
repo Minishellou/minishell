@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/10 13:05:37 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/13 15:19:50 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,21 @@ void	*ft_malloc(int len)
 
 void	ft_free(void)
 {
+	t_garbage_node *lst;
 	t_garbage_node	*tmp;
 
-	tmp = NULL;
-	while (g_glo.garbage_ctr)
+	lst = g_glo.garbage_ctr;
+	while (lst)
 	{
-		free(g_glo.garbage_ctr->addr);
-		g_glo.garbage_ctr->addr = NULL;
-		tmp = g_glo.garbage_ctr;
-		g_glo.garbage_ctr = g_glo.garbage_ctr->next;
-		free(tmp);
+		tmp = lst->next;
+		free(lst->addr);
+		lst->addr = NULL;
+		//free(lst);
+		///lst = NULL;
+		lst = tmp;
 	}
+	free(g_glo.lexer_output_chain);
+	g_glo.lexer_output_chain = NULL;
+	free(g_glo.garbage_ctr);
+	g_glo.garbage_ctr = NULL;
 }

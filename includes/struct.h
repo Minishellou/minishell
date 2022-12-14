@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/13 13:52:03 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:30:58 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,8 @@ typedef struct s_io_environment
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
 {
-	struct s_exec_node		*next;
-	char					*command_path;
-	t_lexer_node			*arg_chain;
-	struct s_redirection	*redir_chain;
-	t_io_env				io_env;
+	struct s_exec_node	*next;
+	t_lexer_node		*argv;
 }				t_exec_node;
 
 /*		REDIRECTION CHAIN		*/
@@ -92,10 +89,19 @@ enum e_quote_context
 
 typedef int	t_quote_context;
 
+/*		IO ENVIRONMENT			*/
+typedef struct s_io_environment
+{
+	int	input_fd;
+	int	output_fd;
+}				t_io_env;
+
 /*		NODE INTERFACE			*/
 typedef struct s_node
 {
 	struct s_node	*next;
+	char			*word;
+	char			*var;
 }				t_node;
 
 /* HANDLING TOKEN STATE FOR PARSING */
