@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_utils.c                                      :+:      :+:    :+:   */
+/*   get_node_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 15:37:03 by mcorso           ###   ########.fr       */
+/*   Created: 2022/12/14 15:27:27 by mcorso            #+#    #+#             */
+/*   Updated: 2022/12/14 15:33:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_node	*make_chain_from_array(char **array, t_node_creator create_node)
+char	*get_env_node_value(t_node	*node)
 {
-	int		i;
-	t_node	**new_node;
-	t_node	*first_node;
+	char		*ret_value;
+	t_env_node	*env_node;
 
-	i = 0;
-	first_node = create_node(array[i++]);
-	if (first_node == NULL)
+	env_node = (t_env_node *)node;
+	ret_value = ft_strjoin(env_node->name, "=");
+	if (!ret_value)
 		return (NULL);
-	new_node = &first_node->next;
-	while (array[i] != NULL)
-	{
-		*new_node = create_node(array[i++]);
-		if (*new_node == NULL)
-			return (NULL);
-		new_node = &(*new_node)->next;
-	}
-	return (first_node);
+	ret_value = ft_strjoin(ret_value, env_node->value);
+	return (ret_value);
 }
 
-char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
+char	*get_lexer_node_value(t_node *node)
 {
-	
+	char			*ret_value;
+	t_lexer_node	*lexer_node;
+
+	lexer_node = (t_lexer_node *)node;
+	ret_value = lexer_node->word;
+	return (ret_value);
 }

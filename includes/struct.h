@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/04 12:07:14 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 15:27:53 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,13 @@ typedef struct s_token_state{
 	bool pipe;
 }		t_token_state;
 
-typedef t_node	*t_node_creator(char *);
+typedef t_node *t_node_creator(char *);
 //	The function should allocate new_node to the right node type
 //						set a member of new_node to its argument
 //						set new_node->next to NULL
 //						return the new_node casted as (t_node *)
+
+typedef char *t_node_getter(t_node *);
 
 /*		GARBAGE COLLECTOR		*/
 typedef struct s_garbage_node
