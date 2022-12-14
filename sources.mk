@@ -62,7 +62,8 @@ SOURCES		+=                      		\
 SOURCES		+=								\
 		src/node_manager/chain_utils.c	\
 		src/node_manager/create_node.c	\
-		src/node_manager/env_node_manager.c	\
+		src/node_manager/get_node_value.c	\
+		src/node_manager/env_node_manager.c
 
 ## SRC/LEXER ##
 
@@ -72,8 +73,11 @@ SOURCES		+=                      		\
 ## SRC/EXECUTOR ##
 
 SOURCES		+=								\
+		src/executor/exec_process_manager.c		\
 		src/executor/file_manager.c			\
-		src/executor/io_env_manager.c		
+		src/executor/io_and_piping_manager.c		\
+		src/executor/io_env_manager.c
+
 
 ## SRC/HEREDOC ##
 

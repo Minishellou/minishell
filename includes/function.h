@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/14 14:39:02 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 15:46:24 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ int			fill_env_node(char *var, t_env_node *node);
 t_node		*create_env_node(char *var);
 t_node		*create_lexer_node(char *word);
 t_node		*create_redirection(char *argument);
+//	Get node value
+char		*get_env_node_value(t_node	*node);
+char		*get_lexer_node_value(t_node *node);
 //	Utils
 t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
+char		**make_array_from_chain(t_node *chain, \
+										t_node_getter get_node_value);
 
 /*		LEXER & UTILS			*/
 //	Lexer
