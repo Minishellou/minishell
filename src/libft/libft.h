@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 13:08:27 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/16 15:35:56 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:09:52 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include "../includes/minishell.h"
 /*
  *      check "is" function
  *

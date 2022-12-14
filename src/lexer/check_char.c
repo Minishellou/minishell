@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:26:31 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 11:05:56 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/09 22:12:31 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int   is_white_space(char c)
 {
     if (c == ' ' || c == '\t'|| c == '\r')
-        return (1);
-    return (0);
+        return (SUCCESS);
+    return (ERROR);
 }
 
 int is_special_token(char c)
 {
 	if (c == PIPE)
-	    return (1);
+	    return (SUCCESS);
     if (c == LESS)
-        return (1);
+        return (SUCCESS);
     if (c == GREAT)
-        return (1);
-    return (0);
+        return (SUCCESS);
+    return (ERROR);
 }

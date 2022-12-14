@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/21 15:40:09 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:27:13 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void token_state_init(t_token_state *state)
 	state->great = false;
 	state->lesser = false;
 	state->greater = false;
+	state->pipe = false;
 }
 
 int	init_global(char **envp)

@@ -3,10 +3,12 @@
 		"includes",
 		"src",
 		"root",
-		"libft"
+		"libft",
+		"global"
 	],
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {
-		"struct.h": "c"
+		"struct.h": "c",
+		"minishell.h": "c"
 	}
 }

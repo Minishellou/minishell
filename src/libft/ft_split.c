@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/14 10:18:57 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/01 19:08:30 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_dup(char const *str)
 	i = 0;
 	while (str[len] && !ft_ischarset(str[len]))
 		len++;
-	cpy = (char *)malloc(sizeof(char) * (len + 1));
+	cpy = (char *)ft_malloc(sizeof(char) * (len + 1));
 	if (!cpy)
 		return (NULL);
 	while (str[i] && !ft_ischarset(str[i]))
@@ -69,7 +69,7 @@ char	**ft_split(char const *s)
 
 	i = 0;
 	j = 0;
-	split = (char **)malloc(sizeof(char *) * (ft_countwords(s) + 1));
+	split = (char **)ft_malloc(sizeof(char *) * (ft_countwords(s) + 1));
 	if (!split)
 		return (NULL);
 	while (s[i] && ft_ischarset(s[i]))

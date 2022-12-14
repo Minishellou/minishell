@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 14:46:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 17:30:58 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # define PIPE '|'
 # define LESS '<' 
 # define GREAT '>'
+# define LESSER 4
+# define GREATER 5
 
+#include <stdbool.h>
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -24,7 +27,7 @@ typedef struct s_global
 	int						standard_output;
 	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
-	struct s_redirection	*redirection_table;
+	struct s_lexer_node		*redirection_table;
 	struct s_lexer_node		*lexer_output_chain;
 	struct s_exec_node		*execution_chain;
 }				t_global;
@@ -42,8 +45,15 @@ typedef struct s_lexer_node
 {
 	struct s_lexer_node	*next;
 	char				*word;
-	char				*token;
+	int 				token;
 }				t_lexer_node;
+
+/*		IO ENVIRONMENT			*/
+typedef struct s_io_environment
+{
+	int	input;
+	int	output;
+}				t_io_env;
 
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
