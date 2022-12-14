@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/06 15:14:58 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 15:58:00 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	manage_heredoc(t_redirection *heredoc_node)
 {
 	int		tmpfile_fd;
 	char	*tmpfile;
-	
+
 	tmpfile = get_current_tmpfile();
 	if (tmpfile == NULL)
 		return (ERROR);

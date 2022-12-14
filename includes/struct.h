@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 15:27:53 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:03:37 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define LESS '<' 
 # define GREAT '>'
 
-#include <stdbool.h>
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
@@ -42,7 +41,7 @@ typedef struct s_lexer_node
 {
 	struct s_lexer_node	*next;
 	char				*word;
-	int 				token;
+	int					token;
 }				t_lexer_node;
 
 /*		IO ENVIRONMENT			*/
@@ -97,20 +96,20 @@ typedef struct s_node
 
 /* HANDLING TOKEN STATE FOR PARSING */
 typedef struct s_token_state{
-	bool less;
-	bool great;
-	bool lesser;
-	bool greater;
-	bool pipe;
+	bool	less;
+	bool	great;
+	bool	lesser;
+	bool	greater;
+	bool	pipe;
 }		t_token_state;
 
-typedef t_node *t_node_creator(char *);
+typedef t_node	*t_node_creator(char *);
 //	The function should allocate new_node to the right node type
 //						set a member of new_node to its argument
 //						set new_node->next to NULL
 //						return the new_node casted as (t_node *)
 
-typedef char *t_node_getter(t_node *);
+typedef char	*t_node_getter(t_node *);
 
 /*		GARBAGE COLLECTOR		*/
 typedef struct s_garbage_node

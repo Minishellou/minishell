@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:57 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/06 14:39:34 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:01:52 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int	open_file_to_read(char *file_path)
 int	open_file_to_trunc(char *file_path)
 {
 	int	ret_fd;
+	int	flags;
+	int	access;
 
-	ret_fd = open(file_path, TRUNC_FILE_FLAGS, CREAT_FILE_ACCESS);
+	flags = O_WRONLY | O_TRUNC | O_CREAT;
+	access = S_IRUSR | S_IWUSR | S_IXUSR;
+	ret_fd = open(file_path, flags, access);
 	if (ret_fd < 0)
 		return (ERROR);
 	return (ret_fd);
@@ -35,8 +39,12 @@ int	open_file_to_trunc(char *file_path)
 int	open_file_to_append(char *file_path)
 {
 	int	ret_fd;
+	int	flags;
+	int	access;
 
-	ret_fd = open(file_path, APPND_FILE_FLAGS, CREAT_FILE_ACCESS);
+	flags = O_WRONLY | O_APPEND | O_CREAT;
+	access = S_IRUSR | S_IWUSR | S_IXUSR;
+	ret_fd = open(file_path, flags, access);
 	if (ret_fd < 0)
 		return (ERROR);
 	return (ret_fd);

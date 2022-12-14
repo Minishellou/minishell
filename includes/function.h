@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/14 15:46:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:02:43 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		**make_array_from_chain(t_node *chain, \
 int			lexer(char *command);
 
 /*		STRING CONVERT & UTILS	*/
-char	*concat_array_to_string(char **splited_string);
+char		*concat_array_to_string(char **splited_string);
 
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
@@ -70,8 +70,8 @@ int			reset_standard_io(void);
 
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage
-void				*ft_malloc(int len);
+void		*ft_malloc(int len);
 //	Throw garbage
-void				ft_free(void);
+void		ft_free(void);
 
 #endif
