@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/10 13:06:40 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/13 13:52:03 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define PIPE '|'
 # define LESS '<' 
 # define GREAT '>'
-# define LESSER '<' * 2
-# define GREATER '>' * 2
+# define LESSER 4
+# define GREATER 5
 
 #include <stdbool.h>
 /*		GLOBAL STRUCT			*/
@@ -27,7 +27,7 @@ typedef struct s_global
 	int						standard_output;
 	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
-	struct s_redirection	*redirection_table;
+	struct s_lexer_node		*redirection_table;
 	struct s_lexer_node		*lexer_output_chain;
 	struct s_exec_node		*execution_chain;
 }				t_global;
@@ -48,11 +48,21 @@ typedef struct s_lexer_node
 	int 				token;
 }				t_lexer_node;
 
+/*		IO ENVIRONMENT			*/
+typedef struct s_io_environment
+{
+	int	input;
+	int	output;
+}				t_io_env;
+
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
 {
-	struct s_exec_node	*next;
-	t_lexer_node		*argv;
+	struct s_exec_node		*next;
+	char					*command_path;
+	t_lexer_node			*arg_chain;
+	struct s_redirection	*redir_chain;
+	t_io_env				io_env;
 }				t_exec_node;
 
 /*		REDIRECTION CHAIN		*/
@@ -82,19 +92,10 @@ enum e_quote_context
 
 typedef int	t_quote_context;
 
-/*		IO ENVIRONMENT			*/
-typedef struct s_io_environment
-{
-	int	input_fd;
-	int	output_fd;
-}				t_io_env;
-
 /*		NODE INTERFACE			*/
 typedef struct s_node
 {
 	struct s_node	*next;
-	char			*word;
-	char			*var;
 }				t_node;
 
 /* HANDLING TOKEN STATE FOR PARSING */
