@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/14 16:02:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/17 22:48:45 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,14 @@
 /*		GLOBAL STRUCTURE		*/
 int			init_global(char **envp);
 
-/*		NODE & UTILS			*/
-//	Env Node
-int			fill_env_node(char *var, t_env_node *node);
+/*		T_NODE & UTILS			*/
 //	Create Node
 t_node		*create_env_node(char *var);
 t_node		*create_lexer_node(char *word);
 t_node		*create_redirection(char *argument);
-//	Get node value
-char		*get_env_node_value(t_node	*node);
-char		*get_lexer_node_value(t_node *node);
 //	Utils
 t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
-char		**make_array_from_chain(t_node *chain, \
-										t_node_getter get_node_value);
 
 /*		LEXER & UTILS			*/
 //	Lexer
@@ -45,6 +38,10 @@ char		*concat_array_to_string(char **splited_string);
 //	Quotes
 int			unquote_string(char **string);
 int			is_quoted(char *string, int nb_of_quote);
+
+/*		ENVAR & NODE UTILS		*/
+//	Envar expansion
+t_env_node	*get_envar(char *envar_name);
 
 /*		FILE & UTILS			*/
 int			open_file_to_read(char *file_path);
