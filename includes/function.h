@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/14 16:02:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/17 23:01:35 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ char		*concat_array_to_string(char **splited_string);
 //	Quotes
 int			unquote_string(char **string);
 int			is_quoted(char *string, int nb_of_quote);
+
+/*		ENVAR & NODE UTILS		*/
+//	Envar expansion
+t_env_node	*get_envar(char *envar_name);
 
 /*		FILE & UTILS			*/
 int			open_file_to_read(char *file_path);
