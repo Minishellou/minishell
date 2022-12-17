@@ -6,20 +6,20 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 15:55:38 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/17 23:28:28 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 static int	fork_and_exec(t_exec_node *current_command);
+static int	manage_current_command_exec(t_exec_node *current_command);
+static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
 {
 	int			fork_pid;
-	int			pipe_in;
 	int			pipeline_status;
 	t_exec_node	*current_command;
 
@@ -28,18 +28,32 @@ int	exec_process_manager(void)
 	current_command = g_glo.execution_chain;
 	while (current_command != NULL)
 	{
-		if (io_environment_manager(current_command) == ERROR)
-			perror("redirection:");
-		else if (current_command->command_path != NULL)
-		{	
-			pipe_in = piping_manager(current_command->io_env, pipe_in);
-			fork_pid = fork_and_exec(current_command);
-		}
+		fork_pid = manage_current_command_exec(current_command);
+		if (fork_pid == ERROR)
+			return (ERROR);
 		current_command = current_command->next;
 	}
 	reset_standard_io();
 	waitpid(fork_pid, &pipeline_status, 0);
 	return (pipeline_status);
+}
+
+static int	manage_current_command_exec(t_exec_node *current_command)
+{
+	int			ret_value;
+	char		*command;
+	static int	pipe_in;
+
+	command = current_command->command_path;
+	if (io_environment_manager(current_command) == ERROR)
+		return (SUCCESS);
+	if (command == NULL)
+		return (SUCCESS);
+	if (is_command_a_path(command) == 0)
+		current_command->command_path = pathfinder_process(command);
+	pipe_in = piping_manager(current_command->io_env, pipe_in);
+	ret_value = fork_and_exec(current_command);
+	return (ret_value);
 }
 
 static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
