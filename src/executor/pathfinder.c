@@ -6,13 +6,25 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:43:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/17 22:49:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/17 23:13:16 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static char	*find_path(char **env_paths, char *command);
+static char	*append_path_to_command(char *path, char *command);
+
+int	is_command_a_path(char *command)
+{
+	int	index;
+
+	index = 0;
+	while (command[index] != '\0')
+		if (command[index] == '/')
+			return (1);
+	return (0);
+}
 
 char	*pathfinder_process(char *command)
 {
@@ -31,7 +43,7 @@ char	*pathfinder_process(char *command)
 	return (final_path);
 }
 
-char	*find_path(char **env_paths, char *command)
+static char	*find_path(char **env_paths, char *command)
 {
 	int		i;
 	char	*current_test;
@@ -39,7 +51,7 @@ char	*find_path(char **env_paths, char *command)
 	i = 0;
 	while (env_paths[i] != NULL)
 	{
-		current_test = ft_strjoin(env_paths[i], command);
+		current_test = append_path_to_command(env_paths[i], command);
 		if (!current_test)
 			return (NULL);
 		if (access(current_test, F_OK) == SUCCESS)
@@ -47,4 +59,14 @@ char	*find_path(char **env_paths, char *command)
 		i++;
 	}
 	return (command);
+}
+
+static char	*append_path_to_command(char *path, char *command)
+{
+	char	*ret_path;
+
+	ret_path = ft_strjoin(path, "/");
+	if (ret_path)
+		ret_path = ft_strjoin(ret_path, command);
+	return (ret_path);
 }

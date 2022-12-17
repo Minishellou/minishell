@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/17 23:01:35 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/17 23:12:13 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int			manage_heredoc(t_redirection *heredoc_node);
 int			process_limit_string(char **limit_string, int *quote_context);
 
 /*		EXEC & PIPING */
+//	PATHFinder
+char		*pathfinder_process(char *command);
+int			is_command_a_path(char *command);
 //	Exec process
 int			exec_process_manager(void);
 //	Pipe

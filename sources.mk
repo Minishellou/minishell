@@ -76,8 +76,14 @@ SOURCES		+=								\
 		src/executor/exec_process_manager.c		\
 		src/executor/file_manager.c			\
 		src/executor/io_and_piping_manager.c		\
-		src/executor/io_env_manager.c
+		src/executor/io_env_manager.c			\
+		src/executor/pathfinder.c
 
+
+## SRC/ENVAR_EXPANSION ##
+
+SOURCES		+=								\
+		src/envar_expansion/envar_expansion.c
 
 ## SRC/HEREDOC ##
 
