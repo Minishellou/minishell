@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:06:35 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:03:33 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 t_lexer_node	*command_expression(t_lexer_node *cmd)
 {
 	char			**split;
-	t_lexer_node 	*command_expression;
-	
+	t_lexer_node	*command_expression;
 
-	//printf("cmd->word = %s\n", cmd->word);
 	split = ft_split(cmd->word);
 	if (!split)
 		return (NULL);
-	command_expression = (t_lexer_node*)make_chain_from_array(split, create_lexer_node);
+	command_expression = \
+		(t_lexer_node *)make_chain_from_array(split, create_lexer_node);
 	if (!command_expression)
 		return (NULL);
 	str_to_lexer_node(&command_expression);
@@ -31,23 +30,24 @@ t_lexer_node	*command_expression(t_lexer_node *cmd)
 	return (command_expression);
 }
 
-void 	add_command_to_lexer_output(t_lexer_node *first_node)
+void	add_command_to_lexer_output(t_lexer_node *first_node)
 {
 	t_lexer_node	*tmp_node;
-	
+
 	if (!g_glo.lexer_output_chain)
 		g_glo.lexer_output_chain = first_node;
 	else
 	{
-		tmp_node = (t_lexer_node *)last_node((t_node *)g_glo.lexer_output_chain);
+		tmp_node = \
+			(t_lexer_node *)last_node((t_node *)g_glo.lexer_output_chain);
 		tmp_node->next = first_node;
 	}
 }
 
-void tokenizer(void)
+void	tokenizer(void)
 {
-	t_lexer_node *tmp;
-	int 		word_len;
+	t_lexer_node	*tmp;
+	int				word_len;
 
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
@@ -57,22 +57,22 @@ void tokenizer(void)
 			tmp->token = PIPE;
 		else if (!ft_strncmp(tmp->word, "<", word_len))
 			tmp->token = LESS;
-	 	else if (!ft_strncmp(tmp->word, ">", word_len))
+		else if (!ft_strncmp(tmp->word, ">", word_len))
 			tmp->token = GREAT;
-		else if(!ft_strncmp(tmp->word, "<<", word_len))
+		else if (!ft_strncmp(tmp->word, "<<", word_len))
 			tmp->token = LESSER;
 		else if (!ft_strncmp(tmp->word, ">>", word_len))
 			tmp->token = GREATER;
-		else 
+		else
 			tmp->token = 10;
 		tmp = tmp->next;
 	}
 }
 
-int lexer(char *input)
+int	lexer(char *input)
 {
 	t_lexer_node	*command_list;
-	
+
 	if (quote_neon(&input) != SUCCESS)
 		return (ERROR);
 	if (parse_token(input) != SUCCESS)

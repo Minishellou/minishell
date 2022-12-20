@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:29:37 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:31:44 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:14:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    while (*s1 != '\0' && *s2 != '\0')
-    {
-        if (*s1 != *s2)
-        {
-            return (*s1 - *s2);
-        }
-        s1++;
-        s2++;
-    }
-    if (*s1 == '\0' && *s2 == '\0')
-    {
-        return 0;
-    }
-    else if (*s1 == '\0')
-    {
-        return -*s2;
-    }
-    else
-    {
-        return *s1;
-    }
+	while (*s1 != '\0' && *s2 != '\0')
+	{
+		if (*s1 != *s2)
+		{
+			return (*s1 - *s2);
+		}
+		s1++;
+		s2++;
+	}
+	if (*s1 == '\0' && *s2 == '\0')
+	{
+		return (0);
+	}
+	else if (*s1 == '\0')
+	{
+		return (-*s2);
+	}
+	else
+	{
+		return (*s1);
+	}
 }

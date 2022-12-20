@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 12:52:02 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 15:55:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*ft_malloc(int len)
 
 void	ft_free(void)
 {
-	t_garbage_node *lst;
+	t_garbage_node	*lst;
 	t_garbage_node	*tmp;
 
 	lst = g_glo.garbage_ctr;

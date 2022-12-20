@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 11:57:03 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:11:34 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_ischarset(char c)
 {
-    if (c == ' ' || c == '\t'|| c == '\r')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '\t' || c == '\r')
+		return (1);
+	return (0);
 }
 
 static int	ft_countwords(char const *str)

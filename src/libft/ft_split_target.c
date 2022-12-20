@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_target.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:29:25 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 11:56:57 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:12:40 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_istarget(char c, char target)
 {
-    if (c == target)
-        return (1);
-    return (0);
+	if (c == target)
+		return (1);
+	return (0);
 }
 
 static int	ft_countwords_target(char const *str, char sep)
@@ -64,12 +64,14 @@ static char	*ft_dup_target(char const *str, char target)
 char	**ft_split_target(char const *s, char target)
 {
 	char	**split;
+	int		count_word;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	split = (char **)ft_malloc(sizeof(char *) * (ft_countwords_target(s, target) + 1));
+	count_word = ft_countwords_target(s, target) + 1;
+	split = (char **)ft_malloc(sizeof(char *) * count_word);
 	if (!split)
 		return (NULL);
 	while (s[i] && ft_istarget(s[i], target))

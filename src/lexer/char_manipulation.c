@@ -3,46 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   char_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:38:43 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 15:58:48 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int empty_char(const char *str)
+int	empty_char(const char *str)
 {
-    while (*str != '\0')
-    {
-        if (*str != ' ' && *str != '\t' && *str != '\n' && *str != '\r')
-        {
-            return 1;
-        }
-        str++;
-    }
-    return 0;
+	while (*str != '\0')
+	{
+		if (*str != ' ' && *str != '\t' && *str != '\n' && *str != '\r')
+			return (1);
+		str++;
+	}
+	return (0);
 }
 
-int neon(char **str)
+int	neon(char **str)
 {
-    int		i;
-    char	start;
+	int		i;
+	char	start;
 
-    i = 1;
-    start = (*str)[0];
-    while ((*str)[i] && (*str)[i] != start)
+	i = 1;
+	start = (*str)[0];
+	while ((*str)[i] && (*str)[i] != start)
 		(*str)[i++] *= -1;
 	if ((*str)[i] != start)
 		return (ERROR);
 	return (i);
 }
 
-int array_to_rehestablish(char ***str)
+int	array_to_rehestablish(char ***str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while ((*str)[i])
 	{
@@ -55,7 +53,7 @@ int array_to_rehestablish(char ***str)
 
 int	quote_neon(char **str)
 {
-	int 	i;
+	int		i;
 	int		return_index;
 	char	*quoted_substring;
 
