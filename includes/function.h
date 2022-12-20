@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/10 13:12:19 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:11:41 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ t_node			*make_chain_from_array(char **array, \
 /*		LEXER & UTILS			*/
 //	Lexer
 int				lexer(char *command);
+int chain_parse(void);
+void free_all(char **tab);
 t_lexer_node	*command_expression(t_lexer_node *cmd);
 /* PARSING */
 int parse_token(char *input);
+int illegal_token(t_lexer_node* node);
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage
 void			*ft_malloc(int len);
@@ -59,6 +62,7 @@ int token_state(t_token_state state);
 void	print_word_list(t_lexer_node *node);
 //redirection handler
 void str_to_lexer_node(t_lexer_node **tmp);
+int empty_char(const char *str);
 // pipe handler
 t_lexer_node	*process_spipe(char *input);
 void	fill_lexer_output(t_lexer_node *command_list);
@@ -66,5 +70,6 @@ void 	add_command_to_lexer_output(t_lexer_node *first_node);
 // token management
 void switch_state(bool *old, bool *new);
 int token_state_management(int *i, char **input, t_token_state *state);
+
 
 #endif

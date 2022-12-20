@@ -6,11 +6,24 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/04 14:12:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:38:43 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int empty_char(const char *str)
+{
+    while (*str != '\0')
+    {
+        if (*str != ' ' && *str != '\t' && *str != '\n' && *str != '\r')
+        {
+            return 1;
+        }
+        str++;
+    }
+    return 0;
+}
 
 int neon(char **str)
 {

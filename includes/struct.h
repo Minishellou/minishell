@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 17:30:58 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/16 10:48:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,6 @@ enum e_quote_context
 };
 
 typedef int	t_quote_context;
-
-/*		IO ENVIRONMENT			*/
-typedef struct s_io_environment
-{
-	int	input_fd;
-	int	output_fd;
-}				t_io_env;
 
 /*		NODE INTERFACE			*/
 typedef struct s_node

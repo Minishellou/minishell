@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/13 15:28:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:06:35 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_lexer_node	*command_expression(t_lexer_node *cmd)
 	char			**split;
 	t_lexer_node 	*command_expression;
 	
+
+	//printf("cmd->word = %s\n", cmd->word);
 	split = ft_split(cmd->word);
 	if (!split)
 		return (NULL);
@@ -67,27 +69,10 @@ void tokenizer(void)
 	}
 }
 
-static
-void check_chain_exist(void)
-{
-	int i = 0;
-	
-	if (g_glo.lexer_output_chain)
-	{
-		while (g_glo.lexer_output_chain)
-		{
-			if (g_glo.lexer_output_chain)
-				printf("%d\n", i);
-			g_glo.lexer_output_chain = g_glo.lexer_output_chain->next;
-		}
-	}
-}
-
 int lexer(char *input)
 {
-	check_chain_exist();
 	t_lexer_node	*command_list;
-
+	
 	if (quote_neon(&input) != SUCCESS)
 		return (ERROR);
 	if (parse_token(input) != SUCCESS)
@@ -102,21 +87,9 @@ int lexer(char *input)
 		command_list = (t_lexer_node *)create_lexer_node(input);
 	fill_lexer_output(command_list);
 	tokenizer();
-	while (g_glo.lexer_output_chain)
+	if (chain_parse() != SUCCESS)
 	{
-		if (g_glo.lexer_output_chain->token == GREAT)
-			printf("GREAT\n");
-		else if (g_glo.lexer_output_chain->token == LESS)
-			printf("LESS\n");
-		else if (g_glo.lexer_output_chain->token == GREATER)
-			printf("GREATER\n");
-		else if (g_glo.lexer_output_chain->token == LESSER)
-			printf("LESSER\n");
-		else if (g_glo.lexer_output_chain->token == PIPE)
-			printf("PIPE\n");
-		else 
-			printf("%s\n", g_glo.lexer_output_chain->word);
-		g_glo.lexer_output_chain = g_glo.lexer_output_chain->next;
+		return (ERROR);
 	}
 	return (SUCCESS);
 }

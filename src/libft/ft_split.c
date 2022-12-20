@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/01 19:08:30 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 11:57:03 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ static int	ft_countwords(char const *str)
 
 	i = 0;
 	wc = 0;
+	if (!str)
+		return (0);
 	while (str[i] && ft_ischarset(str[i]))
 		i++;
+	if (i >= (int)ft_strlen(str))
+		return (0);
 	while (str[i])
 	{
 		wc++;
@@ -49,7 +53,7 @@ static char	*ft_dup(char const *str)
 	i = 0;
 	while (str[len] && !ft_ischarset(str[len]))
 		len++;
-	cpy = (char *)ft_malloc(sizeof(char) * (len + 1));
+	cpy = ft_malloc(sizeof(char) * len + 1);
 	if (!cpy)
 		return (NULL);
 	while (str[i] && !ft_ischarset(str[i]))

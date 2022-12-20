@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 15:21:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/19 16:07:07 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/12/20 13:29:37 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/12/20 13:31:44 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+int ft_strcmp(const char *s1, const char *s2)
 {
-	char	*str;
-	char	*dup;
-	int		i;
-
-	i = 0;
-	str = (char *) s;
-	dup = ft_malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!dup)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+    while (*s1 != '\0' && *s2 != '\0')
+    {
+        if (*s1 != *s2)
+        {
+            return (*s1 - *s2);
+        }
+        s1++;
+        s2++;
+    }
+    if (*s1 == '\0' && *s2 == '\0')
+    {
+        return 0;
+    }
+    else if (*s1 == '\0')
+    {
+        return -*s2;
+    }
+    else
+    {
+        return *s1;
+    }
 }
