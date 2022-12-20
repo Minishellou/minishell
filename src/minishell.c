@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/16 16:54:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:42:36 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_env_list(t_env_node *node)
 static
 int ft_exit(char *str)
 {
-	if(!ft_strncmp(str, "exit", ft_strlen(str)))
+  	if (!ft_strncmp(str, "exit", 4))
 	{
 		ft_free();
 		return (ERROR);
@@ -64,11 +64,14 @@ int	main(int ac, char **av, char **envp)
 		add_history(str);
 		if(ft_exit(str) != SUCCESS)
 		{
+			ft_free();
+			free(str);
 			break ; 
 		}
 		if((lexer(str)) != SUCCESS)
 			printf("error\n");
 		ft_free();
+		free(str);
 	}
 	return (0);
 }

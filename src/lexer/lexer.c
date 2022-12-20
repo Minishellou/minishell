@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 11:42:24 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:06:35 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void tokenizer(void)
 int lexer(char *input)
 {
 	t_lexer_node	*command_list;
-
+	
 	if (quote_neon(&input) != SUCCESS)
 		return (ERROR);
 	if (parse_token(input) != SUCCESS)

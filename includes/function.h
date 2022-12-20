@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/19 16:33:30 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:11:41 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int token_state(t_token_state state);
 void	print_word_list(t_lexer_node *node);
 //redirection handler
 void str_to_lexer_node(t_lexer_node **tmp);
+int empty_char(const char *str);
 // pipe handler
 t_lexer_node	*process_spipe(char *input);
 void	fill_lexer_output(t_lexer_node *command_list);

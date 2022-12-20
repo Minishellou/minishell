@@ -22,6 +22,7 @@ SOURCES		+=                      		\
 		src/libft/ft_isprint.c         	\
 		src/libft/ft_tolower.c         	\
 		src/libft/ft_toupper.c         	\
+		src/libft/ft_strcmp.c 			\
 		src/libft/ft_strncmp.c         	\
 		src/libft/ft_strlen.c          	\
 		src/libft/ft_putstr_fd.c       	\
