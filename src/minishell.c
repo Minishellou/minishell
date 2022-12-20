@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/13 16:14:47 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:54:14 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ t_global	g_glo;
 
 void	print_word_list(t_lexer_node *node)
 {
+	t_lexer_node  *tmp;
+
 	if (node == NULL)
 		return ;
-	printf("%s ->\n", node->word);
-	print_word_list(node->next);
+	tmp = node;
+	while (tmp)
+	{
+		printf("%s ->\n", tmp->word);
+		tmp = tmp->next;
+	}
 }
 
 /*
@@ -32,6 +38,16 @@ void	print_env_list(t_env_node *node)
 	print_env_list(node->next);
 }
 */
+static
+int ft_exit(char *str)
+{
+	if(!ft_strncmp(str, "exit", ft_strlen(str)))
+	{
+		ft_free();
+		return (ERROR);
+	}
+	return (SUCCESS);
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -46,6 +62,10 @@ int	main(int ac, char **av, char **envp)
 	{
 		str = readline("minishell~ ");
 		add_history(str);
+		if(ft_exit(str) != SUCCESS)
+		{
+			break ; 
+		}
 		if((lexer(str)) != SUCCESS)
 			printf("error\n");
 		ft_free();

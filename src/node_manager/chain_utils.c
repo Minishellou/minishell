@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/13 16:19:31 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/16 11:16:33 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 
 	i = 0;
 	first_node = NULL;
-	if (array[1])
+	if (array[0])
 		first_node = create_node(array[i++]);
 	if (first_node == NULL)
 		return (NULL);
@@ -48,9 +48,11 @@ void	include_subchain_at(t_node **this_node, t_node *subchain)
 
 t_node	*last_node(t_node *current_node)
 {
-	if (current_node->next == NULL)
-		return (current_node);
-	return(last_node(current_node->next));
+	if (!current_node)
+		return (NULL);
+	while (current_node->next)
+		current_node = current_node->next;
+	return (current_node);
 }
 
 void	lex_addback(t_lexer_node **node, t_lexer_node *new)
@@ -79,8 +81,8 @@ void unit_free(void *node)
 	{
 		if (g_glo.garbage_ctr->addr == node)
 		{
-			printf("\ngarbage addr-> %p\n", g_glo.garbage_ctr->addr);
-			printf("\nnode-> %p\n", node);
+			//printf("\ngarbage addr-> %p\n", g_glo.garbage_ctr->addr);
+			//printf("\nnode-> %p\n", node);
 			free(g_glo.garbage_ctr->addr);
 			g_glo.garbage_ctr->addr = NULL;
 			tmp = g_glo.garbage_ctr;

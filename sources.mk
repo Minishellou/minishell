@@ -76,3 +76,4 @@ SOURCES 	+=								\
 		src/lexer/char_manipulation.c 		\
 		src/lexer/check_char.c 				\
 		src/lexer/lexer.c 					\
+		src/lexer/chain_checker.c 			\

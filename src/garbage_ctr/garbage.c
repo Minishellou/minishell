@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/13 15:19:50 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:52:02 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,9 @@ void	ft_free(void)
 		tmp = lst->next;
 		free(lst->addr);
 		lst->addr = NULL;
-		//free(lst);
-		///lst = NULL;
+		free(lst);
 		lst = tmp;
 	}
-	free(g_glo.lexer_output_chain);
-	g_glo.lexer_output_chain = NULL;
-	free(g_glo.garbage_ctr);
 	g_glo.garbage_ctr = NULL;
+	g_glo.lexer_output_chain = NULL;
 }
