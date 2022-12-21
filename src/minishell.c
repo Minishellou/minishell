@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:42:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:32:13 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ int	main(int ac, char **av, char **envp)
 			free(str);
 			break ; 
 		}
-		if((lexer(str)) != SUCCESS)
+		if((process_lexer_output_chain(str)) != SUCCESS)
 			printf("error\n");
+		print_word_list(g_glo.lexer_output_chain);
 		ft_free();
 		free(str);
 	}

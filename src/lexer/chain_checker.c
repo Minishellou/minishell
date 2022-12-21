@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:22:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 15:57:03 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:23:39 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	illegal_token(t_lexer_node *node)
 	return (SUCCESS);
 }
 
-int	chain_parse(void)
+int	catch_redir_error(void)
 {
 	t_lexer_node	*tmp;
 

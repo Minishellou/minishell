@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 16:07:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:59:02 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ t_lexer_node	*split_redir(t_lexer_node *tmp)
 		if (is_special_token(word[i]) == SUCCESS)
 		{
 			redir = create_redir(&word[i]);
-			lex_addback(&lst, redir);
+			append_to_chain((t_node **)&lst, (t_node *)redir);
 		}
 		while (word[i] && is_special_token(word[i]) == SUCCESS)
 			i++;
 		if (word[i])
-			lex_addback(&lst, \
-				(t_lexer_node *)create_lexer_node(ft_cpy(&word[i])));
+			append_to_chain((t_node **)&lst, \
+				(t_node *)create_lexer_node(ft_cpy(&word[i])));
 		while (word[i] && is_special_token(word[i]) != SUCCESS)
 			i++;
 	}

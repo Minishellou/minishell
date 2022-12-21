@@ -36,7 +36,7 @@ SOURCES		+=                      		\
 		src/libft/ft_itoa.c            	\
 		src/libft/ft_putchar_fd.c      	\
 		src/libft/ft_strjoin.c         	\
-		src/libft/ft_split.c           	\
+		src/libft/ft_lexer_split.c    	\
 		src/libft/ft_strlcat.c         	\
 		src/libft/ft_putnbr_fd.c       	\
 		src/libft/ft_memchr.c          	\
@@ -44,7 +44,7 @@ SOURCES		+=                      		\
 		src/libft/ft_striteri.c        	\
 		src/libft/ft_strdup.c          	\
 		src/libft/ft_strlcpy.c         	\
-		src/libft/ft_split_target.c 	\
+		src/libft/ft_split.c 	\
 
 ## SRC/INIT ##
 
@@ -66,15 +66,14 @@ SOURCES		+=								\
 
 ## SRC/LEXER ##
 SOURCES		+=                      		\
+		src/lexer/chain_checker.c 			\
+		src/lexer/char_manipulation.c 		\
 		src/lexer/check_char.c 				\
+		src/lexer/lexer_output_manager.c 	\
+		src/lexer/line_parsing_process.c 			\
+		src/lexer/redir_handler.c
 
-## SRC/PARSING
+## SRC/PARSING ##
 SOURCES 	+=								\
 		src/parsing/token_parse.c 			\
 		src/parsing/state_utils.c           \
-		src/lexer/pipe_handler.c 			\
-		src/lexer/redir_handler.c 			\
-		src/lexer/char_manipulation.c 		\
-		src/lexer/check_char.c 				\
-		src/lexer/lexer.c 					\
-		src/lexer/chain_checker.c 			\

@@ -6,14 +6,14 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:44:12 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 15:15:10 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:40:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static
-int	token_validation(char *input)
+int	inline_token_validation(char *input)
 {
 	int				i;
 	t_token_state	state;
@@ -34,7 +34,7 @@ int	token_validation(char *input)
 }
 
 static
-int	parse_error(char *input)
+int	start_and_end_validation(char *input)
 {
 	int	i;
 	int	len;
@@ -57,14 +57,14 @@ int	parse_error(char *input)
 	return (SUCCESS);
 }
 
-int	parse_token(char *input)
+int	catch_parsing_error(char *input)
 {
-	if ((parse_error(input)) != SUCCESS)
+	if ((start_and_end_validation(input)) != SUCCESS)
 	{
 		printf("parse error\n");
 		return (ERROR);
 	}
-	if ((token_validation(input)) != SUCCESS)
+	if ((inline_token_validation(input)) != SUCCESS)
 	{
 		printf("token failure\n");
 		return (ERROR);
