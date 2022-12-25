@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/25 18:51:36 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/25 19:06:01 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static
 int	get_redir_type(char *str)
 {
-	if (str[1] == LESS)
+	if (str[1] && str[1] == LESS)
 		return (LESSER);
-	if (str[1] == GREAT)
+	if (str[1] && str[1] == GREAT)
 		return (GREATER);
 	if (str[0] == LESS)
 		return (LESS);
@@ -70,10 +70,12 @@ char	*copy_word_until_redirection(char *str)
 	return (buffer);
 }
 
-t_lexer_node	*split_redir(t_lexer_node *current_node)
+t_lexer_node	*split_word_on_redir(t_lexer_node *current_node)
 {
 	int				i;
+	char			*new_word;
 	char			*current_word;
+	t_lexer_node	*new_node;
 	t_lexer_node	*parsed_word;
 	t_lexer_node	*new_redirection;
 
@@ -85,13 +87,20 @@ t_lexer_node	*split_redir(t_lexer_node *current_node)
 		if (is_special_token(current_word[i]) == SUCCESS)
 		{
 			new_redirection = create_redir_node(&current_word[i]);
+			if (new_redirection == NULL)
+				return (NULL);
 			append_to_chain((t_node **)&parsed_word, (t_node *)new_redirection);
 		}
 		while (current_word[i] && is_special_token(current_word[i]) == SUCCESS)
 			i++;
 		if (current_word[i])
-			append_to_chain((t_node **)&parsed_word, \
-				(t_node *)create_lexer_node(copy_word_until_redirection(&current_word[i])));
+		{
+			new_word = copy_word_until_redirection(&current_word[i]);
+			new_node = (t_lexer_node *)create_lexer_node(new_word);
+			if (new_word == NULL || new_node == NULL)
+				return (NULL);
+			append_to_chain((t_node **)&parsed_word, (t_node *)new_node);
+		}
 		while (current_word[i] && is_special_token(current_word[i]) != SUCCESS)
 			i++;
 	}
@@ -120,11 +129,12 @@ int	put_in(t_lexer_node *current, t_lexer_node *put_in)
 	return (i);
 }
 
-void	parse_redir_in_command_expression(t_lexer_node **command_expression)
+int	parse_redir_in_command_expression(t_lexer_node **command_expression)
 {
-	t_lexer_node	*current_node;
 	int				word_len;
 	int				to_the_next_word;
+	t_lexer_node	*splited_word;
+	t_lexer_node	*current_node;
 
 	current_node = *command_expression;
 	while (current_node)
@@ -139,10 +149,14 @@ void	parse_redir_in_command_expression(t_lexer_node **command_expression)
 		if ((ft_strchr(current_node->word, LESS) || ft_strchr(current_node->word, GREAT)) \
 			&& ft_strlen(current_node->word) != 1)
 		{
-			to_the_next_word = put_in(current_node, split_redir(current_node));
+			splited_word = split_word_on_redir(current_node);
+			if (!splited_word)
+				return (ERROR);
+			to_the_next_word = put_in(current_node, splited_word);
 			while (to_the_next_word--)
 				current_node = current_node->next;
 		}
 		current_node = current_node->next;
 	}
+	return (SUCCESS);
 }
