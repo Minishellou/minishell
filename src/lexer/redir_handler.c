@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/25 19:06:01 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/25 19:43:37 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,20 @@ t_lexer_node	*create_redir_node(char *str)
 static
 char	*copy_word_until_redirection(char *str)
 {
-	int		i;
 	int		len;
 	char	*buffer;
 
+	len = 0;
 	if (!str)
 		return (NULL);
-	len = 0;
 	while (str[len] && (is_special_token(str[len]) == ERROR))
 		len++;
-	i = 0;
 	buffer = ft_malloc(len + 1);
 	if (!buffer)
 		return (NULL);
-	while (i < len)
-	{
-		buffer[i] = str[i];
-		i++;
-	}
-	buffer[i] = '\0';
+	buffer[len] = '\0';
+	while (len-- != 0)
+		buffer[len] = str[len];
 	return (buffer);
 }
 
@@ -109,29 +104,29 @@ t_lexer_node	*split_word_on_redir(t_lexer_node *current_node)
 
 //	Vladimir
 static
-int	put_in(t_lexer_node *current, t_lexer_node *put_in)
+int	put_in(t_lexer_node *to_replace, t_lexer_node *subchain)
 {
-	t_lexer_node	*next;
-	t_lexer_node	*last_put_in;
 	int				i;
+	t_lexer_node	*next_node;
+	t_lexer_node	*last_subchain_node;
 
 	i = 0;
-	last_put_in = put_in;
-	next = current->next;
-	current->next = put_in->next;
-	current->word = put_in->word;
-	while (last_put_in->next)
+	next_node = to_replace->next;
+	if (subchain->next != NULL)
+		to_replace->next = subchain->next;
+	to_replace->word = subchain->word;
+	last_subchain_node = subchain;
+	while (last_subchain_node->next)
 	{
-		last_put_in = last_put_in->next;
+		last_subchain_node = last_subchain_node->next;
 		i++;
 	}
-	last_put_in->next = next;
+	last_subchain_node->next = next_node;
 	return (i);
 }
 
 int	parse_redir_in_command_expression(t_lexer_node **command_expression)
 {
-	int				word_len;
 	int				to_the_next_word;
 	t_lexer_node	*splited_word;
 	t_lexer_node	*current_node;
@@ -139,13 +134,6 @@ int	parse_redir_in_command_expression(t_lexer_node **command_expression)
 	current_node = *command_expression;
 	while (current_node)
 	{	
-		word_len = ft_strlen(current_node->word);
-		if (!ft_strncmp(current_node->word, "<<", word_len) || \
-			!ft_strncmp(current_node->word, ">>", word_len))
-		{
-			current_node = current_node->next;
-			continue ;
-		}
 		if ((ft_strchr(current_node->word, LESS) || ft_strchr(current_node->word, GREAT)) \
 			&& ft_strlen(current_node->word) != 1)
 		{
