@@ -6,14 +6,14 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/21 13:59:02 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/25 18:51:36 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static
-int	which_redir(char *str)
+int	get_redir_type(char *str)
 {
 	if (str[1] == LESS)
 		return (LESSER);
@@ -27,28 +27,30 @@ int	which_redir(char *str)
 }
 
 static
-t_lexer_node	*create_redir(char *str)
+t_lexer_node	*create_redir_node(char *str)
 {
-	t_lexer_node	*redir;
+	int				redir_type;
+	t_lexer_node	*new_redir_node;
 
-	redir = NULL;
-	if (which_redir(str) == LESSER)
-		redir = (t_lexer_node *)create_lexer_node("<<");
-	else if (which_redir(str) == GREATER)
-		redir = (t_lexer_node *)create_lexer_node(">>");
-	if (which_redir(str) == LESS)
-		redir = (t_lexer_node *)create_lexer_node("<");
-	if (which_redir(str) == GREAT)
-		redir = (t_lexer_node *)create_lexer_node(">");
-	return (redir);
+	new_redir_node = NULL;
+	redir_type = get_redir_type(str);
+	if (redir_type == LESSER)
+		new_redir_node = (t_lexer_node *)create_lexer_node("<<");
+	if (redir_type == GREATER)
+		new_redir_node = (t_lexer_node *)create_lexer_node(">>");
+	if (redir_type == LESS)
+		new_redir_node = (t_lexer_node *)create_lexer_node("<");
+	if (redir_type == GREAT)
+		new_redir_node = (t_lexer_node *)create_lexer_node(">");
+	return (new_redir_node);
 }
 
 static
-char	*ft_cpy(char *str)
+char	*copy_word_until_redirection(char *str)
 {
-	char	*buffer;
 	int		i;
 	int		len;
+	char	*buffer;
 
 	if (!str)
 		return (NULL);
@@ -68,36 +70,37 @@ char	*ft_cpy(char *str)
 	return (buffer);
 }
 
-t_lexer_node	*split_redir(t_lexer_node *tmp)
+t_lexer_node	*split_redir(t_lexer_node *current_node)
 {
-	t_lexer_node	*lst;
-	char			*word;
 	int				i;
-	t_lexer_node	*redir;
+	char			*current_word;
+	t_lexer_node	*parsed_word;
+	t_lexer_node	*new_redirection;
 
 	i = 0;
-	word = tmp->word;
-	lst = NULL;
-	while (word[i])
+	parsed_word = NULL;
+	current_word = current_node->word;
+	while (current_word[i])
 	{
-		if (is_special_token(word[i]) == SUCCESS)
+		if (is_special_token(current_word[i]) == SUCCESS)
 		{
-			redir = create_redir(&word[i]);
-			append_to_chain((t_node **)&lst, (t_node *)redir);
+			new_redirection = create_redir_node(&current_word[i]);
+			append_to_chain((t_node **)&parsed_word, (t_node *)new_redirection);
 		}
-		while (word[i] && is_special_token(word[i]) == SUCCESS)
+		while (current_word[i] && is_special_token(current_word[i]) == SUCCESS)
 			i++;
-		if (word[i])
-			append_to_chain((t_node **)&lst, \
-				(t_node *)create_lexer_node(ft_cpy(&word[i])));
-		while (word[i] && is_special_token(word[i]) != SUCCESS)
+		if (current_word[i])
+			append_to_chain((t_node **)&parsed_word, \
+				(t_node *)create_lexer_node(copy_word_until_redirection(&current_word[i])));
+		while (current_word[i] && is_special_token(current_word[i]) != SUCCESS)
 			i++;
 	}
-	return (lst);
+	return (parsed_word);
 }
 
+//	Vladimir
 static
-int	ft_put_in(t_lexer_node *current, t_lexer_node *put_in)
+int	put_in(t_lexer_node *current, t_lexer_node *put_in)
 {
 	t_lexer_node	*next;
 	t_lexer_node	*last_put_in;
@@ -117,30 +120,29 @@ int	ft_put_in(t_lexer_node *current, t_lexer_node *put_in)
 	return (i);
 }
 
-void	str_to_lexer_node(t_lexer_node **command_expression)
+void	parse_redir_in_command_expression(t_lexer_node **command_expression)
 {
-	t_lexer_node	*tmp;
-	int				i;
+	t_lexer_node	*current_node;
 	int				word_len;
+	int				to_the_next_word;
 
-	tmp = *command_expression;
-	while (tmp)
+	current_node = *command_expression;
+	while (current_node)
 	{	
-		i = 0;
-		word_len = ft_strlen(tmp->word);
-		if (!ft_strncmp(tmp->word, "<<", word_len) || \
-			!ft_strncmp(tmp->word, ">>", word_len))
+		word_len = ft_strlen(current_node->word);
+		if (!ft_strncmp(current_node->word, "<<", word_len) || \
+			!ft_strncmp(current_node->word, ">>", word_len))
 		{
-			tmp = tmp->next;
+			current_node = current_node->next;
 			continue ;
 		}
-		if ((ft_strchr(tmp->word, LESS) || ft_strchr(tmp->word, GREAT)) \
-			&& ft_strlen(tmp->word) != 1)
+		if ((ft_strchr(current_node->word, LESS) || ft_strchr(current_node->word, GREAT)) \
+			&& ft_strlen(current_node->word) != 1)
 		{
-			i = ft_put_in(tmp, split_redir(tmp));
-			while (i--)
-				tmp = tmp->next;
+			to_the_next_word = put_in(current_node, split_redir(current_node));
+			while (to_the_next_word--)
+				current_node = current_node->next;
 		}
-		tmp = tmp->next;
+		current_node = current_node->next;
 	}
 }
