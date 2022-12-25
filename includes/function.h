@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/21 14:37:17 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/25 19:11:30 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				token_state(t_token_state state);
 void			print_word_list(t_lexer_node *node);
 //	Redirection handler
 int				empty_char(const char *str);
-void			str_to_lexer_node(t_lexer_node **tmp);
+int				parse_redir_in_command_expression(t_lexer_node **tmp);
 //	Pipe handler
 t_lexer_node	*lexer_line_parsing_process(char *command_line);
 //	Token management

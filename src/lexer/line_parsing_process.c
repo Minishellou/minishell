@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:46:38 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/21 14:38:48 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/25 19:10:42 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_lexer_node	*parse_simple_command(t_lexer_node *cmd)
 		(t_lexer_node *)make_chain_from_array(split, create_lexer_node);
 	if (!command_expression)
 		return (NULL);
-	str_to_lexer_node(&command_expression);
+	parse_redir_in_command_expression(&command_expression);
 	if (!command_expression)
 		return (NULL);
 	return (command_expression);
