@@ -6,41 +6,25 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/25 19:43:37 by mcorso           ###   ########.fr       */
+/*   Updated: 2022/12/26 13:08:44 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static
-int	get_redir_type(char *str)
-{
-	if (str[1] && str[1] == LESS)
-		return (LESSER);
-	if (str[1] && str[1] == GREAT)
-		return (GREATER);
-	if (str[0] == LESS)
-		return (LESS);
-	if (str[0] == GREAT)
-		return (GREAT);
-	return (ERROR);
-}
-
-static
 t_lexer_node	*create_redir_node(char *str)
 {
-	int				redir_type;
 	t_lexer_node	*new_redir_node;
 
 	new_redir_node = NULL;
-	redir_type = get_redir_type(str);
-	if (redir_type == LESSER)
+	if (str[1] && str[1] == LESS)
 		new_redir_node = (t_lexer_node *)create_lexer_node("<<");
-	if (redir_type == GREATER)
-		new_redir_node = (t_lexer_node *)create_lexer_node(">>");
-	if (redir_type == LESS)
+	else if (str[0] == LESS)
 		new_redir_node = (t_lexer_node *)create_lexer_node("<");
-	if (redir_type == GREAT)
+	if (str[1] && str[1] == GREAT)
+		new_redir_node = (t_lexer_node *)create_lexer_node(">>");
+	else if (str[0] == GREAT)
 		new_redir_node = (t_lexer_node *)create_lexer_node(">");
 	return (new_redir_node);
 }
