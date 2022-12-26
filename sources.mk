@@ -71,7 +71,8 @@ SOURCES		+=                      		\
 		src/lexer/check_char.c 				\
 		src/lexer/lexer_output_manager.c 	\
 		src/lexer/line_parsing_process.c 			\
-		src/lexer/redir_handler.c
+		src/lexer/redir_handler.c			\
+		src/lexer/redir_utils.c
 
 ## SRC/PARSING ##
 SOURCES 	+=								\
