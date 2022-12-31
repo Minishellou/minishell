@@ -6,18 +6,18 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:44:12 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/28 13:10:26 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/31 20:51:49 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static
-int token_validation(char *input)
+int	inline_token_validation(char *input)
 {
-	int i;
-	t_token_state state;
-	
+	int				i;
+	t_token_state	state;
+
 	i = 0;
 	token_state_init(&state);
 	while (input[i])
@@ -33,10 +33,11 @@ int token_validation(char *input)
 	return (SUCCESS);
 }
 
-static int parse_error(char *input)
+static
+int	start_and_end_validation(char *input)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -49,21 +50,21 @@ static int parse_error(char *input)
 		return (SUCCESS);
 	if (input[i] == PIPE)
 		return (ERROR);
-	while(input[len] && (is_white_space(input[len]) != ERROR))
+	while (input[len] && (is_white_space(input[len]) != ERROR))
 		len--;
 	if ((is_special_token(input[len])) == SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }
 
-int parse_token(char *input)
+int	catch_parsing_error(char *input)
 {
-	if ((parse_error(input)) != SUCCESS)
+	if ((start_and_end_validation(input)) != SUCCESS)
 	{
 		printf("parse error\n");
-		return (ERROR);	
+		return (ERROR);
 	}
-	if((token_validation(input)) != SUCCESS)
+	if ((inline_token_validation(input)) != SUCCESS)
 	{
 		printf("token failure\n");
 		return (ERROR);

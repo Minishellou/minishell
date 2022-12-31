@@ -1,19 +1,34 @@
-## Documentation
+Bob Marley's Minishell Backlog
+======================
 
-On [pipes](http://www.zeitoun.net/articles/communication-par-tuyau/start);
+Our **Minishell** program is divided into three parts:
+- #5 ;
+- #6 ;
+- **Other Shell Subsystems** ;
 
-## What is a shell, and how does it work ?
-A **Shell** program is divided into three parts:
-- [The Parsing](https://github.com/Minishellou/minishell/issues/5);
-- [The Executor](https://github.com/Minishellou/minishell/issues/6);
-- Other Shell Subsystems;
-____
-
-### The Parsing
+## The Parsing
 is traditionally composed of two parts :
- - **The Lexer**, which first will separate the string into **words**, just before it convert them into **tokens** :
-	- [The First Pass](https://github.com/Minishellou/minishell/issues/7);
-	- [The Envar Expansion](https://github.com/Minishellou/minishell/issues/8);
-	- [The Second Pass](https://github.com/Minishellou/minishell/issues/9);
+ - #10, which first will separate the string into **words** and *tokenize* them :
+	- #9 ;
+	- #13 ;
 
- - **The Composer** will... compose an **Execution Chain** and a **Redirection Chain** for the **Executor** to use
+ - #17, will... compose an **Execution Chain** and a **Redirection Chain** for the **Executor** to use and
+   - #18 ;
+
+## The Execution
+covers these topics :
+- #11;
+
+- #14;
+ 	- #12 ;
+	- #16 ;
+
+- #19 ;
+
+## Other Shell Subsystems
+
+- #8;
+
+The **Envar expansion** will revolute around one `get_envar(char *envar_name);` which will be used to create various utils regarding specific needs of different parts of this project.
+
+-----

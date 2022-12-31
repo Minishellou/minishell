@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:03 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/31 20:29:26 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/31 21:36:11 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_lexer_node *add_argument(t_exec_node *node, char *word)
 t_exec_node *redirection_composer_unit(t_exec_node **execute_chain, t_lexer_node **lexer_output)
 {
 	*execute_chain = (t_exec_node*)create_exec_node(NULL);
-	(*execute_chain)->next = NULL;
+	(*execute_chain)->arg_chain = NULL;
 	(*execute_chain)->redir_chain = NULL;
 	if (!(*execute_chain))
 		return (NULL);

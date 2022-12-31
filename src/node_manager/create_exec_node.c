@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:38:32 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/26 11:55:08 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/31 21:37:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_node *create_exec_node(char *word)
 		return (NULL);
 	if (word)
 		new_node->command_path = ft_strdup(word);
+	else
+		new_node->command_path = NULL;
 	new_node->next = NULL;
 	return ((t_node *)new_node);
 }

@@ -9,6 +9,7 @@ SOURCES		+=                                		\
 ## SRC/LIBFT ##
 
 SOURCES		+=                                		\
+		src/libft/ft_lexer_split.c               	\
 		src/libft/ft_memcmp.c                    	\
 		src/libft/ft_memcpy.c                    	\
 		src/libft/ft_calloc.c                    	\
@@ -20,7 +21,6 @@ SOURCES		+=                                		\
 		src/libft/ft_isalnum.c                   	\
 		src/libft/ft_strcmp.c                    	\
 		src/libft/ft_isdigit.c                   	\
-		src/libft/ft_split_target.c              	\
 		src/libft/ft_isprint.c                   	\
 		src/libft/ft_tolower.c                   	\
 		src/libft/ft_toupper.c                   	\
@@ -85,10 +85,11 @@ SOURCES		+=                                		\
 ## SRC/LEXER ##
 
 SOURCES		+=                                		\
-		src/lexer/pipe_handler.c                 	\
-		src/lexer/lexer.c                        	\
+		src/lexer/lexer_output_manager.c         	\
 		src/lexer/chain_checker.c                	\
+		src/lexer/line_parsing_process.c         	\
 		src/lexer/char_manipulation.c            	\
+		src/lexer/redir_utils.c                  	\
 		src/lexer/redir_handler.c                	\
 		src/lexer/check_char.c                   	\
 

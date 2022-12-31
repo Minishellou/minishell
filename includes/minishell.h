@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/11/28 18:16:21 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:22:12 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
-# include "../src/libft/libft.h"
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+
+# include "../src/libft/libft.h"
 # include "./function.h"
 # include "./struct.h"
 # include "./define.h"

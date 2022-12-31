@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/21 14:29:44 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/31 20:41:17 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,17 @@ t_node	*last_node(t_node *current_node)
 	return (current_node);
 }
 
-void	lex_addback(t_lexer_node **node, t_lexer_node *new)
+void	append_to_chain(t_node **node, t_node *new_node)
 {
-	t_lexer_node	*last;
-	
+	t_node	*last;
+
 	if (!node)
 		return ;
-	else if (*node)
+	if (*node)
 	{
-		last = (t_lexer_node *)last_node((t_node *)*node);
-		last->next = new;
+		last = last_node(*node);
+		last->next = new_node;
 	}
 	else
-	{
-		*node = new;
-	}
+		*node = new_node;
 }
-
