@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/16 10:48:42 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:26:23 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,6 @@ typedef struct s_io_environment
 	int	output;
 }				t_io_env;
 
-/*		EXECUTION CHAIN			*/
-typedef struct s_exec_node
-{
-	struct s_exec_node	*next;
-	t_lexer_node		*argv;
-}				t_exec_node;
-
-/*		REDIRECTION CHAIN		*/
-enum	e_redirection_type
-{
-	INPUT,
-	HEREDOC,
-	OUTPUT,
-	APPEND
-};
-
 typedef int	t_redirection_type;
 
 typedef struct s_redirection
@@ -79,6 +63,27 @@ typedef struct s_redirection
 	char					*argument;
 	t_redirection_type		type;
 }				t_redirection;
+
+
+/*		EXECUTION CHAIN			*/
+typedef struct s_exec_node
+{
+	struct s_exec_node 	*next;
+	char				*command_path;
+	t_lexer_node		*arg_chain;
+	t_redirection		*redir_chain;
+	t_io_env			io_env;
+
+}				t_exec_node;
+
+/*		REDIRECTION CHAIN	*/
+enum	e_redirection_type
+{
+	INPUT,
+	HEREDOC,
+	OUTPUT,
+	APPEND
+};
 
 /*		QUOTE CONTEXT			*/
 enum e_quote_context

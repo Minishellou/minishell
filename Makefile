@@ -3,7 +3,7 @@
 # genmake v1.1.6
 
 #Compiler and Linker
-CC					:= gcc
+CC					:= clang
 CXX					:= c++
 ifeq ($(shell uname -s),Darwin)
 	CC				:= gcc
@@ -11,8 +11,8 @@ ifeq ($(shell uname -s),Darwin)
 endif
 
 #The Target Binary Program
-TARGET				:= minishell
-TARGET_BONUS		:= minishell-bonus
+TARGET				:= Minishell
+TARGET_BONUS		:= Minishell-bonus
 
 BUILD				:= release
 

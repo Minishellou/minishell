@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:44:12 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/09 12:50:41 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/28 13:10:26 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int parse_token(char *input)
 	if((token_validation(input)) != SUCCESS)
 	{
 		printf("token failure\n");
-		return (ERROR);	
+		return (ERROR);
 	}
 	return (SUCCESS);
 }

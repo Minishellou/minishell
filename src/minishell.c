@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:42:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/30 12:29:49 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ void	print_word_list(t_lexer_node *node)
 	while (tmp)
 	{
 		printf("%s ->\n", tmp->word);
+		tmp = tmp->next;
+	}
+}
+
+void printf_redir_chain(t_redirection *node)
+{
+	t_redirection *tmp;
+	
+	if (!node)
+		return ;
+	tmp = node;
+	while (tmp)
+	{
+		printf("type %d\n", tmp->type);
+		printf("argument-> %s\n", tmp->argument);
 		tmp = tmp->next;
 	}
 }

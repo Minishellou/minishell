@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 13:11:41 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/31 20:29:52 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,15 @@ void 	add_command_to_lexer_output(t_lexer_node *first_node);
 // token management
 void switch_state(bool *old, bool *new);
 int token_state_management(int *i, char **input, t_token_state *state);
-
+// composer //
+t_node *create_exec_node(char *word);
+t_redirection *parse_redirection(t_exec_node *node, t_lexer_node *output_chain);
+void printf_redir_chain(t_redirection *node);
+t_lexer_node *add_argument(t_exec_node *node, char *word);
+t_exec_node *redirection_composer_unit(t_exec_node **execute_chain, t_lexer_node **lexer_output);
+t_exec_node *command_path_composer_unit(t_exec_node **execute_chain, t_lexer_node **lexer_output);
+void printf_execute_chain(t_exec_node *node);
+t_exec_node *composer(void);
+t_exec_node *composer_process(t_lexer_node *lexer_output_chain);
 
 #endif

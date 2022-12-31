@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:22:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/16 12:22:51 by gkitoko          ###   ########.fr       */
+/*   Updated: 2022/12/29 14:42:54 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int illegal_token(t_lexer_node* node)
 	}
 	if (node->token == PIPE && node->next)
 	{
-		if (node->next->token != 10)
+		if (node->next->token == PIPE)
 			return (ERROR);
 	}
 	return (SUCCESS);
