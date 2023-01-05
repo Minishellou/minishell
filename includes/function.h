@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 14:53:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:03:17 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
 char		**make_array_from_chain(t_node *chain, \
 										t_node_getter get_node_value);
+void		append_to_chain(t_node **node, t_node *new_node);
+t_node		*last_node(t_node *current_node);
 
 /*		LEXER & UTILS			*/
 //	Lexer

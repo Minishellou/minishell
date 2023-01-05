@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 14:56:53 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:00:16 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_redirection
 	t_redirection_type		type;
 }				t_redirection;
 
-
 /*		EXECUTION CHAIN			*/
 typedef struct s_exec_node
 {
@@ -83,13 +82,6 @@ enum	e_redirection_type
 };
 
 typedef int	t_redirection_type;
-
-typedef struct s_redirection
-{
-	struct s_redirection	*next;
-	char					*argument;
-	t_redirection_type		type;
-}				t_redirection;
 
 /*		QUOTE CONTEXT			*/
 enum e_quote_context

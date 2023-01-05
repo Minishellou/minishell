@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 14:57:39 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:03:21 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,30 @@ char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
 		chain = chain->next;
 	}
 	return (ret_array);
+}
+
+t_node	*last_node(t_node *current_node)
+{
+	if (!current_node)
+		return (NULL);
+	while (current_node->next)
+		current_node = current_node->next;
+	return (current_node);
+}
+
+void	append_to_chain(t_node **node, t_node *new_node)
+{
+	t_node	*last;
+
+	if (!node)
+		return ;
+	if (*node)
+	{
+		last = last_node(*node);
+		last->next = new_node;
+	}
+	else
+		*node = new_node;
 }
 
 static int	get_chain_len(t_node *chain)
