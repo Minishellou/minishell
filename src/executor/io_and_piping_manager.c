@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:33:17 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 14:38:22 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 17:19:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	piping_manager(t_io_env io_env, int pipe_in)
 
 	current_input_fd = io_env.input;
 	current_output_fd = io_env.output;
+	if (pipe_in == NOT_SET)
+		pipe_in = dup(g_glo.standard_input);
 	if (pipe(from_current_to_next) != SUCCESS)
 		return (ERROR);
 	if (current_input_fd == NOT_SET)

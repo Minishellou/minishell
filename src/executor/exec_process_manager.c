@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 15:58:18 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 16:57:23 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 	int			ret_value;
 	char		*command;
 	char		*original_command_path;
-	static int	pipe_in;
+	static int	pipe_in = NOT_SET;
 
 	command = current_command->command_path;
 	if (io_environment_manager(current_command) == ERROR)
@@ -57,6 +57,13 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 	if (is_command_a_path(command) == 0)
 		current_command->command_path = pathfinder_process(command);
 	pipe_in = piping_manager(current_command->io_env, pipe_in);
+	if (pipe_in == ERROR)
+		return (ERROR);
+	if (current_command->next == NULL)
+	{
+		close(pipe_in);
+		pipe_in = NOT_SET;
+	}
 	ret_value = fork_and_exec(current_command, original_command_path);
 	return (ret_value);
 }
