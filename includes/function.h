@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 11:44:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 12:06:06 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void			switch_state(bool *old, bool *new_node);
 t_redirection *parse_redirection(t_exec_node *node, t_lexer_node *output_chain);
 t_exec_node *command_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output);
 t_exec_node *redirection_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output);
+t_exec_node *command_process_loop(t_exec_node *execute_chain, t_lexer_node **lexer_ouput);
+t_exec_node *redir_process_loop(t_exec_node *execute_chain, t_lexer_node **lexer_output);
 t_lexer_node *add_argument(t_exec_node *node, char *word);
 t_exec_node *add_process(t_lexer_node **output_chain, t_exec_node *node);
 t_redirection *create_parse_redirection(t_lexer_node *output_chain);

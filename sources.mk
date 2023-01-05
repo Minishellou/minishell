@@ -74,7 +74,7 @@ SOURCES		+=                                		\
 SOURCES		+=                                		\
 		src/composer/composer.c                  	\
 		src/composer/composer_utils.c            	\
-
+		src/composer/processes_loop.c 				\
 
 ## SRC/GARBAGE_CTR ##
 
