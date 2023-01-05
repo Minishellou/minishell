@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:43:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/17 23:13:16 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:18:29 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	is_command_a_path(char *command)
 {
 	int	index;
 
-	index = 0;
-	while (command[index] != '\0')
+	index = -1;
+	while (command[++index] != '\0')
 		if (command[index] == '/')
 			return (1);
 	return (0);

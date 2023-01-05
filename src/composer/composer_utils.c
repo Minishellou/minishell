@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   composer_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:03 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 11:47:45 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 16:05:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ t_redirection *create_parse_redirection(t_lexer_node *output_chain)
 	else if (output_chain->token == GREAT)
 		node_redirection->type = OUTPUT;
 	else if (output_chain->token == LESSER)
-		node_redirection->type = APPEND;
-	else if (output_chain->token == GREATER)
 		node_redirection->type = HEREDOC;
+	else if (output_chain->token == GREATER)
+		node_redirection->type = APPEND;
 	return 	(node_redirection);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 14:57:17 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 16:05:46 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,13 @@ int	main(int ac, char **av, char **envp)
 		}
 		if((process_lexer_output_chain(str)) != SUCCESS)
 			printf("error\n");
-		//print_word_list(g_glo.lexer_output_chain);
-		ft_free();
+		if (exec_process_manager() != SUCCESS)
+			printf("error\n");
+		g_glo.lexer_output_chain = NULL;
+		g_glo.execution_chain = NULL;
 		free(str);
+		//print_word_list(g_glo.lexer_output_chain);
 	}
+	ft_free();
 	return (0);
 }

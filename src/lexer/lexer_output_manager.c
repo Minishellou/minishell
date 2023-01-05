@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_output_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 11:48:11 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 15:16:40 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	tokenizer(void);
 
 int	process_lexer_output_chain(char *input)
 {
-	t_exec_node *composer_output;
-	
 	if (quote_neon(&input) != SUCCESS)
 		return (ERROR);
 	if (catch_parsing_error(input) != SUCCESS)
@@ -28,9 +26,10 @@ int	process_lexer_output_chain(char *input)
 	tokenizer();
 	if (catch_redir_error() != SUCCESS)
 		return (ERROR);
-	if (!(composer_output = composer()))
+	g_glo.execution_chain = composer();
+	if (!g_glo.execution_chain)
 		return (ERROR);
-	printf_execute_chain(composer_output);
+	printf_execute_chain(g_glo.execution_chain);
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 15:03:21 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 15:44:27 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
 	char	**ret_array;
 
 	number_of_node = get_chain_len(chain);
-	ret_array = ft_malloc(sizeof(*ret_array) * number_of_node);
+	ret_array = ft_malloc(sizeof(*ret_array) * (number_of_node + 1));
 	if (!ret_array)
 		return (NULL);
 	index = 0;
@@ -57,6 +57,7 @@ char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
 		ret_array[index++] = current_node_value;
 		chain = chain->next;
 	}
+	ret_array[index] = NULL;
 	return (ret_array);
 }
 
