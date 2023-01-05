@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   chain_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/31 20:41:17 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:57:39 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	get_chain_len(t_node *chain);
 
 t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 {
@@ -35,37 +37,35 @@ t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 	return (first_node);
 }
 
-void	include_subchain_at(t_node **this_node, t_node *subchain)
+char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
 {
-	t_node	*next_to_this_node;
-	t_node	*last_subchain_node;
+	int		index;
+	int		number_of_node;
+	char	*current_node_value;
+	char	**ret_array;
 
-	next_to_this_node = (*this_node)->next;
-	*this_node = subchain;
-	last_subchain_node = last_node(subchain);
-	last_subchain_node->next = next_to_this_node;
-}
-
-t_node	*last_node(t_node *current_node)
-{
-	if (!current_node)
+	number_of_node = get_chain_len(chain);
+	ret_array = ft_malloc(sizeof(*ret_array) * number_of_node);
+	if (!ret_array)
 		return (NULL);
-	while (current_node->next)
-		current_node = current_node->next;
-	return (current_node);
+	index = 0;
+	while (index < number_of_node)
+	{
+		current_node_value = get_node_value(chain);
+		if (!current_node_value)
+			return (NULL);
+		ret_array[index++] = current_node_value;
+		chain = chain->next;
+	}
+	return (ret_array);
 }
 
-void	append_to_chain(t_node **node, t_node *new_node)
+static int	get_chain_len(t_node *chain)
 {
-	t_node	*last;
+	int	number_of_node;
 
-	if (!node)
-		return ;
-	if (*node)
-	{
-		last = last_node(*node);
-		last->next = new_node;
-	}
-	else
-		*node = new_node;
+	number_of_node = 0;
+	while (chain && ++number_of_node)
+		chain = chain->next;
+	return (number_of_node);
 }

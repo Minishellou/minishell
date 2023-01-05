@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_node_manager.c                                 :+:      :+:    :+:   */
+/*   string_conversion_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 14:10:31 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 14:58:19 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/16 09:18:45 by mcorso            #+#    #+#             */
+/*   Updated: 2022/11/16 09:19:35 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	fill_env_node(char *var, t_env_node *node)
+char	*concat_array_to_string(char **splited_string)
 {
 	int		i;
-	char	*var_cpy;
+	int		len;
+	char	*concatened_string;
 
-	i = 0;
-	var_cpy = ft_strdup(var);
-	if (!var_cpy)
-		return (ERROR);
-	while (var[i] != '=')
+	i = 1;
+	len = 0;
+	if (splited_string == NULL)
+		return (NULL);
+	concatened_string = *splited_string;
+	while (splited_string[len] != NULL)
+		len++;
+	while (i < len)
+	{
+		concatened_string = ft_strjoin(concatened_string, splited_string[i]);
 		i++;
-	var[i] = '\0';
-	node->name = var;
-	node->value = &var[i + 1];
-	return (SUCCESS);
+	}
+	return (concatened_string);
 }

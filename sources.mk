@@ -82,6 +82,14 @@ SOURCES		+=                                		\
 		src/garbage_ctr/garbage.c                	\
 
 
+## SRC/NODE_MANAGER ##
+
+SOURCES		+=								\
+		src/node_manager/chain_utils.c	\
+		src/node_manager/create_node.c	\
+		src/node_manager/get_node_value.c	\
+		src/node_manager/env_node_manager.c
+
 ## SRC/LEXER ##
 
 SOURCES		+=                                		\
@@ -93,4 +101,30 @@ SOURCES		+=                                		\
 		src/lexer/redir_handler.c                	\
 		src/lexer/check_char.c                   	\
 
+## SRC/EXECUTOR ##
 
+SOURCES		+=								\
+		src/executor/exec_process_manager.c		\
+		src/executor/file_manager.c			\
+		src/executor/io_and_piping_manager.c		\
+		src/executor/io_env_manager.c			\
+		src/executor/pathfinder.c
+
+
+## SRC/ENVAR_EXPANSION ##
+
+SOURCES		+=								\
+		src/envar_expansion/envar_expansion.c
+
+## SRC/HEREDOC ##
+
+SOURCES		+=								\
+		src/heredoc/heredoc_manager.c		\
+		src/heredoc/limit_string_manager.c		\
+		src/heredoc/quote_context_manager.c
+
+
+## SRC/UTILS ##
+
+SOURCES		+=								\
+		src/utils/string_conversion_utils.c	

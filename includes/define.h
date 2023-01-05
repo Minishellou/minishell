@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:14:28 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/03 21:13:34 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:52:33 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # define WORD 10
 # define SUCCESS 0
 # define ERROR -1
+# define NOT_SET -2		// fd
 
 #endif

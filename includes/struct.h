@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
@@ -6,8 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/20 16:11:18 by mcorso           ###   ########.fr       */
-/*   Updated: 2022/12/21 14:26:23 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:56:53 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +14,9 @@
 # define STRUCT_H
 
 # include <stdbool.h>
+# define PIPE '|'
+# define LESS '<' 
+# define GREAT '>'
 
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
@@ -23,7 +25,6 @@ typedef struct s_global
 	int						standard_output;
 	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
-	struct s_lexer_node		*redirection_table;
 	struct s_lexer_node		*lexer_output_chain;
 	struct s_exec_node		*execution_chain;
 }				t_global;
@@ -81,6 +82,15 @@ enum	e_redirection_type
 	APPEND
 };
 
+typedef int	t_redirection_type;
+
+typedef struct s_redirection
+{
+	struct s_redirection	*next;
+	char					*argument;
+	t_redirection_type		type;
+}				t_redirection;
+
 /*		QUOTE CONTEXT			*/
 enum e_quote_context
 {
@@ -94,8 +104,6 @@ typedef int	t_quote_context;
 typedef struct s_node
 {
 	struct s_node	*next;
-	char			*word;
-	char			*var;
 }				t_node;
 
 /* HANDLING TOKEN STATE FOR PARSING */
@@ -112,6 +120,8 @@ typedef t_node	*t_node_creator(char *);
 //						set a member of new_node to its argument
 //						set new_node->next to NULL
 //						return the new_node casted as (t_node *)
+
+typedef char	*t_node_getter(t_node *);
 
 /*		GARBAGE COLLECTOR		*/
 typedef struct s_garbage_node

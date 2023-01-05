@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 16:22:12 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/05 14:53:54 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdbool.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 # include <unistd.h>
-
 # include "../src/libft/libft.h"
 # include "./function.h"
 # include "./struct.h"
