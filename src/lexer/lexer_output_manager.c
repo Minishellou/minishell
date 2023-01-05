@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/31 21:20:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 11:48:11 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	tokenizer(void)
 		else if (!ft_strncmp(tmp->word, ">>", word_len))
 			tmp->token = GREATER;
 		else
-			tmp->token = 10;
+			tmp->token = WORD;
 		tmp = tmp->next;
 	}
 }

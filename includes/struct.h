@@ -14,12 +14,6 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define PIPE '|'
-# define LESS '<' 
-# define GREAT '>'
-# define LESSER 4
-# define GREATER 5
-
 # include <stdbool.h>
 
 /*		GLOBAL STRUCT			*/

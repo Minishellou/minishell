@@ -6,38 +6,90 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:46:39 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/31 21:42:49 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/05 11:46:51 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static
-t_lexer_node *eol_or_pipe(t_lexer_node *node)
+t_exec_node *redirection_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output)
 {
-	t_lexer_node *tmp;
-
-	if (!node)
+	if (!(execute_chain))
+	{
+		execute_chain = (t_exec_node*)create_exec_node(NULL);
+		if (!(execute_chain))
+			return (NULL);
+		(execute_chain)->arg_chain = NULL;
+		(execute_chain)->redir_chain = NULL;
+	}
+	(execute_chain)->redir_chain = parse_redirection((execute_chain), (*lexer_output));
+	if (!(execute_chain)->redir_chain)
 		return (NULL);
-	tmp = node;
-	while (tmp != NULL && tmp->token != PIPE)
-		tmp = tmp->next;
-	return (tmp);
+	*lexer_output = (*lexer_output)->next->next;
+	while (*lexer_output && ((*lexer_output)->token != PIPE))
+	{
+		if ((*lexer_output)->token != WORD)
+		{
+			(execute_chain)->redir_chain = parse_redirection(execute_chain, *lexer_output);
+			if (!(execute_chain)->redir_chain)
+				return (NULL);
+			*lexer_output = (*lexer_output)->next;
+		} 
+		else
+		{
+			(execute_chain) = command_output_context(execute_chain, lexer_output);
+			if (!execute_chain)
+				return (NULL);
+		}
+		if (*lexer_output)
+			*lexer_output = (*lexer_output)->next;
+	}
+	return (execute_chain);
 }
 
-t_exec_node *composer_process(t_lexer_node *lexer_output_chain)
+t_exec_node *command_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output)
 {
-	t_lexer_node *tmp;
-	t_exec_node *execute_chain;
-
-	if (!lexer_output_chain)
-		return (NULL);
-	execute_chain = NULL;
-	tmp = lexer_output_chain;
-	if (tmp->token != 10)
-		execute_chain = redirection_composer_unit(&execute_chain, &tmp);
+	if (!(execute_chain))
+	{
+		execute_chain = (t_exec_node *)create_exec_node((*lexer_output)->word);
+		(execute_chain)->redir_chain = NULL;
+		(execute_chain)->arg_chain = NULL;	
+	}
 	else
-		execute_chain = command_path_composer_unit(&execute_chain, &tmp);
+	 	(execute_chain)->command_path = (*lexer_output)->word;
+	*lexer_output = (*lexer_output)->next;
+	while (((*lexer_output) != NULL) && (*lexer_output)->token != PIPE)
+	{
+		if ((*lexer_output)->token != WORD)
+		{
+			(execute_chain)->redir_chain = parse_redirection(execute_chain, *lexer_output);
+			if (!(execute_chain)->redir_chain)
+				return (NULL);
+			*lexer_output = (*lexer_output)->next;
+		}
+		else
+		{
+			(execute_chain)->arg_chain = add_argument(execute_chain, (*lexer_output)->word);
+			if (!(execute_chain)->arg_chain)
+				return (NULL);
+		}
+		if (*lexer_output)
+			*lexer_output = (*lexer_output)->next;
+	}
+	return (execute_chain);
+}
+
+t_exec_node *composer_process(t_lexer_node **lexer_output_chain)
+{
+	t_exec_node *execute_chain;
+	
+	execute_chain = NULL;
+	if (!(*lexer_output_chain))
+		return (NULL);
+	if ((*lexer_output_chain)->token != WORD)
+		execute_chain = redirection_output_context(execute_chain, lexer_output_chain);
+	else
+		execute_chain = command_output_context(execute_chain, lexer_output_chain);
 	return (execute_chain);
 }
 
@@ -45,45 +97,15 @@ t_exec_node *composer(void)
 {
 	t_lexer_node *tmp;
 	t_exec_node *execute_chain;
-	t_exec_node *tmp2;
 
 	execute_chain = NULL;
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if (execute_chain == NULL)
-		{
-			if (tmp->token != 10)
-			{
-				execute_chain = composer_process(tmp);
-				tmp2 = execute_chain;
-				tmp = tmp->next->next;
-			} else 
-			{
-				execute_chain = composer_process(tmp);
-				tmp2 = execute_chain;
-				if(!(tmp = eol_or_pipe(tmp)))
-					break ;
-				tmp = tmp->next;
-			}
-		}
-		else
-		{
-			if (tmp->token !=  10)
-			{
-				tmp2->next = composer_process(tmp);
-				tmp = tmp->next->next;
-				tmp2 = tmp2->next;
-			}
-			else 
-			{
-				tmp2->next = composer_process(tmp);
-				tmp2 = tmp2->next;
-				if (!(tmp = eol_or_pipe(tmp)))
-					break;
-				tmp = tmp->next;
-			}
-		}
+		if (!(execute_chain = add_process(&tmp, execute_chain)))
+			return (NULL);
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (execute_chain);
 }
