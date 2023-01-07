@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 11:57:25 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 17:05:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/06 11:40:43 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,21 @@ int	io_environment_manager(t_exec_node *current_command)
 
 static void	open_input_redir(char *file_path, t_io_env *to_fill)
 {
-	close(to_fill->input);
+	if (to_fill->input != NOT_SET)
+		close(to_fill->input);
 	to_fill->input = open_file_to_read(file_path);
 }
 
 static void	open_output_redir(char *file_path, t_io_env	*to_fill)
 {
-	close(to_fill->output);
+	if (to_fill->output != NOT_SET)
+		close(to_fill->output);
 	to_fill->output = open_file_to_trunc(file_path);
 }
 
 static void	open_append_redir(char *file_path, t_io_env	*to_fill)
 {
-	close(to_fill->output);
+	if (to_fill->output != NOT_SET)
+		close(to_fill->output);
 	to_fill->output = open_file_to_append(file_path);
 }
