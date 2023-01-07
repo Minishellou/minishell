@@ -6,18 +6,17 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 16:57:23 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/07 14:26:13 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdio.h>
 
-static int	fork_and_exec(t_exec_node *current_command, char *first_argument);
+static int	fork_and_exec(t_exec_node *current_command);
 static int	manage_current_command_exec(t_exec_node *current_command);
 static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node);
-static char	**make_argument_array(t_exec_node *current_command, \
-								char *first_argument);
+static char	**make_argument_array(t_exec_node *current_command);
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
@@ -53,9 +52,6 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 		return (SUCCESS);
 	if (command == NULL)
 		return (SUCCESS);
-	original_command_path = current_command->command_path;
-	if (is_command_a_path(command) == 0)
-		current_command->command_path = pathfinder_process(command);
 	pipe_in = piping_manager(current_command->io_env, pipe_in);
 	if (pipe_in == ERROR)
 		return (ERROR);
@@ -87,16 +83,22 @@ static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
 	return (SUCCESS);
 }
 
-static int	fork_and_exec(t_exec_node *current_command, char *first_argument)
+static int	fork_and_exec(t_exec_node *current_command)
 {
-	pid_t	forked_pid;
-	t_node	*env_chain;
 	char	**envp;
 	char	**argv;
+	char	*command_path;
+	pid_t	forked_pid;
+	t_node	*env_chain;
 
 	env_chain = (t_node *)g_glo.env;
+	command_path = current_command->command_path;
 	envp = make_array_from_chain(env_chain, get_env_node_value);
-	argv = make_argument_array(current_command, first_argument);
+	argv = make_argument_array(current_command);
+	if (!argv || !envp)
+		return (ERROR);
+	if (is_command_a_path(command_path) == 0)
+		current_command->command_path = pathfinder_process(command_path);
 	forked_pid = fork();
 	if (forked_pid == 0)
 	{
@@ -107,13 +109,14 @@ static int	fork_and_exec(t_exec_node *current_command, char *first_argument)
 	return (forked_pid);
 }
 
-static char	**make_argument_array(t_exec_node *current_command, \
-									char *first_argument)
+static char	**make_argument_array(t_exec_node *current_command)
 {
 	char			**ret_array;
+	char			*command_path;
 	t_lexer_node	*arg_chain;
 
-	arg_chain = (t_lexer_node *)create_lexer_node(first_argument);
+	command_path = current_command->command_path;
+	arg_chain = (t_lexer_node *)create_lexer_node(command_path);
 	if (arg_chain == NULL)
 		return (NULL);
 	arg_chain->next = current_command->arg_chain;
