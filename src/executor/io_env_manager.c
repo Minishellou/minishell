@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 11:57:25 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/06 11:40:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/07 16:24:38 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	io_environment_manager(t_exec_node *current_command)
 
 	ret_io_env.input = NOT_SET;
 	ret_io_env.output = NOT_SET;
-	if (current_command->next == NULL)
-		ret_io_env.output = dup(g_glo.standard_output);
 	current_redirection_node = current_command->redir_chain;
 	while (current_redirection_node != NULL)
 	{

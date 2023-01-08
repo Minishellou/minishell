@@ -6,16 +6,17 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/07 14:26:13 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 15:45:56 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdio.h>
 
-static int	fork_and_exec(t_exec_node *current_command);
 static int	manage_current_command_exec(t_exec_node *current_command);
 static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node);
+static int	fork_and_exec(t_exec_node *current_command, \
+							char **argv, char **envp, int pipefd[2]);
 static char	**make_argument_array(t_exec_node *current_command);
 
 /*		EXEC MANAGER		*/
@@ -27,85 +28,69 @@ int	exec_process_manager(void)
 
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
 		return (ERROR);
-	current_command = g_glo.execution_chain;
-	while (current_command != NULL)
+	current_command = (t_exec_node *)create_exec_node(NULL);
+	current_command->next = g_glo.execution_chain;
+	while (current_command->next != NULL)
 	{
+		current_command = current_command->next;
+		if (io_environment_manager(current_command) == ERROR)
+			continue ;
+		if (current_command->command_path == NULL)
+			continue ;
 		fork_pid = manage_current_command_exec(current_command);
 		if (fork_pid == ERROR)
 			return (ERROR);
-		current_command = current_command->next;
 	}
-	reset_standard_io();
 	waitpid(fork_pid, &pipeline_status, 0);
+	if (restore_standard_input() != SUCCESS)
+		return (ERROR);
 	return (pipeline_status);
 }
 
 static int	manage_current_command_exec(t_exec_node *current_command)
 {
 	int			ret_value;
-	char		*command;
-	char		*original_command_path;
-	static int	pipe_in = NOT_SET;
+	char		**argv;
+	char		**envp;
+	t_node		*env_chain;
+	static int	pipefd[2];
 
-	command = current_command->command_path;
-	if (io_environment_manager(current_command) == ERROR)
-		return (SUCCESS);
-	if (command == NULL)
-		return (SUCCESS);
-	pipe_in = piping_manager(current_command->io_env, pipe_in);
-	if (pipe_in == ERROR)
+	env_chain = (t_node *)g_glo.env;
+	argv = make_argument_array(current_command);
+	envp = make_array_from_chain(env_chain, get_env_node_value);
+	if (!argv || !envp)
 		return (ERROR);
-	if (current_command->next == NULL)
-	{
-		close(pipe_in);
-		pipe_in = NOT_SET;
-	}
-	ret_value = fork_and_exec(current_command, original_command_path);
+	if (current_command->next != NULL)
+		if (pipe(pipefd) != SUCCESS)
+			return (ERROR);
+	ret_value = fork_and_exec(current_command, argv, envp, pipefd);
 	return (ret_value);
 }
 
-static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
+static int	fork_and_exec(t_exec_node *current_command, \
+							char **argv, char **envp, int pipefd[2])
 {
-	t_redirection	*current_redir_chain;
-
-	while (current_node != NULL)
-	{
-		current_redir_chain = current_node->redir_chain;
-		while (current_redir_chain != NULL)
-		{
-			if (current_redir_chain->type == HEREDOC)
-				if (manage_heredoc(current_redir_chain) != SUCCESS)
-					return (ERROR);
-			current_redir_chain = current_redir_chain->next;
-		}
-		current_node = current_node->next;
-	}
-	return (SUCCESS);
-}
-
-static int	fork_and_exec(t_exec_node *current_command)
-{
-	char	**envp;
-	char	**argv;
+	int		ret_value;
 	char	*command_path;
 	pid_t	forked_pid;
-	t_node	*env_chain;
 
-	env_chain = (t_node *)g_glo.env;
 	command_path = current_command->command_path;
-	envp = make_array_from_chain(env_chain, get_env_node_value);
-	argv = make_argument_array(current_command);
-	if (!argv || !envp)
-		return (ERROR);
 	if (is_command_a_path(command_path) == 0)
 		current_command->command_path = pathfinder_process(command_path);
 	forked_pid = fork();
 	if (forked_pid == 0)
 	{
-		execve(current_command->command_path, argv, envp);
-		perror("execve:");
+		if (current_command->next != NULL)
+			ret_value = redirect_process_output(pipefd);
+		else
+			ret_value = restore_standard_output();
+		if (ret_value == SUCCESS)
+			execve(current_command->command_path, argv, envp);
+		perror(command_path);
 		return (ERROR);
 	}
+	if (redirect_process_input(pipefd) != SUCCESS)
+		return (ERROR);
 	return (forked_pid);
 }
 

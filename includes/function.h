@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 15:03:17 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 15:48:23 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FUNCTION_H
 
 # include "./struct.h"
+# include "./define.h"
 
 /* INIT */
 void			token_state_init(t_token_state *state);
@@ -42,10 +43,6 @@ char		**make_array_from_chain(t_node *chain, \
 void		append_to_chain(t_node **node, t_node *new_node);
 t_node		*last_node(t_node *current_node);
 
-/*		LEXER & UTILS			*/
-//	Lexer
-int			lexer(char *command);
-
 /*		STRING CONVERT & UTILS	*/
 char		*concat_array_to_string(char **splited_string);
 
@@ -69,6 +66,7 @@ void		write_to_file(int file_fd, char *string_to_write);
 int			io_environment_manager(t_exec_node *current_command);
 //	Heredoc manager 
 int			manage_heredoc(t_redirection *heredoc_node);
+int			exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 //	Limit string
 int			process_limit_string(char **limit_string, int *quote_context);
 
@@ -79,9 +77,46 @@ int			is_command_a_path(char *command);
 //	Exec process
 int			exec_process_manager(void);
 //	Pipe
-int			piping_manager(t_io_env io_env, int pipe_in);
+// int			piping_manager(t_io_env io_env, int pipe_in);
+int			redirect_fd(int fd, int stdfd);
 //	Cleaning
 int			reset_standard_io(void);
+//		INLINE
+static inline int	redirect_process_input(int pipefd[])
+{
+	int	input_fd;
+
+	input_fd = pipefd[0];
+	close(pipefd[1]);
+	if (redirect_fd(input_fd, 0) != SUCCESS)
+		return (ERROR);
+	close(input_fd);
+	return (SUCCESS);
+}	
+
+static inline int	redirect_process_output(int pipefd[])
+{
+	int	output_fd;
+
+	output_fd = pipefd[1];
+	close(pipefd[0]);
+	if (redirect_fd(output_fd, 1) != SUCCESS)
+		return (ERROR);
+	close(output_fd);
+	return (SUCCESS);	
+}
+
+static inline int	restore_standard_input(void)
+{
+	if (dup2(g_glo.standard_input, 0) != SUCCESS)
+		return (ERROR);
+}
+
+static inline int	restore_standard_output(void)
+{
+	if (dup2(g_glo.standard_output, 1) != SUCCESS)
+		return (ERROR);
+}
 
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage

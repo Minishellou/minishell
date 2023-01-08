@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 15:58:00 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 15:48:59 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ int	manage_heredoc(t_redirection *heredoc_node)
 		return (ERROR);
 	heredoc_node->type = INPUT;
 	heredoc_node->argument = tmpfile;
+	return (SUCCESS);
+}
+
+int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
+{
+	t_redirection	*current_redir_chain;
+
+	while (current_node != NULL)
+	{
+		current_redir_chain = current_node->redir_chain;
+		while (current_redir_chain != NULL)
+		{
+			if (current_redir_chain->type == HEREDOC)
+				if (manage_heredoc(current_redir_chain) != SUCCESS)
+					return (ERROR);
+			current_redir_chain = current_redir_chain->next;
+		}
+		current_node = current_node->next;
+	}
 	return (SUCCESS);
 }
 
@@ -66,3 +85,4 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 	}
 	return (SUCCESS);
 }
+
