@@ -47,14 +47,6 @@ SOURCES		+=                                		\
 		src/libft/ft_strlcpy.c                   	\
 
 
-## SRC/NODE_MANAGER ##
-
-SOURCES		+=                                		\
-		src/node_manager/env_node_manager.c      	\
-		src/node_manager/create_exec_node.c      	\
-		src/node_manager/create_node.c           	\
-		src/node_manager/chain_utils.c           	\
-
 
 ## SRC/INIT ##
 
@@ -87,8 +79,8 @@ SOURCES		+=                                		\
 SOURCES		+=								\
 		src/node_manager/chain_utils.c	\
 		src/node_manager/create_node.c	\
-		src/node_manager/get_node_value.c	\
-		src/node_manager/env_node_manager.c
+		src/node_manager/env_node_manager.c	\
+		src/node_manager/get_node_value.c
 
 ## SRC/LEXER ##
 
