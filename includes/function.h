@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/08 15:48:23 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:03:04 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,24 @@ static inline int	redirect_process_output(int pipefd[])
 	return (SUCCESS);	
 }
 
-static inline int	restore_standard_input(void)
+static inline int	restore_standard_input(int stdfd)
 {
-	if (dup2(g_glo.standard_input, 0) != SUCCESS)
+	int	ret_value;
+
+	ret_value = dup2(stdfd, 0);
+	if (ret_value == ERROR)
 		return (ERROR);
+	return (SUCCESS);
 }
 
-static inline int	restore_standard_output(void)
+static inline int	restore_standard_output(int stdfd)
 {
-	if (dup2(g_glo.standard_output, 1) != SUCCESS)
+	int	ret_value;
+
+	ret_value = dup2(stdfd, 1);
+	if (ret_value == ERROR)
 		return (ERROR);
+	return(SUCCESS);
 }
 
 /*		GARBAGE COLLECTOR		*/

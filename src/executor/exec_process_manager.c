@@ -6,24 +6,24 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 15:45:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:05:35 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdio.h>
 
-static int	manage_current_command_exec(t_exec_node *current_command);
-static int	exec_every_heredoc_of_pipeline(t_exec_node *current_node);
+static int	wait_for_current_pipeline(void);
 static int	fork_and_exec(t_exec_node *current_command, \
 							char **argv, char **envp, int pipefd[2]);
 static char	**make_argument_array(t_exec_node *current_command);
+static pid_t	manage_current_command_exec(t_exec_node *current_command);
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
 {
-	int			fork_pid;
 	int			pipeline_status;
+	pid_t		fork_pid;
 	t_exec_node	*current_command;
 
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
@@ -40,21 +40,24 @@ int	exec_process_manager(void)
 		fork_pid = manage_current_command_exec(current_command);
 		if (fork_pid == ERROR)
 			return (ERROR);
+		current_command->process_id = fork_pid;
 	}
-	waitpid(fork_pid, &pipeline_status, 0);
-	if (restore_standard_input() != SUCCESS)
+	if (restore_standard_input(g_glo.standard_input) != SUCCESS)
 		return (ERROR);
+	pipeline_status = wait_for_current_pipeline();
 	return (pipeline_status);
 }
 
-static int	manage_current_command_exec(t_exec_node *current_command)
+static pid_t	manage_current_command_exec(t_exec_node *current_command)
 {
-	int			ret_value;
+	int			fork_pid;
 	char		**argv;
 	char		**envp;
 	t_node		*env_chain;
 	static int	pipefd[2];
 
+	pipefd[0] = NOT_SET;
+	pipefd[1] = NOT_SET;
 	env_chain = (t_node *)g_glo.env;
 	argv = make_argument_array(current_command);
 	envp = make_array_from_chain(env_chain, get_env_node_value);
@@ -63,8 +66,8 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 	if (current_command->next != NULL)
 		if (pipe(pipefd) != SUCCESS)
 			return (ERROR);
-	ret_value = fork_and_exec(current_command, argv, envp, pipefd);
-	return (ret_value);
+	fork_pid = fork_and_exec(current_command, argv, envp, pipefd);
+	return (fork_pid);
 }
 
 static int	fork_and_exec(t_exec_node *current_command, \
@@ -80,18 +83,35 @@ static int	fork_and_exec(t_exec_node *current_command, \
 	forked_pid = fork();
 	if (forked_pid == 0)
 	{
-		if (current_command->next != NULL)
+		if (pipefd[1] != NOT_SET)
 			ret_value = redirect_process_output(pipefd);
 		else
-			ret_value = restore_standard_output();
+			ret_value = restore_standard_output(g_glo.standard_output);
 		if (ret_value == SUCCESS)
 			execve(current_command->command_path, argv, envp);
-		perror(command_path);
-		return (ERROR);
+		exit(1);	
 	}
-	if (redirect_process_input(pipefd) != SUCCESS)
-		return (ERROR);
+	if (pipefd[0] != NOT_SET)
+		if (redirect_process_input(pipefd) != SUCCESS)
+			return (ERROR);
 	return (forked_pid);
+}
+
+static int	wait_for_current_pipeline(void)
+{
+	int			ret_value;
+	int			return_status;
+	t_exec_node	*current_node;
+
+	current_node = g_glo.execution_chain;
+	while (current_node)
+	{
+		ret_value = waitpid(current_node->process_id, &return_status, 0);
+		if (ret_value == ERROR)
+			return (ERROR);
+		current_node = current_node->next;
+	}
+	return (return_status);
 }
 
 static char	**make_argument_array(t_exec_node *current_command)
