@@ -79,6 +79,8 @@ SOURCES		+=                                		\
 SOURCES		+=								\
 		src/node_manager/chain_utils.c	\
 		src/node_manager/create_node.c	\
+		src/node_manager/env_node_manager.c	\
+		src/node_manager/get_node_value.c
 
 ## SRC/LEXER ##
 
@@ -104,7 +106,9 @@ SOURCES		+=								\
 ## SRC/ENVAR_EXPANSION ##
 
 SOURCES		+=								\
-		src/envar_expansion/envar_expansion.c
+		src/envar_expansion/envar_expansion.c \
+		src/envar_expansion/envar_to_lexer.c \
+		src/envar_expansion/envar_utils.c 	\
 
 ## SRC/HEREDOC ##
 
@@ -117,13 +121,4 @@ SOURCES		+=								\
 ## SRC/UTILS ##
 
 SOURCES		+=								\
-		src/utils/file_utils.c				\
-		src/utils/escape_char_utils.c		\
-		src/utils/string_conversion_utils.c		\
-		src/utils/quote_utils.c	
-
-## SRC/ENVAR_EXPANSION ##
-
-SOURCES		+=								\
-		src/envar_expansion/envar_utils.c				\
-		src/envar_expansion/envar_expansion.c		\
+		src/utils/string_conversion_utils.c	

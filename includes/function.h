@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/09 12:55:22 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/09 19:46:58 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void			token_state_init(t_token_state *state);
 /*		GLOBAL STRUCTURE		*/
 int			init_global(char **envp);
 
-/*		T_NODE & UTILS			*/
+/*		NODE & UTILS			*/
+//	Env Node
+int				fill_env_node(char *var, t_env_node *node);
+// Create exec node
+t_node *create_exec_node(char *word);
+t_node			*create_env_node(char *var);
 //	Create Node
 t_node		*create_env_node(char *var);
 t_node		*create_lexer_node(char *word);
@@ -31,8 +36,6 @@ t_node		*create_redirection(char *argument);
 char		*get_env_node_value(t_node	*node);
 char		*get_lexer_node_value(t_node *node);
 //	Utils
-void		include_subchain_at(t_node **this_node, t_node *subchain);
-t_node		*last_node(t_node *current_node);
 t_node		*make_chain_from_array(char **array, \
 										t_node_creator create_node);
 char		**make_array_from_chain(t_node *chain, \
@@ -42,7 +45,6 @@ t_node		*last_node(t_node *current_node);
 
 /*		STRING CONVERT & UTILS	*/
 char		*concat_array_to_string(char **splited_string);
-char		*concat_chain_to_string(t_lexer_node *first_node);
 
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
@@ -51,17 +53,9 @@ int			is_quoted(char *string, int nb_of_quote);
 
 /*		ENVAR & NODE UTILS		*/
 //	Envar expansion
+int	has_envar(char *string);
+int	fill_env_node(char *var, t_env_node *node);
 t_env_node	*get_envar(char *envar_name);
-
-/*		ENVAR & NODE UTILS		*/
-//	Envar expansion
-t_env_node	*get_envar(char *envar_name);
-int			expand_and_add_to_string(char **current_string, t_env_node *envar);
-int			expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar);
-//	Expansion utils
-int			has_envar(char *string);
-//	env_node
-int			fill_env_node(char *var, t_env_node *node);
 
 /*		FILE & UTILS			*/
 int			open_file_to_read(char *file_path);
@@ -192,4 +186,9 @@ t_redirection *create_parse_redirection(t_lexer_node *output_chain);
 void printf_execute_chain(t_exec_node *node);
 t_exec_node *composer(void);
 t_exec_node *composer_process(t_lexer_node **lexer_output_chain);
+char	*concat_chain_to_string(t_lexer_node *first_node);
+char *node_expanded(char *word);
+
+t_lexer_node *lexer_env(char *env_node);
+void test(char *str);
 #endif

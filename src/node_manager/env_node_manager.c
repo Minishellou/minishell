@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envar_utils.c                                      :+:      :+:    :+:   */
+/*   env_node_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 12:02:42 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/09 14:26:19 by gkitoko          ###   ########.fr       */
+/*   Created: 2022/11/03 14:10:31 by mcorso            #+#    #+#             */
+/*   Updated: 2023/01/09 14:26:13 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	has_envar(char *string)
+int	fill_env_node(char *var, t_env_node *node)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (string[i] && string[i] != '$')
+	while (var[i] != '=')
 		i++;
-	return (string[i]);
+	var[i] = '\0';
+	node->name = var;
+	node->value = &var[i + 1];
+	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_conversion_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 09:18:45 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 14:40:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 20:00:49 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ char	*concat_chain_to_string(t_lexer_node *first_node)
 	char			*concatened_string;
 	t_lexer_node	*current_node;
 
+	while (first_node->word == NULL)
+		first_node = first_node->next;
 	concatened_string = first_node->word;
 	current_node = first_node->next;
 	while (current_node != NULL)
 	{
-		concatened_string = ft_strjoin(concatened_string, " ");
-	if (current_node->word != NULL)
+		if (current_node->word != NULL)
 			concatened_string = ft_strjoin(concatened_string, current_node->word);
 		current_node = current_node->next;
 	}
