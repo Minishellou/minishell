@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_target.c                                  :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 15:29:25 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/21 13:17:30 by mcorso           ###   ########.fr       */
+/*   Created: 2022/01/04 10:35:59 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/12/21 13:15:46 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_istarget(char c, char target)
+static int	ft_ischarset(char c)
 {
-	if (c == target)
+	if (c == ' ' || c == '\t' || c == '\r')
 		return (1);
 	return (0);
 }
 
-static int	ft_countwords_target(char const *str, char sep)
+static int	ft_countwords(char const *str)
 {
 	int	wc;
 	int	i;
 
 	i = 0;
 	wc = 0;
-	while (str[i] && ft_istarget(str[i], sep))
+	if (!str)
+		return (0);
+	while (str[i] && ft_ischarset(str[i]))
 		i++;
+	if (i >= (int)ft_strlen(str))
+		return (0);
 	while (str[i])
 	{
 		wc++;
-		while (str[i] && !ft_istarget(str[i], sep))
+		while (str[i] && !ft_ischarset(str[i]))
 			i++;
-		while (str[i] && ft_istarget(str[i], sep))
+		while (str[i] && ft_ischarset(str[i]))
 			i++;
 	}
 	return (wc);
 }
 
-static char	*ft_dup_target(char const *str, char target)
+static char	*ft_dup(char const *str)
 {
 	int		len;
 	int		i;
@@ -47,12 +51,12 @@ static char	*ft_dup_target(char const *str, char target)
 
 	len = 0;
 	i = 0;
-	while (str[len] && !ft_istarget(str[len], target))
+	while (str[len] && !ft_ischarset(str[len]))
 		len++;
 	cpy = ft_malloc(sizeof(char) * len + 1);
 	if (!cpy)
 		return (NULL);
-	while (str[i] && !ft_istarget(str[i], target))
+	while (str[i] && !ft_ischarset(str[i]))
 	{
 		cpy[i] = str[i];
 		i++;
@@ -61,27 +65,25 @@ static char	*ft_dup_target(char const *str, char target)
 	return (cpy);
 }
 
-char	**ft_split(char const *s, char target)
+char	**ft_lexer_split(char const *s)
 {
 	char	**split;
-	int		count_word;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	count_word = ft_countwords_target(s, target) + 1;
-	split = (char **)ft_malloc(sizeof(char *) * count_word);
+	split = (char **)ft_malloc(sizeof(char *) * (ft_countwords(s) + 1));
 	if (!split)
 		return (NULL);
-	while (s[i] && ft_istarget(s[i], target))
+	while (s[i] && ft_ischarset(s[i]))
 		i++;
 	while (s[i])
 	{
-		split[j] = ft_dup_target(&s[i], target);
-		while (s[i] && !ft_istarget(s[i], target))
+		split[j] = ft_dup(&s[i]);
+		while (s[i] && !ft_ischarset(s[i]))
 			i++;
-		while (s[i] && ft_istarget(s[i], target))
+		while (s[i] && ft_ischarset(s[i]))
 			i++;
 		j++;
 	}

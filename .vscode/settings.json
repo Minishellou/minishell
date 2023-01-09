@@ -3,7 +3,8 @@
 		"includes",
 		"src",
 		"root",
-		"libft"
+		"libft",
+		"global"
 	],
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {

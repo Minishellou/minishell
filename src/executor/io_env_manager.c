@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   io_env_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 10:39:07 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/22 10:49:34 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 12:55:37 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	find_last_input_redir(t_redirection *redirection);
-static int	find_last_output_redir(t_redirection *redirection);
+static void	open_input_redir(char *file_path, t_io_env *to_fill);
+static void	open_output_redir(char *file_path, t_io_env *to_fill);
+static void	open_append_redir(char *file_path, t_io_env *to_fill);
 
-t_io_env	io_environment_manager(void)
+int	io_environment_manager(t_exec_node *current_command)
 {
 	int			input_fd;
 	int			output_fd;
@@ -32,44 +33,23 @@ t_io_env	io_environment_manager(void)
 	return (current_io_env);
 }
 
-static int	find_last_input_redir(t_redirection *redirection)
+static void	open_input_redir(char *file_path, t_io_env *to_fill)
 {
-	int			ret;
-	static int	fd = NOT_SET;
-
-	if (redirection == NULL)
-		return (fd);
-	if (redirection->type > HEREDOC)
-		return (find_last_input_redir(redirection->next));
-	if (fd != NOT_SET)
-		close(fd);
-	if (redirection->type == INPUT)
-		fd = open_file_to_read(redirection->argument);
-	if (redirection->type == HEREDOC)
-		fd = heredoc_process(redirection->argument);
-	if (fd == ERROR)
-		return (ERROR);
-	ret = find_last_input_redir(redirection->next);
-	return (ret);
+	if (to_fill->input != NOT_SET)
+		close(to_fill->input);
+	to_fill->input = open_file_to_read(file_path);
 }
 
-static int	find_last_output_redir(t_redirection *redirection)
-{	
-	int			ret;
-	static int	fd = NOT_SET;
+static void	open_output_redir(char *file_path, t_io_env	*to_fill)
+{
+	if (to_fill->output != NOT_SET)
+		close(to_fill->output);
+	to_fill->output = open_file_to_trunc(file_path);
+}
 
-	if (redirection == NULL)
-		return (fd);
-	if (redirection->type < OUTPUT)
-		return (find_last_output_redir(redirection->next));
-	if (fd != NOT_SET)
-		close(fd);
-	if (redirection->type == OUTPUT)
-		fd = open_file_to_trunc(redirection->argument);
-	if (redirection->type == APPEND)
-		fd = open_file_to_append(redirection->argument);
-	if (fd < 0)
-		return (ERROR);
-	ret = find_last_output_redir(redirection->next);
-	return (ret);
+static void	open_append_redir(char *file_path, t_io_env	*to_fill)
+{
+	if (to_fill->output != NOT_SET)
+		close(to_fill->output);
+	to_fill->output = open_file_to_append(file_path);
 }

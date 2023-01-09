@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   check_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 15:21:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 16:14:53 by mcorso           ###   ########.fr       */
+/*   Created: 2022/11/15 16:26:31 by gkitoko           #+#    #+#             */
+/*   Updated: 2022/12/20 16:00:03 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-char	*ft_strdup(const char *s)
+int	is_white_space(char c)
 {
-	char	*str;
-	char	*dup;
-	int		i;
+	if (c == ' ' || c == '\t' || c == '\r')
+		return (SUCCESS);
+	return (ERROR);
+}
 
-	i = 0;
-	str = (char *) s;
-	dup = ft_malloc(sizeof(char) * ft_strlen(str) + 1);
-	if (!dup)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+int	is_special_token(char c)
+{
+	if (c == PIPE)
+		return (SUCCESS);
+	if (c == LESS)
+		return (SUCCESS);
+	if (c == GREAT)
+		return (SUCCESS);
+	return (ERROR);
 }

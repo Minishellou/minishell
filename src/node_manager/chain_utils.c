@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   chain_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2022/11/21 09:42:44 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 12:54:50 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	get_chain_len(t_node *chain);
 
 t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 {
@@ -19,7 +21,9 @@ t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 	t_node	*first_node;
 
 	i = 0;
-	first_node = create_node(array[i++]);
+	first_node = NULL;
+	if (array[0])
+		first_node = create_node(array[i++]);
 	if (first_node == NULL)
 		return (NULL);
 	new_node = &first_node->next;
