@@ -6,39 +6,66 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:33:17 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 12:38:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 21:34:05 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	restore_standard_input(void);
+static int	restore_standard_output(void);
+
 /*		LOCAL IO MANAGER		*/
-// int	piping_manager(t_io_env io_env, int pipe_in)
-// {
-// 	int	current_input_fd;
-// 	int	current_output_fd;
-// 	int	from_current_to_next[2];
-
-// 	current_input_fd = io_env.input;
-// 	current_output_fd = io_env.output;
-// 	if (pipe_in == NOT_SET)
-// 		pipe_in = dup(g_glo.standard_input);
-// 	if (pipe(from_current_to_next) != SUCCESS)
-// 		return (ERROR);
-// 	if (current_input_fd == NOT_SET)
-// 		current_input_fd = pipe_in;
-// 	if (current_output_fd == NOT_SET)
-// 		current_output_fd = from_current_to_next[1];
-// 	if (redir_manager(current_input_fd, current_output_fd) != SUCCESS)
-// 		return (ERROR);
-// 	return (from_current_to_next[0]);
-// }
-
-int	reset_standard_io(void)
+int	manage_output_piping(int pipefd[], int io_env_output)
 {
-	if (dup2(g_glo.standard_input, 0) < 0)
+	int	output_fd;
+	int	pipe_write_end;
+	int	ret_value;
+
+	pipe_write_end = pipefd[1];
+	output_fd = io_env_output;
+	if (output_fd == NOT_SET)
+		output_fd = pipe_write_end;
+	if (output_fd == NOT_SET)
+		ret_value = restore_standard_output();
+	else
+		ret_value = redirect_process_output(pipefd, output_fd);
+	return (ret_value);
+}
+
+int	manage_input_piping(int pipefd[], int io_env_input)
+{
+	int	input_fd;
+	int	pipe_read_end;
+	int	ret_value;
+
+	pipe_read_end = pipefd[0];
+	input_fd = io_env_input;
+	if (input_fd == NOT_SET)
+		input_fd = pipe_read_end;
+	if (input_fd == NOT_SET)
+		ret_value = restore_standard_input();
+	else
+		ret_value = redirect_process_input(pipefd, input_fd);
+	return (ret_value);
+}
+
+static int	restore_standard_input(void)
+{
+	int	ret_value;
+
+	ret_value = dup2(g_glo.standard_input, 0);
+	if (ret_value == ERROR)
 		return (ERROR);
-	if (dup2(g_glo.standard_output, 1) < 0)
+	return (SUCCESS);
+}
+
+static int	restore_standard_output(void)
+{
+	int	ret_value;
+
+	ret_value = dup2(g_glo.standard_output, 1);
+	if (ret_value == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }
