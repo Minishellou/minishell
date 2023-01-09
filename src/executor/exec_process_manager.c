@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 19:05:35 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 14:52:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,19 @@ static int	fork_and_exec(t_exec_node *current_command, \
 
 static int	wait_for_current_pipeline(void)
 {
-	int			ret_value;
 	int			return_status;
+	int			wait_ret_value;
+	pid_t		pid_to_wait_for;
 	t_exec_node	*current_node;
 
+	wait_ret_value = SUCCESS;
 	current_node = g_glo.execution_chain;
 	while (current_node)
 	{
-		ret_value = waitpid(current_node->process_id, &return_status, 0);
-		if (ret_value == ERROR)
+		pid_to_wait_for = current_node->process_id;
+		if (pid_to_wait_for != NOT_SET)
+			wait_ret_value = waitpid(pid_to_wait_for, &return_status, 0);
+		if (wait_ret_value == ERROR)
 			return (ERROR);
 		current_node = current_node->next;
 	}
