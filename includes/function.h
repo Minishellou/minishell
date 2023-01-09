@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/08 19:03:04 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/08 21:23:16 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,60 +70,36 @@ int			exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 //	Limit string
 int			process_limit_string(char **limit_string, int *quote_context);
 
-/*		EXEC & PIPING */
-//	PATHFinder
+/*		PATHFINDER				*/
 char		*pathfinder_process(char *command);
 int			is_command_a_path(char *command);
+
+/*		EXEC & PIPING 			*/
 //	Exec process
 int			exec_process_manager(void);
 //	Pipe
-// int			piping_manager(t_io_env io_env, int pipe_in);
+int			manage_input_piping(int pipefd[], int io_env_input);
+int			manage_output_piping(int pipefd[], int io_env_output);
 int			redirect_fd(int fd, int stdfd);
 //	Cleaning
 int			reset_standard_io(void);
 //		INLINE
-static inline int	redirect_process_input(int pipefd[])
+static inline int	redirect_process_input(int pipefd[], int input_fd)
 {
-	int	input_fd;
-
-	input_fd = pipefd[0];
 	close(pipefd[1]);
 	if (redirect_fd(input_fd, 0) != SUCCESS)
 		return (ERROR);
-	close(input_fd);
+	close(pipefd[0]);
 	return (SUCCESS);
 }	
 
-static inline int	redirect_process_output(int pipefd[])
+static inline int	redirect_process_output(int pipefd[], int output_fd)
 {
-	int	output_fd;
-
-	output_fd = pipefd[1];
 	close(pipefd[0]);
 	if (redirect_fd(output_fd, 1) != SUCCESS)
 		return (ERROR);
-	close(output_fd);
+	close(pipefd[1]);
 	return (SUCCESS);	
-}
-
-static inline int	restore_standard_input(int stdfd)
-{
-	int	ret_value;
-
-	ret_value = dup2(stdfd, 0);
-	if (ret_value == ERROR)
-		return (ERROR);
-	return (SUCCESS);
-}
-
-static inline int	restore_standard_output(int stdfd)
-{
-	int	ret_value;
-
-	ret_value = dup2(stdfd, 1);
-	if (ret_value == ERROR)
-		return (ERROR);
-	return(SUCCESS);
 }
 
 /*		GARBAGE COLLECTOR		*/

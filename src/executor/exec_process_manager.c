@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/09 14:52:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 14:58:24 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	exec_process_manager(void)
 			return (ERROR);
 		current_command->process_id = fork_pid;
 	}
-	if (restore_standard_input(g_glo.standard_input) != SUCCESS)
-		return (ERROR);
 	pipeline_status = wait_for_current_pipeline();
 	return (pipeline_status);
 }
@@ -73,27 +71,25 @@ static pid_t	manage_current_command_exec(t_exec_node *current_command)
 static int	fork_and_exec(t_exec_node *current_command, \
 							char **argv, char **envp, int pipefd[2])
 {
-	int		ret_value;
+	int		io_env_input;
+	int		io_env_output;
 	char	*command_path;
 	pid_t	forked_pid;
 
+	io_env_input = current_command->io_env.input;
+	io_env_output = current_command->io_env.output;
 	command_path = current_command->command_path;
 	if (is_command_a_path(command_path) == 0)
 		current_command->command_path = pathfinder_process(command_path);
 	forked_pid = fork();
 	if (forked_pid == 0)
 	{
-		if (pipefd[1] != NOT_SET)
-			ret_value = redirect_process_output(pipefd);
-		else
-			ret_value = restore_standard_output(g_glo.standard_output);
-		if (ret_value == SUCCESS)
+		if (manage_output_piping(pipefd, io_env_output) == SUCCESS)
 			execve(current_command->command_path, argv, envp);
 		exit(1);	
 	}
-	if (pipefd[0] != NOT_SET)
-		if (redirect_process_input(pipefd) != SUCCESS)
-			return (ERROR);
+	if (manage_input_piping(pipefd, io_env_input) != SUCCESS)
+		return (ERROR);
 	return (forked_pid);
 }
 
