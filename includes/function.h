@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/08 21:23:16 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:38:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 # include "./define.h"
 
 /* INIT */
-void			token_state_init(t_token_state *state);
+void		token_state_init(t_token_state *state);
 
 /*		GLOBAL STRUCTURE		*/
 int			init_global(char **envp);
 
 /*		NODE & UTILS			*/
 //	Env Node
-int				fill_env_node(char *var, t_env_node *node);
+int			fill_env_node(char *var, t_env_node *node);
 // Create exec node
-t_node *create_exec_node(char *word);
-t_node			*create_env_node(char *var);
+t_node 		*create_exec_node(char *word);
+t_node		*create_env_node(char *var);
 //	Create Node
 t_node		*create_env_node(char *var);
 t_node		*create_lexer_node(char *word);
@@ -55,52 +55,83 @@ int			is_quoted(char *string, int nb_of_quote);
 //	Envar expansion
 t_env_node	*get_envar(char *envar_name);
 
-/*		FILE & UTILS			*/
+
+/*			REDIR MANAGEMENT			*/
+//	Main function
+
+int			io_environment_manager(t_exec_node *current_command);
+
+//	Open functions
+
 int			open_file_to_read(char *file_path);
 int			open_file_to_trunc(char *file_path);
 int			open_file_to_append(char *file_path);
+
+//	HEREDOC
+//	Main function
+
+int			manage_heredoc(t_redirection *heredoc_node);
+
+//	Execution
+
+int			exec_every_heredoc_of_pipeline(t_exec_node *current_node);
+
+//	Misc
+
+int			process_limit_string(char **limit_string, int *quote_context);
 void		write_to_file(int file_fd, char *string_to_write);
 
-/*		IO ENV & UTILS			*/
-//	IO Env manager
-int			io_environment_manager(t_exec_node *current_command);
-//	Heredoc manager 
-int			manage_heredoc(t_redirection *heredoc_node);
-int			exec_every_heredoc_of_pipeline(t_exec_node *current_node);
-//	Limit string
-int			process_limit_string(char **limit_string, int *quote_context);
 
-/*		PATHFINDER				*/
+/*			EXEC PROCESS 				*/
+//	Main function
+
+int			exec_process_manager(void);
+
+//	PATHFINDER
+//	Main function
+
 char		*pathfinder_process(char *command);
+
+//	Conditional
+
 int			is_command_a_path(char *command);
 
-/*		EXEC & PIPING 			*/
-//	Exec process
-int			exec_process_manager(void);
-//	Pipe
-int			manage_input_piping(int pipefd[], int io_env_input);
-int			manage_output_piping(int pipefd[], int io_env_output);
-int			redirect_fd(int fd, int stdfd);
-//	Cleaning
-int			reset_standard_io(void);
-//		INLINE
-static inline int	redirect_process_input(int pipefd[], int input_fd)
-{
-	close(pipefd[1]);
-	if (redirect_fd(input_fd, 0) != SUCCESS)
-		return (ERROR);
-	close(pipefd[0]);
-	return (SUCCESS);
-}	
 
-static inline int	redirect_process_output(int pipefd[], int output_fd)
-{
-	close(pipefd[0]);
-	if (redirect_fd(output_fd, 1) != SUCCESS)
-		return (ERROR);
-	close(pipefd[1]);
-	return (SUCCESS);	
-}
+/*			IO MANAGEMENT				*/
+//	Create pipe
+
+int			create_pipe(t_exec_node *current_node);
+
+//	Close pipe
+
+void		close_pipe(void);
+void		close_pipe_input(void);
+void		close_pipe_output(void);
+
+//	Manage redirection
+
+void		manage_child_output_redirection(void);
+void		manage_parent_input_redirection(void);
+
+//	Manage unused fd
+
+void		close_input_in_child(void);
+void		close_output_in_parent(void);
+
+//	Redirect std_IO
+
+void		redirect_process_input(void);
+void		redirect_process_output(void);
+
+//	Restore std_IO
+
+int			restore_standard_input(void);
+int			restore_standard_output(void);
+
+//	Misc
+
+int			redirect_fd(int fd, int stdfd);
+
 
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage

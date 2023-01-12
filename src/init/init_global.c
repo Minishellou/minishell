@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:01:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 14:57:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 08:58:54 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	token_state_init(t_token_state *state)
 
 int	init_global(char **envp)
 {
+	g_glo.pipe_buff[0] = NOT_SET;
+	g_glo.pipe_buff[1] = NOT_SET;
+	g_glo.current_in_file = NOT_SET;
+	g_glo.current_out_file = NOT_SET;
 	g_glo.standard_input = dup(0);
 	g_glo.standard_output = dup(1);
 	if (g_glo.standard_input < 0 || g_glo.standard_output < 0)

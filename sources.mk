@@ -3,7 +3,7 @@
 ## SRC ##
 
 SOURCES		+=                                		\
-		src/minishell.c                          	\
+		src/minishell.c                          	
 
 
 ## SRC/LIBFT ##
@@ -44,21 +44,21 @@ SOURCES		+=                                		\
 		src/libft/ft_strrchr.c                   	\
 		src/libft/ft_striteri.c                  	\
 		src/libft/ft_strdup.c                    	\
-		src/libft/ft_strlcpy.c                   	\
+		src/libft/ft_strlcpy.c                   	
 
 
 
 ## SRC/INIT ##
 
 SOURCES		+=                                		\
-		src/init/init_global.c                   	\
+		src/init/init_global.c                   	
 
 
 ## SRC/PARSING ##
 
 SOURCES		+=                                		\
 		src/parsing/token_parse.c                	\
-		src/parsing/state_utils.c                	\
+		src/parsing/state_utils.c                	
 
 
 ## SRC/COMPOSER ##
@@ -66,12 +66,12 @@ SOURCES		+=                                		\
 SOURCES		+=                                		\
 		src/composer/composer.c                  	\
 		src/composer/composer_utils.c            	\
-		src/composer/processes_loop.c 				\
+		src/composer/processes_loop.c 				
 
 ## SRC/GARBAGE_CTR ##
 
 SOURCES		+=                                		\
-		src/garbage_ctr/garbage.c                	\
+		src/garbage_ctr/garbage.c                	
 
 
 ## SRC/NODE_MANAGER ##
@@ -91,16 +91,18 @@ SOURCES		+=                                		\
 		src/lexer/char_manipulation.c            	\
 		src/lexer/redir_utils.c                  	\
 		src/lexer/redir_handler.c                	\
-		src/lexer/check_char.c                   	\
+		src/lexer/check_char.c                   	
 
 ## SRC/EXECUTOR ##
 
 SOURCES		+=								\
 		src/executor/exec_process_manager.c		\
 		src/executor/file_manager.c			\
-		src/executor/io_and_piping_manager.c		\
+		src/executor/fork_piping.c		\
 		src/executor/io_env_manager.c			\
-		src/executor/pathfinder.c
+		src/executor/io_redir_manager.c		\
+		src/executor/pathfinder.c			\
+		src/executor/pipe_manager.c		
 
 
 ## SRC/ENVAR_EXPANSION ##

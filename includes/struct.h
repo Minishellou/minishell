@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 15:56:36 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 08:57:29 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 /*		GLOBAL STRUCT			*/
 typedef struct s_global
 {
+	int						pipe_buff[2];
+	int						current_in_file;
+	int						current_out_file;
 	int						standard_input;
 	int						standard_output;
 	struct s_env_node		*env;

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 17:19:07 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/10 14:26:42 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ int	main(int ac, char **av, char **envp)
 			free(str);
 			break ; 
 		}
-		if((process_lexer_output_chain(str)) != SUCCESS)
-			printf("error\n");
-		if (exec_process_manager() != SUCCESS)
-			printf("error\n");
+		process_lexer_output_chain(str);
+		exec_process_manager();
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
 		free(str);

@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 15:16:40 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 16:03:07 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	process_lexer_output_chain(char *input)
 	g_glo.execution_chain = composer();
 	if (!g_glo.execution_chain)
 		return (ERROR);
-	printf_execute_chain(g_glo.execution_chain);
+	//printf_execute_chain(g_glo.execution_chain);
 	return (SUCCESS);
 }
 

@@ -6,16 +6,15 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/09 14:58:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:35:43 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdio.h>
 
 static int	wait_for_current_pipeline(void);
 static int	fork_and_exec(t_exec_node *current_command, \
-							char **argv, char **envp, int pipefd[2]);
+							char **argv, char **envp);
 static char	**make_argument_array(t_exec_node *current_command);
 static pid_t	manage_current_command_exec(t_exec_node *current_command);
 
@@ -28,68 +27,63 @@ int	exec_process_manager(void)
 
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
 		return (ERROR);
-	current_command = (t_exec_node *)create_exec_node(NULL);
-	current_command->next = g_glo.execution_chain;
-	while (current_command->next != NULL)
+	current_command = g_glo.execution_chain;
+	while (current_command != NULL)
 	{
-		current_command = current_command->next;
-		if (io_environment_manager(current_command) == ERROR)
-			continue ;
-		if (current_command->command_path == NULL)
-			continue ;
 		fork_pid = manage_current_command_exec(current_command);
 		if (fork_pid == ERROR)
 			return (ERROR);
-		current_command->process_id = fork_pid;
+		if (fork_pid != SUCCESS)
+			current_command->process_id = fork_pid;
+		current_command = current_command->next;
 	}
+	restore_standard_input();
+	restore_standard_output();
 	pipeline_status = wait_for_current_pipeline();
 	return (pipeline_status);
 }
 
 static pid_t	manage_current_command_exec(t_exec_node *current_command)
 {
-	int			fork_pid;
+	int			ret_status;
 	char		**argv;
 	char		**envp;
 	t_node		*env_chain;
-	static int	pipefd[2];
 
-	pipefd[0] = NOT_SET;
-	pipefd[1] = NOT_SET;
+	ret_status = io_environment_manager(current_command);
+	manage_parent_input_redirection();
+	if (create_pipe(current_command) != SUCCESS)
+		return (perror(ft_strjoin(current_command->command_path, ": piping")), ERROR);
+	if (ret_status == ERROR)
+		return (close_pipe_output(), SUCCESS);
+	if (current_command->command_path == NULL)
+		return (SUCCESS);
 	env_chain = (t_node *)g_glo.env;
 	argv = make_argument_array(current_command);
 	envp = make_array_from_chain(env_chain, get_env_node_value);
 	if (!argv || !envp)
 		return (ERROR);
-	if (current_command->next != NULL)
-		if (pipe(pipefd) != SUCCESS)
-			return (ERROR);
-	fork_pid = fork_and_exec(current_command, argv, envp, pipefd);
-	return (fork_pid);
+	return(fork_and_exec(current_command, argv, envp));
 }
 
 static int	fork_and_exec(t_exec_node *current_command, \
-							char **argv, char **envp, int pipefd[2])
+							char **argv, char **envp)
 {
-	int		io_env_input;
-	int		io_env_output;
-	char	*command_path;
-	pid_t	forked_pid;
+	char		*command_path;
+	pid_t		forked_pid;
 
-	io_env_input = current_command->io_env.input;
-	io_env_output = current_command->io_env.output;
 	command_path = current_command->command_path;
 	if (is_command_a_path(command_path) == 0)
 		current_command->command_path = pathfinder_process(command_path);
 	forked_pid = fork();
 	if (forked_pid == 0)
 	{
-		if (manage_output_piping(pipefd, io_env_output) == SUCCESS)
-			execve(current_command->command_path, argv, envp);
-		exit(1);	
+		manage_child_output_redirection();
+		close_input_in_child();
+		execve(current_command->command_path, argv, envp);
+		exit(1);
 	}
-	if (manage_input_piping(pipefd, io_env_input) != SUCCESS)
-		return (ERROR);
+	close_output_in_parent();
 	return (forked_pid);
 }
 
