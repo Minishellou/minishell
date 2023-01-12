@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/09 19:06:59 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:53:12 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_lexer_node *add_env_list(char *word, t_lexer_node *node)
 	return (tmp);
 }
 
-t_lexer_node *lexer_env(char *env_node)
+t_lexer_node *lexer_envar(char *env_node)
 {
 	t_lexer_node *node;
 	int 	i;

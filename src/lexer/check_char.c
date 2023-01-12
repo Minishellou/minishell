@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   check_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:26:31 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 16:00:03 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:50:32 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	empty_char(const char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str != ' ' && *str != '\t' && *str != '\n' && *str != '\r')
+			return (1);
+		str++;
+	}
+	return (0);
+}
 
 int	is_white_space(char c)
 {

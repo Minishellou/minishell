@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 17:19:07 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:08:26 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	main(int ac, char **av, char **envp)
 			break ; 
 		}
 		if((process_lexer_output_chain(str)) != SUCCESS)
+			printf("error\n");
+		if (!(g_glo.execution_chain = composer()))
 			printf("error\n");
 		if (exec_process_manager() != SUCCESS)
 			printf("error\n");

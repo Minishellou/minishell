@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/09 19:52:23 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:55:18 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_env_node	*get_envar(char *envar_name)
 	return (current_node);
 }
 
-char *node_expanded(char *word)
+char *expand_envar_in_string(char *word)
 {
 	t_lexer_node *env_list;
 	t_lexer_node *tmp;
@@ -43,7 +43,7 @@ char *node_expanded(char *word)
 
 	if (!word)
 		return (NULL);
-	env_list = lexer_env(word);
+	env_list = lexer_envar(word);
 	tmp = env_list;
 	if (!env_list)
 		return (NULL);
@@ -66,19 +66,22 @@ char *node_expanded(char *word)
 	}
 	return(concat_chain_to_string(env_list));
 }
-/*
+
 t_lexer_node *envar_expansion(void)
 {
 	t_lexer_node *tmp;
 
+	if (!g_glo.lexer_output_chain)
+		return (NULL);
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
 		if (ft_strchr(tmp->word, '$'))
-			tmp->word = new_word_expanded(tmp->word);
+			tmp->word = expand_envar_in_string(tmp->word);
 		tmp = tmp->next;
 	}
-}*/
+	return(g_glo.lexer_output_chain);
+}
 // static t_lexer_node	*find_envar_node(t_lexer_node *first_node)
 // {
 // 	t_lexer_node	*current_node;

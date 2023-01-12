@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/09 19:46:58 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:56:45 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,13 @@ void printf_execute_chain(t_exec_node *node);
 t_exec_node *composer(void);
 t_exec_node *composer_process(t_lexer_node **lexer_output_chain);
 char	*concat_chain_to_string(t_lexer_node *first_node);
-char *node_expanded(char *word);
-
-t_lexer_node *lexer_env(char *env_node);
+char *expand_envar_in_string(char *word);
+int	positive(char **str);
+int unquoted_lexer_output_chain(void);
+int quote_positive(char **str, char c);
+int reset_single_quote_content_to_pst(void);
+int reset_double_quote_content_to_pst(void);
+t_lexer_node *envar_expansion(void);
+t_lexer_node *lexer_envar(char *env_node);
 void test(char *str);
 #endif
