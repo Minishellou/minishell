@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/12 11:38:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:16:56 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int			is_quoted(char *string, int nb_of_quote);
 
 /*		ENVAR & NODE UTILS		*/
 //	Envar expansion
+int	has_envar(char *string);
+int	fill_env_node(char *var, t_env_node *node);
 t_env_node	*get_envar(char *envar_name);
 
 
@@ -132,7 +134,6 @@ int			restore_standard_output(void);
 
 int			redirect_fd(int fd, int stdfd);
 
-
 /*		GARBAGE COLLECTOR		*/
 //	Collect garbage
 void		*ft_malloc(int len);
@@ -191,4 +192,16 @@ t_redirection *create_parse_redirection(t_lexer_node *output_chain);
 void printf_execute_chain(t_exec_node *node);
 t_exec_node *composer(void);
 t_exec_node *composer_process(t_lexer_node **lexer_output_chain);
+char	*concat_chain_to_string(t_lexer_node *first_node);
+char *expand_envar_in_string(char *word);
+int	positive(char **str);
+int unquoted_lexer_output_chain(void);
+int quote_positive(char **str, char c);
+int reset_single_quote_content_to_pst(void);
+int reset_double_quote_content_to_pst(void);
+int check_and_add_var(char *env_node, t_lexer_node **node, int *i);
+t_lexer_node *add_env_list(char *word, t_lexer_node *node);
+t_lexer_node *envar_expansion(void);
+t_lexer_node *lexer_envar(char *env_node);
+void test(char *str);
 #endif

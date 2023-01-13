@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_node_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:10:31 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 14:58:19 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/09 14:26:13 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 int	fill_env_node(char *var, t_env_node *node)
 {
 	int		i;
-	char	*var_cpy;
 
 	i = 0;
-	var_cpy = ft_strdup(var);
-	if (!var_cpy)
-		return (ERROR);
 	while (var[i] != '=')
 		i++;
 	var[i] = '\0';

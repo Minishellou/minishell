@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:22:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/31 20:39:55 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 19:30:35 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	catch_redir_error(void)
 	while (tmp)
 	{
 		if (illegal_token(tmp) != SUCCESS)
-			return (ERROR);
+			return (printf("syntax error : invalid command\n"), ERROR);
 		tmp = tmp->next;
 	}
 	return (SUCCESS);

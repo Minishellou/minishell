@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/09 16:03:07 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:17:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ int	process_lexer_output_chain(char *input)
 	tokenizer();
 	if (catch_redir_error() != SUCCESS)
 		return (ERROR);
-	g_glo.execution_chain = composer();
-	if (!g_glo.execution_chain)
+	if(reset_double_quote_content_to_pst() != SUCCESS)
+		return(ERROR);
+	if (!envar_expansion())
 		return (ERROR);
-	//printf_execute_chain(g_glo.execution_chain);
+	if (reset_single_quote_content_to_pst() != SUCCESS)
+		return(ERROR);
+	if (unquoted_lexer_output_chain() != SUCCESS)
+		return (ERROR);
 	return (SUCCESS);
 }
 

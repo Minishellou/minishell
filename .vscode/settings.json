@@ -9,7 +9,8 @@
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {
 		"struct.h": "c",
+		"unit_tests.h": "c",
 		"minishell.h": "c",
-		"libft.h": "c"
+		"typeinfo": "c"
 	}
 }

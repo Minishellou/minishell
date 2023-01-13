@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:50:00 by gkitoko           #+#    #+#             */
-/*   Updated: 2021/12/08 11:30:08 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 17:55:54 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -21,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	l = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	i = 0;
 	a = 0;
-	n_str = (char *)malloc(sizeof(char ) * (l + 1));
+	n_str = ft_malloc(sizeof(char ) * (l + 1));
 	if (!n_str)
 		return (NULL);
 	while (i < l)

@@ -108,7 +108,10 @@ SOURCES		+=								\
 ## SRC/ENVAR_EXPANSION ##
 
 SOURCES		+=								\
-		src/envar_expansion/envar_expansion.c
+		src/envar_expansion/envar_expansion.c \
+		src/envar_expansion/envar_to_lexer.c \
+		src/envar_expansion/envar_utils.c 	\
+		src/envar_expansion/envar_to_lexer_extend.c \
 
 ## SRC/HEREDOC ##
 
