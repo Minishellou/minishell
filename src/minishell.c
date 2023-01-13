@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/12 14:08:26 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 19:28:53 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	while (1)
 	{
-		str = readline("minishell~ ");
+		str = readline("minishell~");
 		add_history(str);
 		if(ft_exit(str) != SUCCESS)
 		{
@@ -83,12 +83,12 @@ int	main(int ac, char **av, char **envp)
 			free(str);
 			break ; 
 		}
-		if((process_lexer_output_chain(str)) != SUCCESS)
-			printf("error\n");
+		if((process_lexer_output_chain(str)) == ERROR)
+			printf("syntax error : invalid command\n");
 		if (!(g_glo.execution_chain = composer()))
-			printf("error\n");
+			printf("syntax error : invalid command\n");
 		if (exec_process_manager() != SUCCESS)
-			printf("error\n");
+			printf(" ");
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
 		free(str);

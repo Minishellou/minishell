@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/12 13:53:12 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 18:43:43 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_lexer_node *add_node_unit(char *str)
 	return (add_regular_word(str));		
 }
 
-static
+
 t_lexer_node *add_env_list(char *word, t_lexer_node *node)
 {
 	t_lexer_node *tmp;
@@ -111,23 +111,8 @@ t_lexer_node *lexer_envar(char *env_node)
 		return (NULL);
 	while (env_node[i])
 	{
-		if (env_node[i] == '$')
-		{
-			node = add_env_list(&env_node[i], node);
-			if (!node)
-				return (NULL);
-			i++;
-			while (env_node[i] && ft_isalnum(env_node[i]))
-				i++;
-		}
-		else
-		{
-			node = add_env_list(&env_node[i], node);
-			if (!node)
-				return (NULL);
-			while (env_node[i] && env_node[i] != '$')
-				i++;
-		}
+		if((check_and_add_var(env_node, &node, &i)) != SUCCESS)
+			return (NULL);
 	}
 	return (node);
 }

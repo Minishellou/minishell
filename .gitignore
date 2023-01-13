@@ -51,6 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .vscode/
+readline.supp
 valgrind_readline_leaks_ignore.txt
 *.txt
 *.json

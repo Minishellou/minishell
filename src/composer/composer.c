@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:46:39 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 12:12:39 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 19:08:51 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,30 +75,29 @@ t_exec_node *composer(void)
 	}
 	return (execute_chain);
 }
-
-void printf_execute_chain(t_exec_node *node)
-{
-	t_exec_node *tmp;
-	if (!node)
-		return ;
-	tmp = node;
-	while (tmp)
-	{	
-		if (tmp->command_path)
-		{
-			printf("\n____COMMAND_PATH____\n");
-			printf("Command Path -> %s\n", tmp->command_path);	
-		}
-		if (tmp->arg_chain)
-		{
-			printf("\n____ARG_CHAIN____\n");
-			print_word_list(tmp->arg_chain);
-		}
-		if (tmp->redir_chain)
-		{
-			printf("\n____REDICTION____\n");
-			printf_redir_chain(tmp->redir_chain);
-		}
-		tmp = tmp->next;
-	}
-}
+// void printf_execute_chain(t_exec_node *node)
+// {
+// 	t_exec_node *tmp;
+// 	if (!node)
+// 		return ;
+// 	tmp = node;
+// 	while (tmp)
+// 	{	
+// 		if (tmp->command_path)
+// 		{
+// 			printf("\n____COMMAND_PATH____\n");
+// 			printf("Command Path -> %s\n", tmp->command_path);	
+// 		}
+// 		if (tmp->arg_chain)
+// 		{
+// 			printf("\n____ARG_CHAIN____\n");
+// 			print_word_list(tmp->arg_chain);
+// 		}
+// 		if (tmp->redir_chain)
+// 		{
+// 			printf("\n____REDICTION____\n");
+// 			printf_redir_chain(tmp->redir_chain);
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// }

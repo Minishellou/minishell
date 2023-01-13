@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 13:55:18 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 18:54:28 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,3 @@ t_lexer_node *envar_expansion(void)
 	}
 	return(g_glo.lexer_output_chain);
 }
-// static t_lexer_node	*find_envar_node(t_lexer_node *first_node)
-// {
-// 	t_lexer_node	*current_node;
-
-// 	current_node = first_node;
-// 	while (!has_envar(current_node->word))
-// 		current_node = current_node->next;
-// 	return (current_node);
-// }
-
-
-// int	expand_and_add_to_chain(t_lexer_node **envar_node, t_env_node *envar)
-// {
-// 	char			**splited_envar;
-// 	t_lexer_node	*subchain;
-
-// 	subchain = NULL;
-// 	if (envar)
-// 		splited_envar = ft_split(envar->value, ' ');
-// 	if (envar && splited_envar)
-// 		subchain = (t_lexer_node *)make_chain_from_array(splited_envar, create_lexer_node);
-// 	if (!envar)
-// 		subchain = (t_lexer_node *)create_lexer_node(NULL);
-// 	if (!subchain)
-// 		return (ERROR);
-// 	include_subchain_at((t_node **)envar_node, (t_node *)subchain);
-// 	return (SUCCESS);	
-// }

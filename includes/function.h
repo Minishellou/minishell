@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/12 13:56:45 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/13 18:43:52 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static inline int	redirect_process_input(int pipefd[])
 		return (ERROR);
 	close(input_fd);
 	return (SUCCESS);
-}	
+}
 
 static inline int	redirect_process_output(int pipefd[])
 {
@@ -193,6 +193,8 @@ int unquoted_lexer_output_chain(void);
 int quote_positive(char **str, char c);
 int reset_single_quote_content_to_pst(void);
 int reset_double_quote_content_to_pst(void);
+int check_and_add_var(char *env_node, t_lexer_node **node, int *i);
+t_lexer_node *add_env_list(char *word, t_lexer_node *node);
 t_lexer_node *envar_expansion(void);
 t_lexer_node *lexer_envar(char *env_node);
 void test(char *str);
