@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 11:57:25 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 11:40:33 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/13 18:00:57 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ int	io_environment_manager(t_exec_node *current_command)
 	handle_redirection_chain(current_redir_chain);
 	if (*in_file != ERROR && *out_file != ERROR)
 		return (SUCCESS);
-	if (*in_file != ERROR)
+	if (*in_file != ERROR && *in_file != NOT_SET)
 		close(*in_file);
-	if (*out_file != ERROR)
+	if (*out_file != ERROR && *out_file != NOT_SET)
 		close(*out_file);
 	*in_file = NOT_SET;
 	*out_file = NOT_SET;
-	ft_putstr_fd(current_command->command_path, 2);
-	return (perror(": in redirection argument"), ERROR);
+	return (ERROR);
 }
 
 static void	handle_redirection_chain(t_redirection *redir_chain)
@@ -59,7 +58,10 @@ static void	handle_redirection_chain(t_redirection *redir_chain)
 		if (current_redirection_node->type == APPEND)
 			*out_file = open_append_redir(current_redirection_node->argument);
 		if (*in_file == ERROR || *out_file == ERROR)
+		{
+			perror(current_redirection_node->argument);
 			return ;
+		}
 		current_redirection_node = current_redirection_node->next;
 	}
 	return ;
