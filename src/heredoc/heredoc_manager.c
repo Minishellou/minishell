@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 15:48:59 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/13 19:32:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 	while (1)
 	{
 		current_string = readline("heredoc> ");
+		if (current_string == NULL)
+		{
+			ft_putstr_fd("\nwarning: receiving END-OF-FILE waiting for ", 2);
+			ft_putstr_fd(limit_string, 2);
+			write(2, "\n", 1);
+			break ;
+		}
 		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
 			break ;
 //		if (quote_context == UNQUOTED)
