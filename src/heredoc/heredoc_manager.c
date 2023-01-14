@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/13 19:32:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:36:12 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 		}
 		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
 			break ;
-//		if (quote_context == UNQUOTED)
-//			process_heredoc_string(current_string);
-		write_to_file(heredoc_fd, current_string);
+		if (quote_context == UNQUOTED)
+			current_string = expand_envar_in_string(current_string);
+		if (current_string)
+			write_to_file(heredoc_fd, current_string);
 		write_to_file(heredoc_fd, "\n");
 	}
 	return (SUCCESS);
