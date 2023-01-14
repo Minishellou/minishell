@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envar_to_lexer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 19:16:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 19:29:17 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static t_lexer_node	*add_env_word(char *word)
 	i = 1;
 	if (!word)
 		return (NULL);
-	while (word[len] && ft_isalnum(word[len]))
+	while (word[len] && (ft_isalnum(word[len]) || word[len] == '?'))
 		len++;
 	buffer = ft_malloc(len + 1);
 	if (!buffer)
 		return (NULL);
 	buffer[0] = '$';
-	while (word[i] && ft_isalnum(word[i]))
+	while (word[i] && (ft_isalnum(word[i]) || word[i] == '?'))
 	{
 		buffer[i] = word[i];
 		i++;
