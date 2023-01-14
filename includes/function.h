@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 14:06:50 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:47:35 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ int				restore_standard_output(void);
 //	Misc
 int				redirect_fd(int fd, int stdfd);
 /*		GARBAGE COLLECTOR		*/
+
+t_garbage_node	*new_grb_node(void *addr);
+void			lst_addback(t_garbage_node *new_node);
+
 //	Collect garbage
 void			*ft_malloc(int len);
 //	Throw garbage

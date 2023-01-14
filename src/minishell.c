@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 11:05:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 16:47:07 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_global	g_glo;
 
+/*
 void	print_word_list(t_lexer_node *node)
 {
 	t_lexer_node  *tmp;
@@ -43,7 +44,7 @@ void printf_redir_chain(t_redirection *node)
 	}
 }
 
-/*
+
 static
 void	print_env_list(t_env_node *node)
 {
@@ -53,24 +54,36 @@ void	print_env_list(t_env_node *node)
 	print_env_list(node->next);
 }
 */
-static
-int ft_exit(char *str)
+
+static void	exit_minishell(int exit_status)
 {
-  	if (!ft_strncmp(str, "exit", 4))
-	{
-		ft_free();
-		return (ERROR);
-	}
-	return (SUCCESS);
+	write(2, "\n", 1);
+	ft_free();
+	close(g_glo.standard_input);
+	close(g_glo.standard_output);
+	exit(exit_status);
 }
 
-void	main_process(char *str)
+static void	process_and_execute_command(char *command)
 {
-	if (process_lexer_output_chain(str) != SUCCESS)
+	if (process_lexer_output_chain(command) != SUCCESS)
 		return ;
 	g_glo.execution_chain = composer();
 	if (exec_process_manager() != SUCCESS)
 		return ;
+}
+
+static char	*read_command_line(char *prompt)
+{
+	char			*str;
+	t_garbage_node	*new_node;
+
+	str = readline(prompt);
+	if (str == NULL)
+		exit_minishell(EXIT_SUCCESS);
+	new_node = new_grb_node(str);
+	lst_addback(new_node);
+	return (str);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -78,26 +91,21 @@ int	main(int ac, char **av, char **envp)
 	char	*str;
 
 	(void)av;
+	if (isatty(0) == 0)
+		return (EXIT_FAILURE);
+	if (!*envp)
+		return (EXIT_SUCCESS);
 	if (init_global(envp) == ERROR)
-		return (ERROR);
+		return (EXIT_FAILURE);
 	if (ac > 1)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	while (1)
 	{
-		str = readline("minishell~ ");
+		str = read_command_line("minishell~ ");
 		add_history(str);
-		if(ft_exit(str) != SUCCESS)
-		{
-			ft_free();
-			free(str);
-			break ; 
-		}
-		main_process(str);
+		process_and_execute_command(str);
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
-		free(str);
-		//print_word_list(g_glo.lexer_output_chain);
 	}
-	ft_free();
 	return (0);
 }
