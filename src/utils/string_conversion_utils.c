@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 09:18:45 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 14:04:38 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:05:45 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ char	*concat_chain_to_string(t_lexer_node *first_node)
 	while (first_node && first_node->word == NULL)
 		first_node = first_node->next;
 	if (!first_node)
-	 	return (NULL);
+		return (NULL);
 	concatened_string = first_node->word;
 	current_node = first_node->next;
 	while (current_node != NULL)
 	{
 		if (current_node->word != NULL)
-			concatened_string = ft_strjoin(concatened_string, current_node->word);
+		{
+			concatened_string = ft_strjoin(concatened_string, \
+											current_node->word);
+		}
 		current_node = current_node->next;
 	}
 	return (concatened_string);

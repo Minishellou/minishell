@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/13 19:13:19 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:22:10 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	wait_for_current_pipeline(void);
-static int	fork_and_exec(t_exec_node *current_command, \
-							char **argv, char **envp);
-static char	**make_argument_array(t_exec_node *current_command);
+static int		wait_for_current_pipeline(void);
+static int		fork_and_exec(t_exec_node *current_command, \
+							char **argv, \
+							char **envp);
+static char		**make_argument_array(t_exec_node *current_command);
 static pid_t	manage_current_command_exec(t_exec_node *current_command);
 
 /*		EXEC MANAGER		*/
@@ -45,15 +46,18 @@ int	exec_process_manager(void)
 
 static pid_t	manage_current_command_exec(t_exec_node *current_command)
 {
-	int			ret_status;
-	char		**argv;
-	char		**envp;
-	t_node		*env_chain;
+	int		ret_status;
+	char	**argv;
+	char	**envp;
+	t_node	*env_chain;
 
 	ret_status = io_environment_manager(current_command);
 	manage_parent_input_redirection();
 	if (create_pipe(current_command) != SUCCESS)
-		return (perror(ft_strjoin(current_command->command_path, ": piping")), ERROR);
+	{
+		return (perror(ft_strjoin(current_command->command_path, ": piping")),
+			ERROR);
+	}
 	if (ret_status == ERROR)
 		return (close_pipe_output(), SUCCESS);
 	if (current_command->command_path == NULL)
@@ -63,14 +67,15 @@ static pid_t	manage_current_command_exec(t_exec_node *current_command)
 	envp = make_array_from_chain(env_chain, get_env_node_value);
 	if (!argv || !envp)
 		return (ERROR);
-	return(fork_and_exec(current_command, argv, envp));
+	return (fork_and_exec(current_command, argv, envp));
 }
 
-static int	fork_and_exec(t_exec_node *current_command, \
-							char **argv, char **envp)
+static int	fork_and_exec(t_exec_node *current_command,
+							char **argv,
+							char **envp)
 {
-	char		*command_path;
-	pid_t		forked_pid;
+	char	*command_path;
+	pid_t	forked_pid;
 
 	command_path = current_command->command_path;
 	forked_pid = fork();

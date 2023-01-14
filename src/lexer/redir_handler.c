@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redir_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:14:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/26 14:01:39 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 14:01:03 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static int	add_redir_to_chain(t_lexer_node **chain, char *current_word)
-{	
+{
 	t_lexer_node	*new_redirection;
 
 	new_redirection = create_redir_node(current_word);
@@ -69,16 +69,16 @@ int	parse_redir_in_command_expression(t_lexer_node **command_expression)
 
 	current_node = *command_expression;
 	while (current_node)
-	{	
-		if ((ft_strchr(current_node->word, LESS) \
-			|| ft_strchr(current_node->word, GREAT)) \
+	{
+		if ((ft_strchr(current_node->word, LESS)
+				|| ft_strchr(current_node->word, GREAT))
 			&& ft_strlen(current_node->word) != 1)
 		{
 			redir_subchain = isolate_redir_in_subchain(current_node);
 			if (!redir_subchain)
 				return (ERROR);
-			to_the_next_word = \
-				replace_and_track_next_node(current_node, redir_subchain);
+			to_the_next_word = replace_and_track_next_node(current_node, \
+															redir_subchain);
 			while (to_the_next_word--)
 				current_node = current_node->next;
 		}

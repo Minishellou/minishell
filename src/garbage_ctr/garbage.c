@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:31:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/20 15:55:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:57:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static
-t_garbage_node	*new_grb_node(void *addr)
+static t_garbage_node	*new_grb_node(void *addr)
 {
 	t_garbage_node	*new_node;
 
@@ -25,8 +24,7 @@ t_garbage_node	*new_grb_node(void *addr)
 	return (new_node);
 }
 
-static
-t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
+static t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
 {
 	while (genisis_block->next)
 	{
@@ -35,8 +33,7 @@ t_garbage_node	*ft_lstlast(t_garbage_node *genisis_block)
 	return (genisis_block);
 }
 
-static
-void	lst_addback(t_garbage_node *new_node)
+static void	lst_addback(t_garbage_node *new_node)
 {
 	if (!new_node)
 		return ;

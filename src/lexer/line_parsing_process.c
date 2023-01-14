@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_parsing_process.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:46:38 by gkitoko           #+#    #+#             */
-/*   Updated: 2022/12/25 19:10:42 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:48:36 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static t_lexer_node	*parse_simple_command(t_lexer_node *cmd)
 	split = ft_lexer_split(cmd->word);
 	if (!split)
 		return (NULL);
-	command_expression = \
-		(t_lexer_node *)make_chain_from_array(split, create_lexer_node);
+	command_expression = (t_lexer_node *)make_chain_from_array(split, \
+													create_lexer_node);
 	if (!command_expression)
 		return (NULL);
 	parse_redir_in_command_expression(&command_expression);

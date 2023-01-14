@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/08 16:02:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:58:36 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_node	*create_redirection(char *argument)
 	return ((t_node *)new_node);
 }
 
-t_node *create_exec_node(char *word)
+t_node	*create_exec_node(char *word)
 {
 	t_exec_node	*new_node;
 

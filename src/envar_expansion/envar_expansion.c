@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/13 18:54:28 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:45:28 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ t_env_node	*get_envar(char *envar_name)
 		if (!current_node)
 			break ;
 		if (ft_strncmp(current_node->name, envar_name + 1, envar_name_len))
-			continue;
+			continue ;
 		if (envar_name_len != ft_strlen(current_node->name))
-			continue;
+			continue ;
 		break ;
 	}
 	return (current_node);
 }
 
-char *expand_envar_in_string(char *word)
+char	*expand_envar_in_string(char *word)
 {
-	t_lexer_node *env_list;
-	t_lexer_node *tmp;
-	t_env_node *current_var;
+	t_lexer_node	*env_list;
+	t_lexer_node	*tmp;
+	t_env_node		*current_var;
 
 	if (!word)
 		return (NULL);
@@ -49,27 +49,15 @@ char *expand_envar_in_string(char *word)
 		return (NULL);
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->word, "$", ft_strlen(tmp->word)) == SUCCESS)
-		{
+		if (check_and_get_envar(&tmp, &current_var) == SUCCESS)
 			tmp = tmp->next;
-			continue ;
-		}
-		else if (ft_strchr(tmp->word, '$'))
-		{
-			current_var = get_envar(tmp->word);
-			if (current_var)
-				tmp->word = current_var->value;
-			else
-				tmp->word = NULL;
-		}
-		tmp = tmp->next;
 	}
-	return(concat_chain_to_string(env_list));
+	return (concat_chain_to_string(env_list));
 }
 
-t_lexer_node *envar_expansion(void)
+t_lexer_node	*envar_expansion(void)
 {
-	t_lexer_node *tmp;
+	t_lexer_node	*tmp;
 
 	if (!g_glo.lexer_output_chain)
 		return (NULL);
@@ -80,5 +68,5 @@ t_lexer_node *envar_expansion(void)
 			tmp->word = expand_envar_in_string(tmp->word);
 		tmp = tmp->next;
 	}
-	return(g_glo.lexer_output_chain);
+	return (g_glo.lexer_output_chain);
 }

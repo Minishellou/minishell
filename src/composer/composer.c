@@ -6,23 +6,25 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:46:39 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/13 19:08:51 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:17:38 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_exec_node *redirection_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output)
+t_exec_node	*redirection_output_context(t_exec_node *execute_chain,
+										t_lexer_node **lexer_output)
 {
 	if (!(execute_chain))
 	{
-		execute_chain = (t_exec_node*)create_exec_node(NULL);
+		execute_chain = (t_exec_node *)create_exec_node(NULL);
 		if (!(execute_chain))
 			return (NULL);
 		(execute_chain)->arg_chain = NULL;
 		(execute_chain)->redir_chain = NULL;
 	}
-	(execute_chain)->redir_chain = parse_redirection((execute_chain), (*lexer_output));
+	(execute_chain)->redir_chain = parse_redirection(execute_chain, \
+													*lexer_output);
 	if (!(execute_chain)->redir_chain)
 		return (NULL);
 	*lexer_output = (*lexer_output)->next->next;
@@ -30,45 +32,49 @@ t_exec_node *redirection_output_context(t_exec_node *execute_chain, t_lexer_node
 	return (execute_chain);
 }
 
-t_exec_node *command_output_context(t_exec_node *execute_chain, t_lexer_node **lexer_output)
+t_exec_node	*command_output_context(t_exec_node *execute_chain,
+									t_lexer_node **lexer_output)
 {
 	if (!(execute_chain))
 	{
 		execute_chain = (t_exec_node *)create_exec_node((*lexer_output)->word);
 		(execute_chain)->redir_chain = NULL;
-		(execute_chain)->arg_chain = NULL;	
+		(execute_chain)->arg_chain = NULL;
 	}
 	else
-	 	(execute_chain)->command_path = (*lexer_output)->word;
+		(execute_chain)->command_path = (*lexer_output)->word;
 	*lexer_output = (*lexer_output)->next;
 	execute_chain = command_process_loop(execute_chain, lexer_output);
 	return (execute_chain);
 }
 
-t_exec_node *composer_process(t_lexer_node **lexer_output_chain)
+t_exec_node	*composer_process(t_lexer_node **lexer_output_chain)
 {
-	t_exec_node *execute_chain;
-	
+	t_exec_node	*execute_chain;
+
 	execute_chain = NULL;
 	if (!(*lexer_output_chain))
 		return (NULL);
 	if ((*lexer_output_chain)->token != WORD)
-		execute_chain = redirection_output_context(execute_chain, lexer_output_chain);
+		execute_chain = redirection_output_context(execute_chain,
+				lexer_output_chain);
 	else
-		execute_chain = command_output_context(execute_chain, lexer_output_chain);
+		execute_chain = command_output_context(execute_chain,
+				lexer_output_chain);
 	return (execute_chain);
 }
 
-t_exec_node *composer(void)
+t_exec_node	*composer(void)
 {
-	t_lexer_node *tmp;
-	t_exec_node *execute_chain;
+	t_lexer_node	*tmp;
+	t_exec_node		*execute_chain;
 
 	execute_chain = NULL;
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if (!(execute_chain = add_process(&tmp, execute_chain)))
+		execute_chain = add_process(&tmp, execute_chain);
+		if (!execute_chain)
 			return (NULL);
 		if (tmp)
 			tmp = tmp->next;
@@ -82,11 +88,11 @@ t_exec_node *composer(void)
 // 		return ;
 // 	tmp = node;
 // 	while (tmp)
-// 	{	
+// 	{
 // 		if (tmp->command_path)
 // 		{
 // 			printf("\n____COMMAND_PATH____\n");
-// 			printf("Command Path -> %s\n", tmp->command_path);	
+// 			printf("Command Path -> %s\n", tmp->command_path);
 // 		}
 // 		if (tmp->arg_chain)
 // 		{

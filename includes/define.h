@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:14:28 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 13:57:40 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 12:59:06 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 /*		ERROR MANAGEMENT		*/
 # define PIPE '|'
-# define LESS '<' 
+# define LESS '<'
 # define GREAT '>'
 # define LESSER 4
 # define GREATER 5
 # define WORD 10
 # define SUCCESS 0
 # define ERROR -1
-# define NOT_SET -2	// fd
+# define NOT_SET -2 // fd
 # define DOUBLE_QUOTE '"'
 # define SINGLE_QUOTE '\''
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/13 19:32:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:57:45 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
 static char	*get_current_tmpfile(void)
 {
 	char		*to_test;
-	const char	*base_path = "/tmp/.heredoc";
+	const char	*base_path;
 	static int	index;
 
+	base_path = "/tmp/.heredoc";
 	to_test = ft_strjoin(base_path, ft_itoa(index++));
 	while (access(to_test, F_OK) != ERROR)
 		to_test = ft_strjoin(base_path, ft_itoa(index++));
@@ -85,11 +86,10 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 		}
 		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
 			break ;
-//		if (quote_context == UNQUOTED)
-//			process_heredoc_string(current_string);
+		//		if (quote_context == UNQUOTED)
+		//			process_heredoc_string(current_string);
 		write_to_file(heredoc_fd, current_string);
 		write_to_file(heredoc_fd, "\n");
 	}
 	return (SUCCESS);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limit_string_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:05:16 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/06 10:02:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:57:47 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	process_limit_string(char **limit_string, int *quote_context)
 
 static t_quote_context	set_quote_context(char *limit_string)
 {
-	int				is_quoted_ret;
+	int	is_quoted_ret;
 
 	is_quoted_ret = is_quoted(limit_string, 0);
 	if (is_quoted_ret == 0)

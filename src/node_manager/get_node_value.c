@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_node_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:27:27 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 15:45:36 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:58:42 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_env_node_value(t_node	*node)
+char	*get_env_node_value(t_node *node)
 {
 	char		*ret_value;
 	t_env_node	*env_node;

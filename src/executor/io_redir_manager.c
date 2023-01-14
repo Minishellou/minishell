@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_redir_manager.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:33:17 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 11:40:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:57:30 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	redirect_process_input(void)
 	if (in_file_fd != NOT_SET)
 		redirect_fd(in_file_fd, 0);
 	return ;
-}	
+}
 
 void	redirect_process_output(void)
 {

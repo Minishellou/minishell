@@ -6,19 +6,18 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/13 18:43:43 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:46:20 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static
-t_lexer_node *add_env_word(char *word)
+static t_lexer_node	*add_env_word(char *word)
 {
-	char *buffer;
-	t_lexer_node *env_word;
-	int  len;
-	int  i;
+	char			*buffer;
+	t_lexer_node	*env_word;
+	int				len;
+	int				i;
 
 	len = 1;
 	i = 1;
@@ -42,13 +41,12 @@ t_lexer_node *add_env_word(char *word)
 	return (env_word);
 }
 
-static
-t_lexer_node *add_regular_word(char *word)
+static t_lexer_node	*add_regular_word(char *word)
 {
-	char *buffer;
-	t_lexer_node *regular_word;
-	int  len;
-	int i;
+	char			*buffer;
+	t_lexer_node	*regular_word;
+	int				len;
+	int				i;
 
 	i = 0;
 	len = 0;
@@ -69,20 +67,18 @@ t_lexer_node *add_regular_word(char *word)
 	return (regular_word);
 }
 
-static
-t_lexer_node *add_node_unit(char *str)
-{	
+static t_lexer_node	*add_node_unit(char *str)
+{
 	if (!str)
 		return (NULL);
 	if (str[0] == '$')
-		return(add_env_word(str));
-	return (add_regular_word(str));		
+		return (add_env_word(str));
+	return (add_regular_word(str));
 }
 
-
-t_lexer_node *add_env_list(char *word, t_lexer_node *node)
+t_lexer_node	*add_env_list(char *word, t_lexer_node *node)
 {
-	t_lexer_node *tmp;
+	t_lexer_node	*tmp;
 
 	tmp = NULL;
 	if (!node)
@@ -100,18 +96,18 @@ t_lexer_node *add_env_list(char *word, t_lexer_node *node)
 	return (tmp);
 }
 
-t_lexer_node *lexer_envar(char *env_node)
+t_lexer_node	*lexer_envar(char *env_node)
 {
-	t_lexer_node *node;
-	int 	i;
-	
+	t_lexer_node	*node;
+	int				i;
+
 	i = 0;
 	node = NULL;
 	if (!env_node)
 		return (NULL);
 	while (env_node[i])
 	{
-		if((check_and_add_var(env_node, &node, &i)) != SUCCESS)
+		if ((check_and_add_var(env_node, &node, &i)) != SUCCESS)
 			return (NULL);
 	}
 	return (node);

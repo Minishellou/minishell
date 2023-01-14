@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:10:31 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/09 14:26:13 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 12:58:39 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	fill_env_node(char *var, t_env_node *node)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (var[i] != '=')

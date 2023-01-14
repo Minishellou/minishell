@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:42:39 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 13:59:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:08:50 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	unquote_string(char **string)
 	char	**splited_string;
 
 	cur_char = *string;
-	while (*cur_char != SINGLE_QUOTE && *cur_char != DOUBLE_QUOTE && *cur_char != '\0')
+	while (*cur_char != SINGLE_QUOTE && *cur_char != DOUBLE_QUOTE
+		&& *cur_char != '\0')
 		cur_char++;
 	if (*cur_char == '\0')
 		return (0);
@@ -29,23 +30,24 @@ int	unquote_string(char **string)
 	return (SUCCESS);
 }
 
-int unquoted_lexer_output_chain(void)
+int	unquoted_lexer_output_chain(void)
 {
-	t_lexer_node *tmp;
+	t_lexer_node	*tmp;
 
 	if (!g_glo.lexer_output_chain)
 		return (ERROR);
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if (ft_strchr(tmp->word, SINGLE_QUOTE) ||ft_strchr(tmp->word, DOUBLE_QUOTE))
+		if (ft_strchr(tmp->word, SINGLE_QUOTE) || ft_strchr(tmp->word,
+				DOUBLE_QUOTE))
 		{
 			if ((unquote_string(&tmp->word)) != SUCCESS)
 				return (ERROR);
 		}
 		tmp = tmp->next;
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
 
 int	is_quoted(char *string, int nb_of_quote)

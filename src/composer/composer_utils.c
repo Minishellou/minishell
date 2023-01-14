@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   composer_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:03 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/05 16:05:06 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 13:18:44 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_exec_node *add_process(t_lexer_node **output_chain, t_exec_node *node)
+t_exec_node	*add_process(t_lexer_node **output_chain, t_exec_node *node)
 {
-	t_exec_node *tmp;
+	t_exec_node	*tmp;
 
 	tmp = NULL;
 	if (!(*output_chain))
-		return (NULL);	
+		return (NULL);
 	if (!node)
 	{
 		node = composer_process(output_chain);
@@ -34,13 +34,13 @@ t_exec_node *add_process(t_lexer_node **output_chain, t_exec_node *node)
 	return (tmp);
 }
 
-t_lexer_node *add_argument(t_exec_node *node, char *word)
+t_lexer_node	*add_argument(t_exec_node *node, char *word)
 {
-	t_lexer_node *tmp;
+	t_lexer_node	*tmp;
 
 	tmp = NULL;
 	if (!word)
-		return (NULL);	
+		return (NULL);
 	if (!node->arg_chain)
 	{
 		node->arg_chain = (t_lexer_node *)create_lexer_node(word);
@@ -56,13 +56,13 @@ t_lexer_node *add_argument(t_exec_node *node, char *word)
 	return (tmp);
 }
 
-t_redirection *create_parse_redirection(t_lexer_node *output_chain)
+t_redirection	*create_parse_redirection(t_lexer_node *output_chain)
 {
-	t_redirection *node_redirection;
+	t_redirection	*node_redirection;
 
 	node_redirection = ft_malloc(sizeof(t_redirection));
 	if (!node_redirection)
-		return(NULL);
+		return (NULL);
 	node_redirection->next = NULL;
 	node_redirection->argument = output_chain->next->word;
 	if (output_chain->token == LESS)
@@ -73,13 +73,14 @@ t_redirection *create_parse_redirection(t_lexer_node *output_chain)
 		node_redirection->type = HEREDOC;
 	else if (output_chain->token == GREATER)
 		node_redirection->type = APPEND;
-	return 	(node_redirection);
+	return (node_redirection);
 }
 
-t_redirection *parse_redirection(t_exec_node *node, t_lexer_node *output_chain)
+t_redirection	*parse_redirection(t_exec_node *node,
+		t_lexer_node *output_chain)
 {
-	t_redirection *tmp;
-	
+	t_redirection	*tmp;
+
 	tmp = NULL;
 	if (!node || !output_chain)
 		return (NULL);

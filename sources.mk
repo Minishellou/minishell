@@ -88,7 +88,8 @@ SOURCES		+=                                		\
 		src/lexer/lexer_output_manager.c         	\
 		src/lexer/chain_checker.c                	\
 		src/lexer/line_parsing_process.c         	\
-		src/lexer/char_manipulation.c            	\
+		src/lexer/quote_manipulation.c				\
+		src/lexer/quote_restore.c           	 	\
 		src/lexer/redir_utils.c                  	\
 		src/lexer/redir_handler.c                	\
 		src/lexer/check_char.c                   	

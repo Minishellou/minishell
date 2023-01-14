@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 13:43:02 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/26 13:47:10 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:58:16 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*copy_word_until_redirection(char *str)
 	return (buffer);
 }
 
-int	replace_and_track_next_node(t_lexer_node *to_replace, \
+int	replace_and_track_next_node(t_lexer_node *to_replace,
 								t_lexer_node *subchain)
 {
 	int				i;

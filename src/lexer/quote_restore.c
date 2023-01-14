@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_manipulation.c                                :+:      :+:    :+:   */
+/*   quote_restore.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/12 13:57:04 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:00:30 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	neon(char **str)
-{
-	int		i;
-	char	start;
-
-	i = 1;
-	start = (*str)[0];
-	while ((*str)[i] && (*str)[i] != start)
-		(*str)[i++] *= -1;
-	if ((*str)[i] != start)
-		return (ERROR);
-	return (i);
-}
 
 int	positive(char **str)
 {
@@ -48,7 +34,7 @@ int	positive(char **str)
 	return (i);
 }
 
-int quote_positive(char **str, char c)
+int	quote_positive(char **str, char c)
 {
 	int		i;
 	int		return_index;
@@ -72,10 +58,9 @@ int quote_positive(char **str, char c)
 	return (SUCCESS);
 }
 
-static
-int single_quote_positive(char **str)
+static int	single_quote_positive(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!*str)
@@ -89,53 +74,30 @@ int single_quote_positive(char **str)
 	return (SUCCESS);
 }
 
-int	quote_neon(char **str)
+int	reset_single_quote_content_to_pst(void)
 {
-	int		i;
-	int		return_index;
-	char	*quoted_substring;
+	t_lexer_node	*tmp;
 
-	i = 0;
-	return_index = 0;
-	while ((*str)[i])
-	{
-		if ((*str)[i] && ((*str)[i] == '"' || (*str)[i] == '\''))
-		{
-			quoted_substring = &(*str)[i];
-			return_index = neon(&quoted_substring);
-			if (return_index < 0)
-				return (ERROR);
-			i += return_index;
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
-int reset_single_quote_content_to_pst(void)
-{
-	t_lexer_node* tmp;
-	
 	if (!g_glo.lexer_output_chain)
-		return(ERROR);
+		return (ERROR);
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if(single_quote_positive(&tmp->word) != SUCCESS)
+		if (single_quote_positive(&tmp->word) != SUCCESS)
 			return (ERROR);
 		tmp = tmp->next;
 	}
 	return (SUCCESS);
 }
 
-int reset_double_quote_content_to_pst(void)
+int	reset_double_quote_content_to_pst(void)
 {
-	t_lexer_node* tmp;
-	char c;
-	
+	t_lexer_node	*tmp;
+	char			c;
+
 	c = DOUBLE_QUOTE;
 	if (!g_glo.lexer_output_chain)
-		return(ERROR);
+		return (ERROR);
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{

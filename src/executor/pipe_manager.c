@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:01:33 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/12 11:43:17 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 12:57:38 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 int	create_pipe(t_exec_node *current_node)
 {
