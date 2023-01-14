@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 12:58:36 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:24:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	fill_env_node(char *var, t_env_node *node);
 
 t_node	*create_lexer_node(char *word)
 {
@@ -31,8 +33,7 @@ t_node	*create_env_node(char *var)
 	new_node = ft_malloc(sizeof(*new_node));
 	if (!new_node)
 		return (NULL);
-	if (fill_env_node(var, new_node) == ERROR)
-		return (NULL);
+	fill_env_node(var, new_node);
 	new_node->next = NULL;
 	return ((t_node *)new_node);
 }
@@ -64,4 +65,19 @@ t_node	*create_exec_node(char *word)
 	new_node->process_id = NOT_SET;
 	new_node->next = NULL;
 	return ((t_node *)new_node);
+}
+
+static void	fill_env_node(char *var, t_env_node *node)
+{
+	int	i;
+
+	i = 0;
+	if (!var)
+		return ;
+	while (var[i] && var[i] != '=')
+		i++;
+	var[i] = '\0';
+	node->name = var;
+	node->value = &var[i + 1];
+	return ;
 }

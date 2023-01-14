@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 12:59:17 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 16:57:47 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_global
 	int						current_out_file;
 	int						standard_input;
 	int						standard_output;
+	int						ret_status;
 	struct s_env_node		*env;
 	struct s_garbage_node	*garbage_ctr;
 	struct s_lexer_node		*lexer_output_chain;

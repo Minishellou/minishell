@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 15:47:35 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:14:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ void			token_state_init(t_token_state *state);
 int				init_global(char **envp);
 
 /*		NODE & UTILS			*/
-//	Env Node
-int				fill_env_node(char *var, t_env_node *node);
-// Create exec node
-t_node			*create_exec_node(char *word);
-t_node			*create_env_node(char *var);
 //	Create Node
 t_node			*create_env_node(char *var);
+t_node			*create_exec_node(char *word);
 t_node			*create_lexer_node(char *word);
 t_node			*create_redirection(char *argument);
 //	Get node value
@@ -42,17 +38,18 @@ char			**make_array_from_chain(t_node *chain, \
 								t_node_getter get_node_value);
 void			append_to_chain(t_node **node, t_node *new_node);
 t_node			*last_node(t_node *current_node);
-/*		STRING CONVERT & UTILS	*/
 char			*concat_array_to_string(char **splited_string);
+
 /*		ESCAPE & QUOTES UTILS	*/
 //	Quotes
 int				unquote_string(char **string);
 int				is_quoted(char *string, int nb_of_quote);
+
 /*		ENVAR & NODE UTILS		*/
 //	Envar expansion
-int				has_envar(char *string);
-int				fill_env_node(char *var, t_env_node *node);
 t_env_node		*get_envar(char *envar_name);
+int				has_envar(char *string);
+
 /*			REDIR MANAGEMENT			*/
 //	Main function
 int				io_environment_manager(t_exec_node *current_command);
@@ -60,7 +57,7 @@ int				io_environment_manager(t_exec_node *current_command);
 int				open_file_to_read(char *file_path);
 int				open_file_to_trunc(char *file_path);
 int				open_file_to_append(char *file_path);
-//	HEREDOC
+//			HEREDOC
 //	Main function
 int				manage_heredoc(t_redirection *heredoc_node);
 //	Execution
@@ -68,10 +65,11 @@ int				exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 //	Misc
 int				process_limit_string(char **limit_string, int *quote_context);
 void			write_to_file(int file_fd, char *string_to_write);
+
 /*			EXEC PROCESS 				*/
 //	Main function
 int				exec_process_manager(void);
-//	PATHFINDER
+//			PATHFINDER
 //	Main function
 char			*pathfinder_process(char *command);
 //	Conditional
@@ -97,20 +95,21 @@ int				restore_standard_input(void);
 int				restore_standard_output(void);
 //	Misc
 int				redirect_fd(int fd, int stdfd);
-/*		GARBAGE COLLECTOR		*/
 
+/*		GARBAGE COLLECTOR		*/
 t_garbage_node	*new_grb_node(void *addr);
 void			lst_addback(t_garbage_node *new_node);
-
 //	Collect garbage
 void			*ft_malloc(int len);
 //	Throw garbage
 void			ft_free(void);
+
 /*		LEXER & UTILS			*/
 //	Lexer
 int				process_lexer_output_chain(char *command);
 int				catch_redir_error(void);
 void			free_all(char **tab);
+
 /* 		PARSING					*/
 //	Token parser
 int				catch_parsing_error(char *input);

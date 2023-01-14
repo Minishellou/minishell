@@ -79,8 +79,8 @@ SOURCES		+=                                		\
 SOURCES		+=								\
 		src/node_manager/chain_utils.c	\
 		src/node_manager/create_node.c	\
-		src/node_manager/env_node_manager.c	\
-		src/node_manager/get_node_value.c
+		src/node_manager/get_node_value.c	\
+		src/node_manager/string_conversion.c
 
 ## SRC/LEXER ##
 
@@ -120,9 +120,3 @@ SOURCES		+=								\
 		src/heredoc/heredoc_manager.c		\
 		src/heredoc/limit_string_manager.c		\
 		src/heredoc/quote_context_manager.c
-
-
-## SRC/UTILS ##
-
-SOURCES		+=								\
-		src/utils/string_conversion_utils.c	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envar_to_lexer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 13:46:20 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 19:16:52 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static t_lexer_node	*add_regular_word(char *word)
 	while (word[len] && word[len] != '$')
 		len++;
 	buffer = ft_malloc(len + 1);
+	if (!buffer)
+		return (NULL);
 	while (word[i] && word[i] != '$')
 	{
 		buffer[i] = word[i];

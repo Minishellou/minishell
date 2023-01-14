@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 13:22:10 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:36:18 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ static pid_t	manage_current_command_exec(t_exec_node *current_command)
 	ret_status = io_environment_manager(current_command);
 	manage_parent_input_redirection();
 	if (create_pipe(current_command) != SUCCESS)
-	{
-		return (perror(ft_strjoin(current_command->command_path, ": piping")),
-			ERROR);
-	}
+		return (ERROR);
 	if (ret_status == ERROR)
 		return (close_pipe_output(), SUCCESS);
 	if (current_command->command_path == NULL)

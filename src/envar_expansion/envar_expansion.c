@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   envar_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 14:15:23 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 17:27:59 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static t_env_node	*get_question_mark(void);
 
 t_env_node	*get_envar(char *envar_name)
 {
@@ -18,6 +20,8 @@ t_env_node	*get_envar(char *envar_name)
 	t_env_node	env;
 	t_env_node	*current_node;
 
+	if (ft_strcmp(envar_name, "$?") == SUCCESS)
+		return (get_question_mark());
 	env.next = g_glo.env;
 	current_node = &env;
 	envar_name_len = ft_strlen(envar_name) - 1;
@@ -78,4 +82,18 @@ t_lexer_node	*envar_expansion(void)
 		tmp = tmp->next;
 	}
 	return (g_glo.lexer_output_chain);
+}
+
+static t_env_node	*get_question_mark(void)
+{
+	char		*value;
+	t_env_node	*ret_node;
+
+	value = ft_itoa(g_glo.ret_status);
+	if (!value)
+		return (NULL);
+	ret_node = (t_env_node *)create_env_node(NULL);
+	ret_node->name = NULL;
+	ret_node->value = value;
+	return (ret_node);
 }

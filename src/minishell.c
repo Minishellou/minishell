@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 16:47:07 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:35:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,17 @@ static void	exit_minishell(int exit_status)
 	exit(exit_status);
 }
 
-static void	process_and_execute_command(char *command)
+static int	process_and_execute_command(char *command)
 {
+	int	new_ret_status;
+
 	if (process_lexer_output_chain(command) != SUCCESS)
-		return ;
+		return (2);
 	g_glo.execution_chain = composer();
-	if (exec_process_manager() != SUCCESS)
-		return ;
+	new_ret_status = exec_process_manager();
+	if (new_ret_status == ERROR)
+		exit_minishell(EXIT_FAILURE);
+	return (new_ret_status);
 }
 
 static char	*read_command_line(char *prompt)
@@ -103,7 +107,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		str = read_command_line("minishell~ ");
 		add_history(str);
-		process_and_execute_command(str);
+		g_glo.ret_status = process_and_execute_command(str);
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
 	}
