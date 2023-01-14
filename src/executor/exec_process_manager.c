@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 17:36:18 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 21:48:13 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	exec_process_manager(void)
 	restore_standard_input();
 	restore_standard_output();
 	pipeline_status = wait_for_current_pipeline();
+
 	return (pipeline_status);
 }
 
@@ -104,18 +105,21 @@ static int	wait_for_current_pipeline(void)
 	pid_t		pid_to_wait_for;
 	t_exec_node	*current_node;
 
+	return_status = 0;
 	wait_ret_value = SUCCESS;
 	current_node = g_glo.execution_chain;
 	while (current_node)
 	{
 		pid_to_wait_for = current_node->process_id;
+		if (pid_to_wait_for == NOT_SET && current_node->next == NULL)
+			return (1);
 		if (pid_to_wait_for != NOT_SET)
 			wait_ret_value = waitpid(pid_to_wait_for, &return_status, 0);
 		if (wait_ret_value == ERROR)
 			return (ERROR);
 		current_node = current_node->next;
 	}
-	return (return_status);
+	return (WEXITSTATUS(return_status));
 }
 
 static char	**make_argument_array(t_exec_node *current_command)
