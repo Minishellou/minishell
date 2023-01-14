@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/13 20:17:29 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 11:05:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ int ft_exit(char *str)
 	return (SUCCESS);
 }
 
+void	main_process(char *str)
+{
+	if (process_lexer_output_chain(str) != SUCCESS)
+		return ;
+	g_glo.execution_chain = composer();
+	if (exec_process_manager() != SUCCESS)
+		return ;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
@@ -75,7 +84,7 @@ int	main(int ac, char **av, char **envp)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	while (1)
 	{
-		str = readline("minishell~");
+		str = readline("minishell~ ");
 		add_history(str);
 		if(ft_exit(str) != SUCCESS)
 		{
@@ -83,12 +92,7 @@ int	main(int ac, char **av, char **envp)
 			free(str);
 			break ; 
 		}
-		if((process_lexer_output_chain(str)) == ERROR)
-			printf("syntax error : invalid command\n");
-		if (!(g_glo.execution_chain = composer()))
-			printf("syntax error : invalid command\n");
-		if (exec_process_manager() != SUCCESS)
-			printf(" ");
+		main_process(str);
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
 		free(str);
