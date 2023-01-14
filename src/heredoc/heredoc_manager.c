@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 14:15:37 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 15:34:23 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_current_tmpfile(void);
 static int	heredoc_process(char *limit_string, int heredoc_fd);
+static char	*get_current_tmpfile(void);
+static void	display_eof_error(char *limit_string);
 
 int	manage_heredoc(t_redirection *heredoc_node)
 {
@@ -52,19 +53,6 @@ int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
 	return (SUCCESS);
 }
 
-static char	*get_current_tmpfile(void)
-{
-	char		*to_test;
-	const char	*base_path;
-	static int	index;
-
-	base_path = "/tmp/.heredoc";
-	to_test = ft_strjoin(base_path, ft_itoa(index++));
-	while (access(to_test, F_OK) != ERROR)
-		to_test = ft_strjoin(base_path, ft_itoa(index++));
-	return (to_test);
-}
-
 static int	heredoc_process(char *limit_string, int heredoc_fd)
 {
 	char			*current_string;
@@ -79,9 +67,7 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 		current_string = readline("heredoc> ");
 		if (current_string == NULL)
 		{
-			ft_putstr_fd("\nwarning: receiving END-OF-FILE waiting for ", 2);
-			ft_putstr_fd(limit_string, 2);
-			write(2, "\n", 1);
+			display_eof_error(limit_string);
 			break ;
 		}
 		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
@@ -93,4 +79,24 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 		write_to_file(heredoc_fd, "\n");
 	}
 	return (SUCCESS);
+}
+
+static char	*get_current_tmpfile(void)
+{
+	char		*to_test;
+	const char	*base_path;
+	static int	index;
+
+	base_path = "/tmp/.heredoc";
+	to_test = ft_strjoin(base_path, ft_itoa(index++));
+	while (access(to_test, F_OK) != ERROR)
+		to_test = ft_strjoin(base_path, ft_itoa(index++));
+	return (to_test);
+}
+
+static void	display_eof_error(char *limit_string)
+{
+	ft_putstr_fd("\nwarning: END-OF-FILE received (waiting for", 2);
+	ft_putstr_fd(limit_string, 2);
+	write(2, ")\n", 1);
 }
