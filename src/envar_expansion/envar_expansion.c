@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:46:54 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/13 18:54:28 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 10:30:40 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ t_lexer_node *envar_expansion(void)
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
+		if (ft_strcmp(tmp->word, "<<"))
+		{
+			tmp = tmp->next->next;
+			continue ;
+		}
 		if (ft_strchr(tmp->word, '$'))
 			tmp->word = expand_envar_in_string(tmp->word);
 		tmp = tmp->next;
