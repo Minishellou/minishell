@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:42:39 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 13:08:50 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:15:48 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ int	unquoted_lexer_output_chain(void)
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if (ft_strchr(tmp->word, SINGLE_QUOTE) || ft_strchr(tmp->word,
-				DOUBLE_QUOTE))
+		if (ft_strcmp(tmp->word, "<<") == SUCCESS)
+		{
+			tmp = tmp->next->next;
+			continue ;
+		}
+		if (ft_strchr(tmp->word, SINGLE_QUOTE) ||ft_strchr(tmp->word, DOUBLE_QUOTE))
 		{
 			if ((unquote_string(&tmp->word)) != SUCCESS)
 				return (ERROR);
