@@ -132,3 +132,9 @@ SOURCES		+=								\
 		src/heredoc/heredoc_manager.c		\
 		src/heredoc/limit_string_manager.c		\
 		src/heredoc/quote_context_manager.c
+
+## SRC/SIGNALS ##
+
+SOURCES		+=								\
+		src/signals/signals_management.c 	\
+		src/signals/signals_utils.c 		

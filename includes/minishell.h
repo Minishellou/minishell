@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 12:59:14 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 18:32:48 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "./function.h"
 # include "./struct.h"
 # include <fcntl.h>
+# include <signal.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>

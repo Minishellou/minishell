@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 23:31:57y mcorso           ###   ########.fr       */
+/*   Created: 2023/01/15 18:25:24 by gkitoko           #+#    #+#             */
+/*   Updated: 2023/01/15 21:39:31 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
 t_global	g_glo;
 
-/*
 void	print_word_list(t_lexer_node *node)
 {
 	t_lexer_node  *tmp;
@@ -44,15 +44,14 @@ void printf_redir_chain(t_redirection *node)
 	}
 }
 
-static
-void	print_env_list(t_env_node *node)
-{
-	if (node == NULL)
-		return ;
-	printf("%s=%s \n", node->name, node->value);
-	print_env_list(node->next);
-}
-*/
+// static
+// void	print_env_list(t_env_node *node)
+// {
+// 	if (node == NULL)
+// 		return ;
+// 	printf("%s=%s \n", node->name, node->value);
+// 	print_env_list(node->next);
+// }
 
 void	exit_minishell(int exit_status)
 {
@@ -82,6 +81,7 @@ static char	*read_command_line(char *prompt)
 	t_garbage_node	*new_node;
 
 	str = readline(prompt);
+	ctrld_handler(str);
 	if (str == NULL)
 		exit_minishell(EXIT_SUCCESS);
 	if (*str == '\0')
@@ -104,6 +104,7 @@ int	main(int ac, char **av, char **envp)
 		return (printf("minishell binary does not take any argument.\n"), 0);
 	while (1)
 	{
+		init_sig();
 		str = read_command_line("minishell~ ");
 		if (str == NULL)
 			continue ;

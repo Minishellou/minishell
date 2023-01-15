@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chain_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 06:18:38 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 21:35:18 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**make_array_from_chain(t_node *chain, t_node_getter get_node_value)
 	{
 		current_node_value = get_node_value(chain);
 		if (!current_node_value)
-			return (NULL);
+			current_node_value = "\0";
 		ret_array[index++] = current_node_value;
 		chain = chain->next;
 	}

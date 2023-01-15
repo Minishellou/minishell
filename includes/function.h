@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 17:32:07 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 21:51:57 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,4 +216,15 @@ int				check_and_get_envar(t_lexer_node **node, \
 t_lexer_node	*envar_expansion(void);
 t_lexer_node	*lexer_envar(char *env_node);
 void			test(char *str);
+
+// signals
+void	init_sig(void);
+void	fork_sig(void);
+void	ignore_sig(void);
+void	sigint_handler(int signo);
+void	sigquit_handler(int signo);
+void	sigquit_fork_handler(int signo);
+void	ctrld_handler(char *input);
+void	interrupt_cmd(int signo);
+
 #endif

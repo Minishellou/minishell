@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 18:11:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 22:05:32 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void		fork_and_exec(t_exec_node *current_command, \
 							char **envp);
 // static char		**make_argument_array(t_exec_node *current_command);
 static int		manage_current_command_exec(t_exec_node *current_command);
+
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
@@ -74,9 +75,12 @@ static void	fork_and_exec(t_exec_node *current_command, \
 	pid_t	forked_pid;
 
 	command_path = current_command->command_path;
+	ignore_sig();
 	forked_pid = fork();
+	// reinit_sig();
 	if (forked_pid == 0)
 	{
+		fork_sig();
 		manage_child_output_redirection();
 		close_input_in_child();
 		if (is_a_builtin(command_path))
@@ -121,4 +125,3 @@ static int	wait_for_current_pipeline(void)
 	}
 	return (WEXITSTATUS(return_status));
 }
-
