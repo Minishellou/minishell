@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 17:14:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 05:39:10 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,18 @@ int				restore_standard_input(void);
 int				restore_standard_output(void);
 //	Misc
 int				redirect_fd(int fd, int stdfd);
+
+/*		BUILD INS		*/
+// Echo
+void			echo(t_lexer_node *arg_chain);
+//  Env
+int				env(void);
+// exit
+void			exit_builtins(int arg_nb, t_lexer_node *arg_chain);
+// pwd
+void			pwd(void);
+// unset
+int				unset(t_lexer_node *arg_chain);
 
 /*		GARBAGE COLLECTOR		*/
 t_garbage_node	*new_grb_node(void *addr);
