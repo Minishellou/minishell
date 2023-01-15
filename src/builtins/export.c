@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:53:17 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 06:06:54 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 06:31:49 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int	manage_export(char **to_export)
 	plus_index = NOT_SET;
 	if (ft_strchr(to_export[0], '+') != NULL)
 	{
-		plus_index = ft_strlen(name) - 2;
-		name[plus_index] = '\0';
+		plus_index = ft_strlen(to_export[0]) - 2;
+		to_export[0][plus_index] = '\0';
 	}
 	while (environment && ft_strcmp(environment->name, to_export[0]) != 0)
 		environment = environment->next;
@@ -72,6 +72,8 @@ static int	add_new_envar(char **to_add)
 	char		*envar_joined;
 	t_env_node	*new_node;
 
+	envar_name = to_add[0];
+	envar_value = to_add[1];
 	envar_joined = ft_strjoin(envar_name, "=");
 	if (!envar_joined)
 		return (ERROR);
@@ -81,7 +83,7 @@ static int	add_new_envar(char **to_add)
 	new_node = (t_env_node *)create_env_node(envar_joined);
 	if (!new_node)
 		return (ERROR);
-	append_node_to_chain((t_node **)&g_glo.env, (t_node *)new_node);
+	append_to_chain((t_node **)&g_glo.env, (t_node *)new_node);
 	return (SUCCESS);
 }
 
@@ -94,7 +96,7 @@ static int	check_current_arg_validity(t_lexer_node *current_node)
 	current_arg = current_node->word;
 	if (!current_arg)
 		return (ERROR);
-	if (ft_isnum(*current_arg) == 1)
+	if (!ft_isalpha(*current_arg))
 		return (ERROR);
 	while (ft_isalnum(current_arg[i]))
 		i++;

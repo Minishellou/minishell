@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:49:45 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 05:51:56 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 06:42:10 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ int	cd(int arg_number, t_lexer_node *arg_chain)
 	else if (arg_number == 1)
 	{
 		arg_path = arg_chain->word;
-		return (chdir(arg_path));
+		if (chdir(arg_path) != SUCCESS)
+		{
+			perror(arg_path);
+			return (2);
+		}
 	}
 	if (update_related_envar(getcwd(NULL, 0)) != SUCCESS)
 		return (12);
@@ -48,7 +52,7 @@ static int	update_related_envar(char *new_cwd)
 		environment = environment->next;
 	old_pwd = environment->value;
 	environment->value = new_cwd;
-	update_old_pwd_envar(old_pwd);
+	return (update_old_pwd_envar(old_pwd));
 }
 
 static int	update_old_pwd_envar(char *old_pwd)
@@ -62,10 +66,11 @@ static int	update_old_pwd_envar(char *old_pwd)
 		if (!environment)
 			break ;
 	}
-	if (!environment)
-		if (create_old_pwd_envar != SUCCESS)
+	if (environment)
+		environment->value = old_pwd;
+	else
+		if (create_old_pwd_envar(old_pwd) != SUCCESS)
 			return (ERROR);
-	environment->value = old_pwd;
 	return (SUCCESS);
 }
 
@@ -80,6 +85,6 @@ static int	create_old_pwd_envar(char *old_pwd)
 	new_node = (t_env_node *)create_env_node(env_node_value);
 	if (!new_node)
 		return (ERROR);
-	append_to_chain(&g_glo.env, new_node);
+	append_to_chain((t_node **)&g_glo.env, (t_node *)new_node);
 	return (SUCCESS);
 }
