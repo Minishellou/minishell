@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:43:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 15:18:29 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 23:30:12 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*pathfinder_process(char *command)
 
 	final_path = command;
 	path_env_node = get_envar("$PATH");
+	if (!path_env_node)
+		return (command);
 	if (path_env_node)
 		env_paths = ft_split(path_env_node->value, ':');
 	if (path_env_node && !env_paths)

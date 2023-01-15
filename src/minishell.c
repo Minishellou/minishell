@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:51:46 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 21:46:38 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/14 23:31:57y mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ void printf_redir_chain(t_redirection *node)
 	}
 }
 
-
 static
 void	print_env_list(t_env_node *node)
 {
 	if (node == NULL)
 		return ;
-	printf("%s = %s \n", node->name, node->value);
+	printf("%s=%s \n", node->name, node->value);
 	print_env_list(node->next);
 }
 */
@@ -99,8 +98,6 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	if (isatty(0) == 0)
 		return (EXIT_FAILURE);
-	if (!*envp)
-		return (EXIT_SUCCESS);
 	if (init_global(envp) == ERROR)
 		return (EXIT_FAILURE);
 	if (ac > 1)
