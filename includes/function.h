@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 05:39:10 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 17:10:46 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				is_quoted(char *string, int nb_of_quote);
 /*		ENVAR & NODE UTILS		*/
 //	Envar expansion
 t_env_node		*get_envar(char *envar_name);
+int				is_valid_env_char(char c);
 int				has_envar(char *string);
 
 /*			REDIR MANAGEMENT			*/

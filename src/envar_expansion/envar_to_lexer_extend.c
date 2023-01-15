@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:02:58 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 19:31:20 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 17:05:09 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_and_add_var(char *env_node, t_lexer_node **node, int *i)
 			return (ERROR);
 		(*i)++;
 		while (env_node[*i] && \
-					(ft_isalnum(env_node[*i]) || env_node[*i] == '?'))
+					(is_valid_env_char(env_node[*i])))
 			(*i)++;
 	}
 	else
