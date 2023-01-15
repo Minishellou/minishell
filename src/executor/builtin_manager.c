@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:34:13 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 07:39:30 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 18:13:12 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	exec_builtin(t_exec_node *command)
 	int		arg_count;
 	char	*command_name;
 
-	write(2, "ok\n", 3);
 	arg_count = get_chain_len((t_node *)command->arg_chain);
 	command_name = command->command_path;
 	if (ft_strcmp(command_name, "echo") == 0)

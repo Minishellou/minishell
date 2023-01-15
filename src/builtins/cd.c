@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:49:45 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 06:42:10 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 17:43:31 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	update_old_pwd_envar(char *old_pwd)
 	t_env_node	*environment;
 
 	environment = g_glo.env;
-	while (ft_strcmp(environment->name, "OLD_PWD") != SUCCESS)
+	while (ft_strcmp(environment->name, "OLDPWD") != SUCCESS)
 	{
 		environment = environment->next;
 		if (!environment)
@@ -79,7 +79,7 @@ static int	create_old_pwd_envar(char *old_pwd)
 	char		*env_node_value;
 	t_env_node	*new_node;
 
-	env_node_value = ft_strjoin("OLD_PWD=", old_pwd);
+	env_node_value = ft_strjoin("OLDPWD=", old_pwd);
 	if (!env_node_value)
 		return (ERROR);
 	new_node = (t_env_node *)create_env_node(env_node_value);

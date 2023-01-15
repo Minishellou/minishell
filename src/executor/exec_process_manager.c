@@ -6,24 +6,24 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 21:48:13 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 18:11:56 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static int		wait_for_current_pipeline(void);
-static int		fork_and_exec(t_exec_node *current_command, \
+static void		fork_and_exec(t_exec_node *current_command, \
 							char **argv, \
 							char **envp);
-static char		**make_argument_array(t_exec_node *current_command);
-static pid_t	manage_current_command_exec(t_exec_node *current_command);
+// static char		**make_argument_array(t_exec_node *current_command);
+static int		manage_current_command_exec(t_exec_node *current_command);
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
 {
+	int			waitpid_status;
 	int			pipeline_status;
-	pid_t		fork_pid;
 	t_exec_node	*current_command;
 
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
@@ -31,46 +31,44 @@ int	exec_process_manager(void)
 	current_command = g_glo.execution_chain;
 	while (current_command != NULL)
 	{
-		fork_pid = manage_current_command_exec(current_command);
-		if (fork_pid == ERROR)
-			return (ERROR);
-		if (fork_pid != SUCCESS)
-			current_command->process_id = fork_pid;
+		pipeline_status = manage_current_command_exec(current_command);
 		current_command = current_command->next;
 	}
 	restore_standard_input();
 	restore_standard_output();
-	pipeline_status = wait_for_current_pipeline();
-
+	waitpid_status = wait_for_current_pipeline();
+	if (pipeline_status == NOT_SET)
+		return (waitpid_status);
 	return (pipeline_status);
 }
 
-static pid_t	manage_current_command_exec(t_exec_node *current_command)
+static int	manage_current_command_exec(t_exec_node *current_command)
 {
 	int		ret_status;
 	char	**argv;
 	char	**envp;
-	t_node	*env_chain;
 
+	argv = make_argument_array(current_command);
+	envp = make_array_from_chain((t_node *)g_glo.env, get_env_node_value);
+	if (!argv || !envp)
+		return (ERROR);
 	ret_status = io_environment_manager(current_command);
 	manage_parent_input_redirection();
 	if (create_pipe(current_command) != SUCCESS)
 		return (ERROR);
 	if (ret_status == ERROR)
-		return (close_pipe_output(), SUCCESS);
+		return (close_pipe_output(), 1);
 	if (current_command->command_path == NULL)
 		return (SUCCESS);
-	env_chain = (t_node *)g_glo.env;
-	argv = make_argument_array(current_command);
-	envp = make_array_from_chain(env_chain, get_env_node_value);
-	if (!argv || !envp)
-		return (ERROR);
-	return (fork_and_exec(current_command, argv, envp));
+	if (current_command->next == NULL)
+		if (is_a_builtin(current_command->command_path))
+			return (exec_builtin(current_command));
+	fork_and_exec(current_command, argv, envp);
+	return (NOT_SET);
 }
 
-static int	fork_and_exec(t_exec_node *current_command,
-							char **argv,
-							char **envp)
+static void	fork_and_exec(t_exec_node *current_command, \
+							char **argv, char **envp)
 {
 	char	*command_path;
 	pid_t	forked_pid;
@@ -81,6 +79,8 @@ static int	fork_and_exec(t_exec_node *current_command,
 	{
 		manage_child_output_redirection();
 		close_input_in_child();
+		if (is_a_builtin(command_path))
+			exit(exec_builtin(current_command));
 		if (is_command_a_path(command_path) == 1)
 		{
 			execve(command_path, argv, envp);
@@ -94,8 +94,8 @@ static int	fork_and_exec(t_exec_node *current_command,
 		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
+	current_command->process_id = forked_pid;
 	close_output_in_parent();
-	return (forked_pid);
 }
 
 static int	wait_for_current_pipeline(void)
@@ -122,18 +122,3 @@ static int	wait_for_current_pipeline(void)
 	return (WEXITSTATUS(return_status));
 }
 
-static char	**make_argument_array(t_exec_node *current_command)
-{
-	char			**ret_array;
-	char			*command_path;
-	t_lexer_node	*arg_chain;
-
-	command_path = current_command->command_path;
-	arg_chain = (t_lexer_node *)create_lexer_node(command_path);
-	if (arg_chain == NULL)
-		return (NULL);
-	arg_chain->next = current_command->arg_chain;
-	ret_array = make_array_from_chain((t_node *)arg_chain, \
-										get_lexer_node_value);
-	return (ret_array);
-}
