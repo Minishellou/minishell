@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 17:10:46 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 17:32:07 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void			token_state_init(t_token_state *state);
 
 /*		GLOBAL STRUCTURE		*/
 int				init_global(char **envp);
+
+/*		CLEANING				*/
+void			exit_minishell(int exit_status);
 
 /*		NODE & UTILS			*/
 //	Create Node
@@ -38,6 +41,7 @@ char			**make_array_from_chain(t_node *chain, \
 								t_node_getter get_node_value);
 void			append_to_chain(t_node **node, t_node *new_node);
 t_node			*last_node(t_node *current_node);
+int				get_chain_len(t_node *chain);
 char			*concat_array_to_string(char **splited_string);
 
 /*		ESCAPE & QUOTES UTILS	*/
@@ -75,6 +79,22 @@ int				exec_process_manager(void);
 char			*pathfinder_process(char *command);
 //	Conditional
 int				is_command_a_path(char *command);
+
+inline static char	**make_argument_array(t_exec_node *current_command)
+{
+	char			**ret_array;
+	char			*command_path;
+	t_lexer_node	*arg_chain;
+
+	command_path = current_command->command_path;
+	arg_chain = (t_lexer_node *)create_lexer_node(command_path);
+	if (arg_chain == NULL)
+		return (NULL);
+	arg_chain->next = current_command->arg_chain;
+	ret_array = make_array_from_chain((t_node *)arg_chain, \
+										get_lexer_node_value);
+	return (ret_array);
+}
 /*			IO MANAGEMENT				*/
 //	Create pipe
 int				create_pipe(t_exec_node *current_node);
@@ -98,15 +118,23 @@ int				restore_standard_output(void);
 int				redirect_fd(int fd, int stdfd);
 
 /*		BUILD INS		*/
-// Echo
-void			echo(t_lexer_node *arg_chain);
-//  Env
+//	Execution
+int				exec_builtin(t_exec_node *command);
+//	Validation
+int				is_a_builtin(char *command_name);
+//	cd
+int				cd(int arg_number, t_lexer_node *arg_chain);
+//	echo
+int				echo(t_lexer_node *arg_chain);
+//	env
 int				env(void);
-// exit
+//	exit
 void			exit_builtins(int arg_nb, t_lexer_node *arg_chain);
-// pwd
-void			pwd(void);
-// unset
+//	pwd
+int				pwd(void);
+//	export
+int				export(int arg_number, t_lexer_node *arg_list);
+//	unset
 int				unset(t_lexer_node *arg_chain);
 
 /*		GARBAGE COLLECTOR		*/

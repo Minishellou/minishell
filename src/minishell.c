@@ -54,7 +54,7 @@ void	print_env_list(t_env_node *node)
 }
 */
 
-static void	exit_minishell(int exit_status)
+void	exit_minishell(int exit_status)
 {
 	write(2, "\n", 1);
 	ft_free();

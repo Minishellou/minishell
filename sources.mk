@@ -97,6 +97,7 @@ SOURCES		+=                                		\
 ## SRC/EXECUTOR ##
 
 SOURCES		+=								\
+		src/executor/builtin_manager.c \
 		src/executor/exec_process_manager.c		\
 		src/executor/file_manager.c			\
 		src/executor/fork_piping.c		\
@@ -104,6 +105,17 @@ SOURCES		+=								\
 		src/executor/io_redir_manager.c		\
 		src/executor/pathfinder.c			\
 		src/executor/pipe_manager.c		
+
+## SRC/BUILTINS
+
+SOURCES		+=					\
+		src/builtins/cd.c		\
+		src/builtins/echo.c		\
+		src/builtins/env.c 		\
+		src/builtins/exit.c		\
+		src/builtins/export.c		\
+		src/builtins/pwd.c		\
+		src/builtins/unset.c	
 
 
 ## SRC/ENVAR_EXPANSION ##

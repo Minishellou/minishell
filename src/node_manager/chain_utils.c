@@ -6,13 +6,11 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:29:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/05 15:44:27 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 06:18:38 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	get_chain_len(t_node *chain);
 
 t_node	*make_chain_from_array(char **array, t_node_creator create_node)
 {
@@ -85,7 +83,7 @@ void	append_to_chain(t_node **node, t_node *new_node)
 		*node = new_node;
 }
 
-static int	get_chain_len(t_node *chain)
+int	get_chain_len(t_node *chain)
 {
 	int	number_of_node;
 
