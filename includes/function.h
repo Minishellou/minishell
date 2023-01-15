@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 05:39:10 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 06:07:20 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char			**make_array_from_chain(t_node *chain, \
 								t_node_getter get_node_value);
 void			append_to_chain(t_node **node, t_node *new_node);
 t_node			*last_node(t_node *current_node);
+int				get_chain_len(t_node *chain);
 char			*concat_array_to_string(char **splited_string);
 
 /*		ESCAPE & QUOTES UTILS	*/
@@ -97,15 +98,19 @@ int				restore_standard_output(void);
 int				redirect_fd(int fd, int stdfd);
 
 /*		BUILD INS		*/
-// Echo
+//	cd
+int				cd(int arg_number, t_lexer_node *arg_chain);
+//	echo
 void			echo(t_lexer_node *arg_chain);
-//  Env
+//	env
 int				env(void);
-// exit
+//	exit
 void			exit_builtins(int arg_nb, t_lexer_node *arg_chain);
-// pwd
+//	pwd
 void			pwd(void);
-// unset
+//	export
+int				export(int arg_number, t_lexer_node *arg_list);
+//	unset
 int				unset(t_lexer_node *arg_chain);
 
 /*		GARBAGE COLLECTOR		*/
