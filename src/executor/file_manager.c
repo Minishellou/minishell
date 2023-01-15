@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:57:57 by mcorso            #+#    #+#             */
-/*   Updated: 2022/12/14 16:01:52 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 02:27:38 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	write_to_file(int file_fd, char *string_to_write)
 {
 	size_t	string_len;
 
+	if (string_to_write == NULL)
+		return ;
 	string_len = ft_strlen(string_to_write);
 	write(file_fd, string_to_write, string_len);
 }

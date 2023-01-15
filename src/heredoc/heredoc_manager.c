@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 15:34:23 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/15 02:53:41 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,29 @@ int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
 static int	heredoc_process(char *limit_string, int heredoc_fd)
 {
 	char			*current_string;
-	size_t			limit_string_len;
 	t_quote_context	quote_context;
 
-	limit_string_len = ft_strlen(limit_string);
 	if (process_limit_string(&limit_string, &quote_context) != SUCCESS)
 		return (ERROR);
 	while (1)
 	{
 		current_string = readline("heredoc> ");
 		if (current_string == NULL)
-		{
-			display_eof_error(limit_string);
 			break ;
-		}
-		if (ft_strncmp(current_string, limit_string, limit_string_len) == 0)
+		if (*current_string == '\0' && limit_string == NULL)
+			break ;
+		if (ft_strcmp(current_string, limit_string) == 0)
 			break ;
 		if (quote_context == UNQUOTED)
 			current_string = expand_envar_in_string(current_string);
-		if (current_string)
-			write_to_file(heredoc_fd, current_string);
+		write_to_file(heredoc_fd, current_string);
 		write_to_file(heredoc_fd, "\n");
+		free(current_string);
 	}
+	if (current_string == NULL)
+		display_eof_error(limit_string);
+	if (current_string != NULL)
+		free(current_string);
 	return (SUCCESS);
 }
 
@@ -96,7 +97,10 @@ static char	*get_current_tmpfile(void)
 
 static void	display_eof_error(char *limit_string)
 {
-	ft_putstr_fd("\nwarning: END-OF-FILE received (waiting for", 2);
-	ft_putstr_fd(limit_string, 2);
-	write(2, ")\n", 1);
+	ft_putstr_fd("\nwarning: END-OF-FILE received (waiting for ", 2);
+	if (!limit_string)
+		ft_putstr_fd("[null]", 2);
+	else
+		ft_putstr_fd(limit_string, 2);
+	write(2, ")\n", 2);
 }

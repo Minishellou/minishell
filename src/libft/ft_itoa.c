@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:40:55 by gkitoko           #+#    #+#             */
-/*   Updated: 2021/12/10 17:56:33 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/15 02:02:07 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "./libft.h"
 
 int	count_nbr(long int n)
 {
@@ -40,7 +41,7 @@ char	*ft_itoa(int n)
 	nb = n;
 	count = 0;
 	count += count_nbr(nb);
-	buffer = (char *)malloc(sizeof(char) * (count + 1));
+	buffer = (char *)ft_malloc(sizeof(char) * (count + 1));
 	if (!buffer)
 		return (NULL);
 	buffer[count] = '\0';
