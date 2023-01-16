@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 17:58:31 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:01:57 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	manage_heredoc(t_redirection *heredoc_node)
 
 static int	fork_heredoc_process(char *limit_string, int heredoc_fd)
 {
+	int		heredoc_status;
 	int		fork_pid;
 	int		ret_status;
 	
@@ -68,10 +69,13 @@ static int	fork_heredoc_process(char *limit_string, int heredoc_fd)
 	if (fork_pid == 0)
 	{
 		heredoc_sig();
-		if (heredoc_process(limit_string, heredoc_fd) != SUCCESS)
+		heredoc_status = heredoc_process(limit_string, heredoc_fd);
+		close(heredoc_fd);
+		if (heredoc_status != SUCCESS)
 			exit(EXIT_FAILURE);
 		exit(EXIT_SUCCESS);
 	}
+	close(heredoc_fd);
 	if (waitpid(fork_pid, &ret_status, 0) == ERROR)
 		return (ERROR);
 	if (WIFSIGNALED(ret_status))

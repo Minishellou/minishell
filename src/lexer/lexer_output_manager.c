@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_output_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 12:56:34 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 21:27:43 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static void	tokenizer(void);
 int	process_lexer_output_chain(char *input)
 {
 	if (quote_neon(&input) != SUCCESS)
-		return (ERROR);
+		return (ft_putstr_fd("syntax error: invalid cmd line\n", 2), ERROR);
 	if (catch_parsing_error(input) != SUCCESS)
-		return (ERROR);
+		return (ft_putstr_fd("syntax error: invalid cmd line\n", 2), ERROR);
 	g_glo.lexer_output_chain = lexer_line_parsing_process(input);
 	if (g_glo.lexer_output_chain == NULL)
 		return (ERROR);
 	tokenizer();
 	if (catch_redir_error() != SUCCESS)
-		return (ERROR);
+		return (ft_putstr_fd("syntax error: invalid cmd line\n", 2), ERROR);
 	if (reset_double_quote_content_to_pst() != SUCCESS)
 		return (ERROR);
 	if (!envar_expansion())

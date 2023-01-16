@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 20:56:20 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:44:20 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,20 @@ static void	fork_and_exec(t_exec_node *current_command, \
 		manage_child_output_redirection();
 		close_input_in_child();
 		if (is_a_builtin(command_path))
-			exit(exec_builtin(current_command));
+			exit_minishell(exec_builtin(current_command));
 		if (is_command_a_path(command_path) == 1)
 		{
 			execve(command_path, argv, envp);
 			ft_putstr_fd("minishell: ", 2);
 			perror(command_path);
-			exit(127);
+			exit_minishell(127);
 		}
 		command_path = pathfinder_process(command_path);
 		if (command_path)
 			execve(command_path, argv, envp);
 		ft_putstr_fd(current_command->command_path, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		exit(127);
+		exit_minishell(127);
 	}
 	current_command->process_id = forked_pid;
 	close_output_in_parent();

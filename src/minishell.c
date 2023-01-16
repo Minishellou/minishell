@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 18:25:24 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 18:07:51 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:00:27 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,19 @@ void	exit_minishell(int exit_status)
 
 static char	*read_command_line(char *prompt)
 {
-	char			*str;
+	char			**str;
 	t_garbage_node	*new_node;
 
-	str = readline(prompt);
-	ctrld_handler(str);
-	if (str == NULL)
+	str = ft_malloc(sizeof(*str) * 1);
+	*str = readline(prompt);
+	ctrld_handler(*str);
+	if (*str == NULL)
 		exit_minishell(EXIT_SUCCESS);
-	if (*str == '\0')
+	if (**str == '\0')
 		return (NULL);
-	new_node = new_grb_node(str);
+	new_node = new_grb_node(*str);
 	lst_addback(new_node);
-	return (str);
+	return (*str);
 }
 
 static void	set_return_status(void)
@@ -98,7 +99,6 @@ static void	process_and_execute_command(char *command)
 	if (process_lexer_output_chain(command) != SUCCESS)
 	{
 		g_glo.ret_status = 2;
-		ft_putstr_fd("syntax error: invalid command line\n", 2);
 		return ;
 	}
 	g_glo.execution_chain = composer();
