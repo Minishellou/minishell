@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 12:22:00 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 17:00:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ static int		get_signal_return_status(int return_status);
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
 {
-	int			waitpid_status;
 	int			pipeline_status;
 	t_exec_node	*current_command;
 
-	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
-		return (ERROR);
-	ignore_sig();
 	current_command = g_glo.execution_chain;
 	while (current_command != NULL)
 	{
 		pipeline_status = manage_current_command_exec(current_command);
 		if (pipeline_status == ERROR)
+			return (ERROR);
+		if (current_command->process_id == ERROR)
 			return (ERROR);
 		current_command->return_status = pipeline_status;
 		current_command = current_command->next;
@@ -42,8 +40,7 @@ int	exec_process_manager(void)
 	restore_standard_input();
 	restore_standard_output();
 	g_glo.ret_status = NOT_SET;
-	waitpid_status = wait_for_current_pipeline();
-	return (waitpid_status);
+	return (wait_for_current_pipeline());
 }
 
 static int	manage_current_command_exec(t_exec_node *current_command)

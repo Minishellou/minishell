@@ -6,18 +6,44 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 12:31:24 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 17:58:31 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static int	heredoc_process(char *limit_string, int heredoc_fd);
+static int	fork_heredoc_process(char *limit_string, int heredoc_fd);
 static char	*get_current_tmpfile(void);
 static void	display_eof_error(char *limit_string);
 
+
+int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
+{
+	int				ret_status;
+	t_redirection	*current_redir_chain;
+
+	while (current_node != NULL)
+	{
+		current_redir_chain = current_node->redir_chain;
+		while (current_redir_chain != NULL)
+		{
+			if (current_redir_chain->type == HEREDOC)
+			{
+				ret_status = manage_heredoc(current_redir_chain);
+				if (ret_status != SUCCESS)
+					return (ret_status);
+			}
+			current_redir_chain = current_redir_chain->next;
+		}
+		current_node = current_node->next;
+	}
+	return (SUCCESS);
+}
+
 int	manage_heredoc(t_redirection *heredoc_node)
 {
+	int		ret_status;
 	int		tmpfile_fd;
 	char	*tmpfile;
 
@@ -27,30 +53,30 @@ int	manage_heredoc(t_redirection *heredoc_node)
 	tmpfile_fd = open_file_to_trunc(tmpfile);
 	if (tmpfile_fd == ERROR)
 		return (ERROR);
-	if (heredoc_process(heredoc_node->argument, tmpfile_fd) != SUCCESS)
-		return (ERROR);
+	ret_status = fork_heredoc_process(heredoc_node->argument, tmpfile_fd);
 	heredoc_node->type = INPUT;
 	heredoc_node->argument = tmpfile;
-	return (SUCCESS);
+	return (ret_status);
 }
 
-int	exec_every_heredoc_of_pipeline(t_exec_node *current_node)
+static int	fork_heredoc_process(char *limit_string, int heredoc_fd)
 {
-	t_redirection	*current_redir_chain;
-
-	while (current_node != NULL)
+	int		fork_pid;
+	int		ret_status;
+	
+	fork_pid = fork();
+	if (fork_pid == 0)
 	{
-		current_redir_chain = current_node->redir_chain;
-		while (current_redir_chain != NULL)
-		{
-			if (current_redir_chain->type == HEREDOC)
-				if (manage_heredoc(current_redir_chain) != SUCCESS)
-					return (ERROR);
-			current_redir_chain = current_redir_chain->next;
-		}
-		current_node = current_node->next;
+		heredoc_sig();
+		if (heredoc_process(limit_string, heredoc_fd) != SUCCESS)
+			exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
-	return (SUCCESS);
+	if (waitpid(fork_pid, &ret_status, 0) == ERROR)
+		return (ERROR);
+	if (WIFSIGNALED(ret_status))
+		return (WTERMSIG(ret_status));
+	return (WEXITSTATUS(ret_status));
 }
 
 static int	heredoc_process(char *limit_string, int heredoc_fd)
@@ -101,6 +127,10 @@ static void	display_eof_error(char *limit_string)
 	if (!limit_string)
 		ft_putstr_fd("[null]", 2);
 	else
+	{
+		write(2, "'", 1);
 		ft_putstr_fd(limit_string, 2);
+		write(2, "'", 1);
+	}
 	write(2, ")\n", 2);
 }

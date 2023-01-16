@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 12:12:58 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 15:40:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ void			test(char *str);
 // signals
 void	init_sig(void);
 void	restore_sig(void);
+void	heredoc_sig(void);
 void	ignore_sig(void);
 void	sigint_handler(int signo);
 void	sigquit_handler(int signo);

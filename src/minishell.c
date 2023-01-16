@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 18:25:24 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 12:11:42 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:07:51 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,6 @@ static char	*read_command_line(char *prompt)
 	return (str);
 }
 
-static void	process_and_execute_command(char *command)
-{
-	if (process_lexer_output_chain(command) != SUCCESS)
-	{
-		g_glo.ret_status = 2;
-		return ;
-	}
-	g_glo.execution_chain = composer();
-	if (exec_process_manager() == ERROR)
-		exit_minishell(EXIT_FAILURE);
-}
-
 static void	set_return_status(void)
 {
 	t_exec_node	*current_node;
@@ -102,6 +90,37 @@ static void	set_return_status(void)
 		current_node = current_node->next;
 	}
 }
+
+static void	process_and_execute_command(char *command)
+{
+	int	heredoc_status;
+
+	if (process_lexer_output_chain(command) != SUCCESS)
+	{
+		g_glo.ret_status = 2;
+		ft_putstr_fd("syntax error: invalid command line\n", 2);
+		return ;
+	}
+	g_glo.execution_chain = composer();
+	ignore_sig();
+	heredoc_status = exec_every_heredoc_of_pipeline(g_glo.execution_chain);
+	if (heredoc_status == ERROR)
+		exit_minishell(EXIT_FAILURE);
+	if (heredoc_status != SUCCESS)
+	{
+		if (heredoc_status == 2)
+			g_glo.ret_status = 130;
+		write(1, "\n", 1);
+		return ;
+	}
+	if (exec_process_manager() == ERROR)
+		exit_minishell(EXIT_FAILURE);
+	set_return_status();
+	if (g_glo.ret_status == 131)
+		ft_putstr_fd("Quit (core dumped)\n", 2);
+	return ;
+}
+
 
 int	main(int ac, char **av, char **envp)
 {
@@ -122,9 +141,6 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(str);
 		process_and_execute_command(str);
-		set_return_status();
-		if (g_glo.ret_status == 131)
-			ft_putstr_fd("Quit (core dumped)\n", 2);
 		g_glo.lexer_output_chain = NULL;
 		g_glo.execution_chain = NULL;
 	}
