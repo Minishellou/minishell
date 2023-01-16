@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 12:07:36 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 12:22:00 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	exec_process_manager(void)
 	int			pipeline_status;
 	t_exec_node	*current_command;
 
-	ignore_sig();
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
 		return (ERROR);
+	ignore_sig();
 	current_command = g_glo.execution_chain;
 	while (current_command != NULL)
 	{

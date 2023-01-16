@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 21:11:53 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:31:24 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 			break ;
 		if (*current_string == '\0' && limit_string == NULL)
 			break ;
+		if (limit_string == NULL)
+			continue ;
 		if (ft_strcmp(current_string, limit_string) == 0)
 			break ;
 		if (quote_context == UNQUOTED)
@@ -76,10 +78,8 @@ static int	heredoc_process(char *limit_string, int heredoc_fd)
 		free(current_string);
 	}
 	if (current_string == NULL)
-		display_eof_error(limit_string);
-	if (current_string != NULL)
-		free(current_string);
-	return (SUCCESS);
+		return (display_eof_error(limit_string), SUCCESS);
+	return (free(current_string), SUCCESS);
 }
 
 static char	*get_current_tmpfile(void)
