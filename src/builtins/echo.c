@@ -6,25 +6,45 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:14:50 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 07:36:00 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 20:49:26 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//		fa
+static
+int	only__n(char *argument)
+{
+	int	i;
+
+	i = 1;
+	if (ft_strncmp("-n", argument, 2) != 0)
+		return (0);
+	while (argument[i] != '\0' && argument[i] == 'n')
+		i++;
+	write(1, "ok\n", 3);
+	if (argument[i] == '\0')
+		return (1);
+	return (0);
+}
+
 static
 int	search_for_option(t_lexer_node **arg_chain)
 {
+	int	n_option;
+	int	only_n_ret;
+
+	n_option = 0;
 	while (*arg_chain != NULL && (*arg_chain)->word[0] == '-')
 	{
-		if (ft_strcmp("-n", (*arg_chain)->word) == 0)
-		{
-			*arg_chain = (*arg_chain)->next;
-			return (1);
-		}
+		only_n_ret = only__n((*arg_chain)->word);
+		if (only_n_ret == 0)
+			return (n_option);
+		n_option = only_n_ret;
 		*arg_chain = (*arg_chain)->next;
 	}
-	return (0);
+	return (n_option);
 }
 
 int	echo(t_lexer_node *arg_chain)
