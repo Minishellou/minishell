@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:14:50 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 20:49:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 20:53:22 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	only__n(char *argument)
 		return (0);
 	while (argument[i] != '\0' && argument[i] == 'n')
 		i++;
-	write(1, "ok\n", 3);
 	if (argument[i] == '\0')
 		return (1);
 	return (0);
