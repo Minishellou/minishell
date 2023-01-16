@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:53:17 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 06:31:49 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:05:10 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ int	export(int arg_number, t_lexer_node *arg_list)
 {
 	char	**export_split;
 
+	if (arg_number == 0)
+		return(env());
 	while (arg_number > 0 && arg_list != NULL)
 	{
 		if (check_current_arg_validity(arg_list) != SUCCESS)
 		{
+			ft_putstr_fd("minishell: export: '", 2);
+			ft_putstr_fd(arg_list->word, 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
 			arg_list = arg_list->next;
 			continue ;
 		}
@@ -46,7 +51,7 @@ static int	manage_export(char **to_export)
 	plus_index = NOT_SET;
 	if (ft_strchr(to_export[0], '+') != NULL)
 	{
-		plus_index = ft_strlen(to_export[0]) - 2;
+		plus_index = ft_strlen(to_export[0]) - 1;
 		to_export[0][plus_index] = '\0';
 	}
 	while (environment && ft_strcmp(environment->name, to_export[0]) != 0)
@@ -96,9 +101,9 @@ static int	check_current_arg_validity(t_lexer_node *current_node)
 	current_arg = current_node->word;
 	if (!current_arg)
 		return (ERROR);
-	if (!ft_isalpha(*current_arg))
+	if (!ft_isalpha(*current_arg) || *current_arg == '_')
 		return (ERROR);
-	while (ft_isalnum(current_arg[i]))
+	while (ft_isalnum(current_arg[i]) || current_arg[i] == '_')
 		i++;
 	if (current_arg[i] == '\0')
 		return (ERROR);
