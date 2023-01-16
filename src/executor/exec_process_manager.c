@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 19:34:01 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 20:56:20 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 		return (SUCCESS);
 	if (current_command->next == NULL)
 		if (is_a_builtin(current_command->command_path))
+		{
+			manage_child_output_redirection();
 			return (exec_builtin(current_command));
+		}
 	fork_and_exec(current_command, argv, envp);
 	return (NOT_SET);
 }
