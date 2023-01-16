@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 21:51:57 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:12:58 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,12 +219,11 @@ void			test(char *str);
 
 // signals
 void	init_sig(void);
-void	fork_sig(void);
+void	restore_sig(void);
 void	ignore_sig(void);
 void	sigint_handler(int signo);
 void	sigquit_handler(int signo);
-void	sigquit_fork_handler(int signo);
+void	runtime_sigint_handler(int signo);
 void	ctrld_handler(char *input);
-void	interrupt_cmd(int signo);
 
 #endif

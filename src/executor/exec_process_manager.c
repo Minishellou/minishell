@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 22:05:32 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:07:36 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int		wait_for_current_pipeline(void);
 static void		fork_and_exec(t_exec_node *current_command, \
 							char **argv, \
 							char **envp);
-// static char		**make_argument_array(t_exec_node *current_command);
 static int		manage_current_command_exec(t_exec_node *current_command);
+static int		get_signal_return_status(int return_status);
 
 
 /*		EXEC MANAGER		*/
@@ -27,20 +27,23 @@ int	exec_process_manager(void)
 	int			pipeline_status;
 	t_exec_node	*current_command;
 
+	ignore_sig();
 	if (exec_every_heredoc_of_pipeline(g_glo.execution_chain) != SUCCESS)
 		return (ERROR);
 	current_command = g_glo.execution_chain;
 	while (current_command != NULL)
 	{
 		pipeline_status = manage_current_command_exec(current_command);
+		if (pipeline_status == ERROR)
+			return (ERROR);
+		current_command->return_status = pipeline_status;
 		current_command = current_command->next;
 	}
 	restore_standard_input();
 	restore_standard_output();
+	g_glo.ret_status = NOT_SET;
 	waitpid_status = wait_for_current_pipeline();
-	if (pipeline_status == NOT_SET)
-		return (waitpid_status);
-	return (pipeline_status);
+	return (waitpid_status);
 }
 
 static int	manage_current_command_exec(t_exec_node *current_command)
@@ -75,12 +78,10 @@ static void	fork_and_exec(t_exec_node *current_command, \
 	pid_t	forked_pid;
 
 	command_path = current_command->command_path;
-	ignore_sig();
 	forked_pid = fork();
-	// reinit_sig();
 	if (forked_pid == 0)
 	{
-		fork_sig();
+		restore_sig();
 		manage_child_output_redirection();
 		close_input_in_child();
 		if (is_a_builtin(command_path))
@@ -115,13 +116,32 @@ static int	wait_for_current_pipeline(void)
 	while (current_node)
 	{
 		pid_to_wait_for = current_node->process_id;
-		if (pid_to_wait_for == NOT_SET && current_node->next == NULL)
-			return (1);
+		if (pid_to_wait_for == NOT_SET)
+		{
+			current_node = current_node->next;
+			continue ;
+		}
 		if (pid_to_wait_for != NOT_SET)
 			wait_ret_value = waitpid(pid_to_wait_for, &return_status, 0);
 		if (wait_ret_value == ERROR)
 			return (ERROR);
+		if (WIFSIGNALED(return_status))
+			current_node->return_status = get_signal_return_status(return_status);
+		else
+			current_node->return_status = WEXITSTATUS(return_status);
 		current_node = current_node->next;
 	}
-	return (WEXITSTATUS(return_status));
+	return (SUCCESS);
+}
+
+static int	get_signal_return_status(int return_status)
+{
+	int	signo;
+
+	signo = WTERMSIG(return_status);
+	if (signo == SIGINT)
+		return (130);
+	if (signo == SIGQUIT)
+		return (131);
+	return (0);
 }

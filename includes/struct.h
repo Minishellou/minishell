@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:54:36 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 16:57:47 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:24:58 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_exec_node
 	t_redirection			*redir_chain;
 	t_io_env				io_env;
 	pid_t					process_id;
+	int						return_status;
 
 }							t_exec_node;
 

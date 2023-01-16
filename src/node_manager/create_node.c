@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 17:24:08 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:14:32 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_node	*create_exec_node(char *word)
 	new_node->io_env.input = NOT_SET;
 	new_node->io_env.output = NOT_SET;
 	new_node->process_id = NOT_SET;
+	new_node->return_status = NOT_SET;
 	new_node->next = NULL;
 	return ((t_node *)new_node);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:50:53 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 22:04:29 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 12:13:10 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	init_sig(void)
 {
 	signal(SIGINT, sigint_handler);
-	//signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, sigquit_handler);
 }
 
-void	fork_sig(void)
+void	restore_sig(void)
 {
-	signal(SIGINT, interrupt_cmd);
-	signal(SIGQUIT, sigquit_fork_handler);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	ignore_sig(void)
 {
-	signal(SIGINT, SIG_IGN);
-	//signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, runtime_sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
