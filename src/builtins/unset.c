@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:21:49 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 05:31:52 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 20:28:19 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	pop_env(char *envar_name)
 	t_env_node	*current_node;
 
 	current_node = g_glo.env;
-	tmp = current_node;
+	tmp = NULL;
+	if (!current_node)
+		return ;
 	while (current_node)
 	{
 		if (ft_strcmp(current_node->name, envar_name) == SUCCESS)
@@ -29,7 +31,10 @@ void	pop_env(char *envar_name)
 	}
 	if (!current_node)
 		return ;
-	tmp->next = current_node->next;
+	if (tmp)
+		tmp->next = current_node->next;
+	else
+		g_glo.env = current_node->next;
 	return ;
 }
 
