@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   composer_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:02:03 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 13:18:44 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 19:05:06 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_lexer_node	*add_argument(t_exec_node *node, char *word)
 	t_lexer_node	*tmp;
 
 	tmp = NULL;
-	if (!word)
-		return (NULL);
 	if (!node->arg_chain)
 	{
 		node->arg_chain = (t_lexer_node *)create_lexer_node(word);

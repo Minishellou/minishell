@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 11:20:48 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 11:14:32 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 19:05:42 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_node	*create_lexer_node(char *word)
 	new_node = ft_malloc(sizeof(*new_node));
 	if (!new_node)
 		return (NULL);
-	new_node->word = word;
+	new_node->word = "\0";
+	if (word)
+		new_node->word = word;
 	new_node->next = NULL;
 	return ((t_node *)new_node);
 }
