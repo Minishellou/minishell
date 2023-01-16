@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 17:00:08 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 19:34:01 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ static void	fork_and_exec(t_exec_node *current_command, \
 			exit(127);
 		}
 		command_path = pathfinder_process(command_path);
-		execve(command_path, argv, envp);
-		ft_putstr_fd(command_path, 2);
+		if (command_path)
+			execve(command_path, argv, envp);
+		ft_putstr_fd(current_command->command_path, 2);
 		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}

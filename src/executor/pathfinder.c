@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:43:59 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/14 23:30:12 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/16 19:29:08 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*find_path(char **env_paths, char *command)
 			return (current_test);
 		i++;
 	}
-	return (command);
+	return (NULL);
 }
 
 static char	*append_path_to_command(char *path, char *command)

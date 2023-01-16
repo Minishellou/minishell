@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chain_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:22:28 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/13 19:30:35 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 19:43:40 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	catch_redir_error(void)
 	while (tmp)
 	{
 		if (illegal_token(tmp) != SUCCESS)
-			return (printf("syntax error : invalid command\n"), ERROR);
+			return (ERROR);
 		tmp = tmp->next;
 	}
 	return (SUCCESS);

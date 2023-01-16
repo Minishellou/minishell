@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:44:12 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 13:11:43 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/16 19:43:48 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,8 @@ static int	start_and_end_validation(char *input)
 int	catch_parsing_error(char *input)
 {
 	if ((start_and_end_validation(input)) != SUCCESS)
-	{
-		printf("syntax error : invalid command\n");
 		return (ERROR);
-	}
 	if ((inline_token_validation(input)) != SUCCESS)
-	{
-		printf("syntax error : invalid command\n");
 		return (ERROR);
-	}
 	return (SUCCESS);
 }
