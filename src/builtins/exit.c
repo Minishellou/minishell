@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:16:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:31:36 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 14:48:33 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ void	exit_builtins(int arg_nb, t_lexer_node *arg_chain)
 		exit_minishell(0);
 	if (arg_nb != 1)
 	{
-		ft_putstr_fd("\nminishell: exit: too many arguments !\n", 2);
+		ft_putstr_fd("minishell: exit: too many arguments !\n", 2);
 		return ;
 	}
 	if (find_alpha(arg_chain->word) == SUCCESS)
 	{
-		ft_putstr_fd("\nminishell: exit: numerical operand required", 2);
+		ft_putstr_fd("minishell: exit: numerical operand required", 2);
 		exit_minishell(2);
 	}
 	if (ft_strlen(arg_chain->word) > 3)
 	{
-		ft_putstr_fd("\nminishell: exit: magic number required", 2);
+		ft_putstr_fd("minishell: exit: magic number required", 2);
 		exit_minishell(2);
 	}
 	argument = ft_atoi(arg_chain->word);
