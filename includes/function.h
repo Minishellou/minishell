@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:15:09 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 11:24:08 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,13 +218,13 @@ t_lexer_node	*lexer_envar(char *env_node);
 void			test(char *str);
 
 // signals
-void	init_sig(void);
-void	restore_sig(void);
-void	heredoc_sig(void);
-void	ignore_sig(void);
-void	sigint_handler(int signo);
-void	sigquit_handler(int signo);
-void	runtime_sigint_handler(int signo);
-void	ctrld_handler(char *input);
+void			init_sig(void);
+void			restore_sig(void);
+void			heredoc_sig(void);
+void			ignore_sig(void);
+void			sigint_handler(int signo);
+void			sigquit_handler(int signo);
+void			runtime_sigint_handler(int signo);
+void			ctrld_handler(char *input);
 
 #endif
