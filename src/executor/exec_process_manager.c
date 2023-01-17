@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:24:27 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 21:44:20 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:40:11 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static int		wait_for_current_pipeline(void);
 static void		fork_and_exec(t_exec_node *current_command, \
-							char **argv, \
-							char **envp);
+							char **argv, char **envp);
 static int		manage_current_command_exec(t_exec_node *current_command);
 static int		get_signal_return_status(int return_status);
-
 
 /*		EXEC MANAGER		*/
 int	exec_process_manager(void)
@@ -61,13 +59,14 @@ static int	manage_current_command_exec(t_exec_node *current_command)
 		return (close_pipe_output(), 1);
 	if (current_command->command_path == NULL)
 		return (SUCCESS);
-	if (current_command->next == NULL)
-		if (is_a_builtin(current_command->command_path))
-		{
-			manage_child_output_redirection();
-			return (exec_builtin(current_command));
-		}
+	if (current_command->next == NULL && \
+		is_a_builtin(current_command->command_path))
+	{
+		manage_child_output_redirection();
+		return (exec_builtin(current_command));
+	}
 	fork_and_exec(current_command, argv, envp);
+	close_output_in_parent();
 	return (NOT_SET);
 }
 
@@ -75,33 +74,29 @@ static void	fork_and_exec(t_exec_node *current_command, \
 							char **argv, char **envp)
 {
 	char	*command_path;
-	pid_t	forked_pid;
 
 	command_path = current_command->command_path;
-	forked_pid = fork();
-	if (forked_pid == 0)
+	current_command->process_id = fork();
+	if (current_command->process_id == 0)
 	{
 		restore_sig();
 		manage_child_output_redirection();
 		close_input_in_child();
 		if (is_a_builtin(command_path))
 			exit_minishell(exec_builtin(current_command));
-		if (is_command_a_path(command_path) == 1)
+		if (is_command_a_path(command_path) == 0)
+			command_path = pathfinder_process(command_path);
+		if (!command_path)
 		{
-			execve(command_path, argv, envp);
-			ft_putstr_fd("minishell: ", 2);
-			perror(command_path);
+			ft_putstr_fd(current_command->command_path, 2);
+			ft_putstr_fd(": command not found\n", 2);
 			exit_minishell(127);
 		}
-		command_path = pathfinder_process(command_path);
-		if (command_path)
-			execve(command_path, argv, envp);
-		ft_putstr_fd(current_command->command_path, 2);
-		ft_putstr_fd(": command not found\n", 2);
+		execve(command_path, argv, envp);
+		ft_putstr_fd("minishell: ", 2);
+		perror(command_path);
 		exit_minishell(127);
 	}
-	current_command->process_id = forked_pid;
-	close_output_in_parent();
 }
 
 static int	wait_for_current_pipeline(void)
@@ -117,18 +112,16 @@ static int	wait_for_current_pipeline(void)
 	while (current_node)
 	{
 		pid_to_wait_for = current_node->process_id;
-		if (pid_to_wait_for == NOT_SET)
-		{
-			current_node = current_node->next;
-			continue ;
-		}
 		if (pid_to_wait_for != NOT_SET)
 			wait_ret_value = waitpid(pid_to_wait_for, &return_status, 0);
-		if (wait_ret_value == ERROR)
+		if (pid_to_wait_for == ERROR || wait_ret_value == ERROR)
 			return (ERROR);
-		if (WIFSIGNALED(return_status))
-			current_node->return_status = get_signal_return_status(return_status);
-		else
+		if (pid_to_wait_for != NOT_SET && WIFSIGNALED(return_status))
+		{
+			current_node->return_status = \
+			get_signal_return_status(return_status);
+		}
+		else if (pid_to_wait_for != NOT_SET && !WIFSIGNALED(return_status))
 			current_node->return_status = WEXITSTATUS(return_status);
 		current_node = current_node->next;
 	}

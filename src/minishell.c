@@ -6,10 +6,9 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 18:25:24 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 22:00:27 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:29:04 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 
@@ -32,7 +31,7 @@ t_global	g_glo;
 // void printf_redir_chain(t_redirection *node)
 // {
 // 	t_redirection *tmp;
-	
+//	
 // 	if (!node)
 // 		return ;
 // 	tmp = node;
@@ -55,7 +54,6 @@ t_global	g_glo;
 
 void	exit_minishell(int exit_status)
 {
-	write(2, "\n", 1);
 	ft_free();
 	close(g_glo.standard_input);
 	close(g_glo.standard_output);
@@ -121,7 +119,6 @@ static void	process_and_execute_command(char *command)
 	return ;
 }
 
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
@@ -132,7 +129,11 @@ int	main(int ac, char **av, char **envp)
 	if (init_global(envp) == ERROR)
 		return (EXIT_FAILURE);
 	if (ac > 1)
-		return (printf("minishell binary does not take any argument.\n"), 0);
+	{
+		return \
+		(ft_putstr_fd("lmao, do you even know what you're doing?\n", 2), \
+		SUCCESS);
+	}
 	while (1)
 	{
 		init_sig();

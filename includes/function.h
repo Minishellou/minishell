@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:24:08 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 11:43:27 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int				exec_every_heredoc_of_pipeline(t_exec_node *current_node);
 //	Misc
 int				process_limit_string(char **limit_string, int *quote_context);
 void			write_to_file(int file_fd, char *string_to_write);
+void			display_eof_error(char *limit_string);
 
 /*			EXEC PROCESS 				*/
 //	Main function

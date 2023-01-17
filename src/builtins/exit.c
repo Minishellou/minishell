@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:16:47 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 17:39:12 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:31:36 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exit_builtins(int arg_nb, t_lexer_node *arg_chain)
 	int	argument;
 
 	argument = 0;
-	ft_putstr_fd("exit", 2);
+	ft_putstr_fd("exit\n", 1);
 	if (arg_nb == 0)
 		exit_minishell(0);
 	if (arg_nb != 1)

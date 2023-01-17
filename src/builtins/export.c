@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 05:53:17 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/16 18:05:10 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:12:07 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	export(int arg_number, t_lexer_node *arg_list)
 	char	**export_split;
 
 	if (arg_number == 0)
-		return(env());
+		return (env());
 	while (arg_number > 0 && arg_list != NULL)
 	{
 		if (check_current_arg_validity(arg_list) != SUCCESS)

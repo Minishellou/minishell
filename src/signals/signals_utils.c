@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:55:24 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 16:57:04 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:32:00 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ctrld_handler(char *input)
 {
 	if (input == NULL)
 	{
-		ft_putstr_fd("exit", 2);
+		ft_putstr_fd("exit\n", 2);
 		exit_minishell(g_glo.ret_status);
 	}
 }

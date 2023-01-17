@@ -129,6 +129,7 @@ SOURCES		+=								\
 ## SRC/HEREDOC ##
 
 SOURCES		+=								\
+		src/heredoc/heredoc_error.c		\
 		src/heredoc/heredoc_manager.c		\
 		src/heredoc/limit_string_manager.c		\
 		src/heredoc/quote_context_manager.c
