@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 15:40:26 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:15:09 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ char			*expand_envar_in_string(char *word);
 int				positive(char **str);
 int				unquoted_lexer_output_chain(void);
 int				quote_positive(char **str, char c);
-int				reset_single_quote_content_to_pst(void);
+int				reset_neg_char_in_lexer_output(void);
 int				reset_double_quote_content_to_pst(void);
 int				check_and_add_var(char *env_node, t_lexer_node **node, int *i);
 t_lexer_node	*add_env_list(char *word, t_lexer_node *node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_context_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:42:39 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/15 02:54:18 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:10:21 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	unquoted_lexer_output_chain(void)
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
+		quote_neon(&tmp->word);
 		if (ft_strcmp(tmp->word, "<<") == SUCCESS)
 		{
 			tmp = tmp->next->next;
 			continue ;
 		}
-		if (ft_strchr(tmp->word, SINGLE_QUOTE) || \
+		while (ft_strchr(tmp->word, SINGLE_QUOTE) || \
 			ft_strchr(tmp->word, DOUBLE_QUOTE))
 		{
 			if ((unquote_string(&tmp->word)) != SUCCESS)

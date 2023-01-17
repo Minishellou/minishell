@@ -6,7 +6,7 @@
 /*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 14:00:30 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 11:14:35 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	quote_positive(char **str, char c)
 	return (SUCCESS);
 }
 
-static int	single_quote_positive(char **str)
+static int	reset_neg_char(char **str)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ static int	single_quote_positive(char **str)
 	return (SUCCESS);
 }
 
-int	reset_single_quote_content_to_pst(void)
+int	reset_neg_char_in_lexer_output(void)
 {
 	t_lexer_node	*tmp;
 
@@ -83,7 +83,7 @@ int	reset_single_quote_content_to_pst(void)
 	tmp = g_glo.lexer_output_chain;
 	while (tmp)
 	{
-		if (single_quote_positive(&tmp->word) != SUCCESS)
+		if (reset_neg_char(&tmp->word) != SUCCESS)
 			return (ERROR);
 		tmp = tmp->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_output_manager.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:39:52 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/16 21:27:43 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 11:11:46 by gkitoko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	process_lexer_output_chain(char *input)
 		return (ERROR);
 	if (!envar_expansion())
 		return (ERROR);
-	if (reset_single_quote_content_to_pst() != SUCCESS)
-		return (ERROR);
 	if (unquoted_lexer_output_chain() != SUCCESS)
+		return (ERROR);
+	if (reset_neg_char_in_lexer_output() != SUCCESS)
 		return (ERROR);
 	return (SUCCESS);
 }
