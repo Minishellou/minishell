@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:53:14 by mcorso            #+#    #+#             */
-/*   Updated: 2023/01/17 11:12:58 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 14:50:53 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static int	fork_heredoc_process(char *limit_string, int heredoc_fd)
 		heredoc_status = heredoc_process(limit_string, heredoc_fd);
 		close(heredoc_fd);
 		if (heredoc_status != SUCCESS)
-			exit(EXIT_FAILURE);
-		exit(EXIT_SUCCESS);
+			exit_minishell(EXIT_FAILURE);
+		exit_minishell(EXIT_SUCCESS);
 	}
 	close(heredoc_fd);
 	if (waitpid(fork_pid, &ret_status, 0) == ERROR)

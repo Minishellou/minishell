@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 18:25:24 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:29:04 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 14:53:19 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ void	exit_minishell(int exit_status)
 
 static char	*read_command_line(char *prompt)
 {
-	char			**str;
-	t_garbage_node	*new_node;
+	char			*str;
+	char			*read_line;
 
-	str = ft_malloc(sizeof(*str) * 1);
-	*str = readline(prompt);
-	ctrld_handler(*str);
-	if (*str == NULL)
-		exit_minishell(EXIT_SUCCESS);
-	if (**str == '\0')
+	read_line = readline(prompt);
+	ctrld_handler(read_line);
+	if (*read_line == '\0')
+	{
+		free(read_line);
 		return (NULL);
-	new_node = new_grb_node(*str);
-	lst_addback(new_node);
-	return (*str);
+	}
+	str = ft_strdup(read_line);
+	free(read_line);
+	return (str);
 }
 
 static void	set_return_status(void)
