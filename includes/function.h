@@ -6,7 +6,7 @@
 /*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:19:05 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:43:27 by mcorso           ###   ########.fr       */
+/*   Updated: 2023/01/17 12:02:54 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ int				unquoted_lexer_output_chain(void);
 int				quote_positive(char **str, char c);
 int				reset_neg_char_in_lexer_output(void);
 int				reset_double_quote_content_to_pst(void);
+int				reset_neg_char(char **str);
 int				check_and_add_var(char *env_node, t_lexer_node **node, int *i);
 t_lexer_node	*add_env_list(char *word, t_lexer_node *node);
 int				check_and_get_envar(t_lexer_node **node, \

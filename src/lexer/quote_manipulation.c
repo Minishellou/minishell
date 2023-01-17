@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 13:50:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/14 14:01:19 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 13:17:50 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int	neon(char **str)
 	i = 1;
 	start = (*str)[0];
 	while ((*str)[i] && (*str)[i] != start)
-		(*str)[i++] *= -1;
+	{
+		if ((*str)[i] > 0)
+			(*str)[i] *= -1;
+		i++;
+	}
 	if ((*str)[i] != start)
 		return (ERROR);
 	return (i);

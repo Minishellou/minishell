@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_restore.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:47:45 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/17 11:14:35 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:32:30 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	quote_positive(char **str, char c)
 	return (SUCCESS);
 }
 
-static int	reset_neg_char(char **str)
+int	reset_neg_char(char **str)
 {
 	int	i;
 
