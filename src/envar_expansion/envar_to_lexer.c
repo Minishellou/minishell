@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envar_to_lexer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkitoko <gkitoko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:21:36 by gkitoko           #+#    #+#             */
-/*   Updated: 2023/01/15 17:06:10 by gkitoko          ###   ########.fr       */
+/*   Updated: 2023/01/17 14:19:07 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static t_lexer_node	*add_env_word(char *word)
 {
 	char			*buffer;
-	t_lexer_node	*env_word;
 	int				len;
 	int				i;
 
@@ -24,7 +23,10 @@ static t_lexer_node	*add_env_word(char *word)
 	if (!word)
 		return (NULL);
 	while (word[len] && is_valid_env_char(word[len]))
-		len++;
+	{
+		if (word[len++] == '?')
+			break ;
+	}
 	buffer = ft_malloc(len + 1);
 	if (!buffer)
 		return (NULL);
@@ -32,13 +34,11 @@ static t_lexer_node	*add_env_word(char *word)
 	while (word[i] && is_valid_env_char(word[i]))
 	{
 		buffer[i] = word[i];
-		i++;
+		if (word[i++] == '?')
+			break ;
 	}
 	buffer[i] = '\0';
-	env_word = (t_lexer_node *)create_lexer_node(buffer);
-	if (!env_word)
-		return (NULL);
-	return (env_word);
+	return ((t_lexer_node *)create_lexer_node(buffer));
 }
 
 static t_lexer_node	*add_regular_word(char *word)
